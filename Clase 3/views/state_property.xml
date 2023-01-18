@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="ModelName_form_view" model="ir.ui.view">
+        <record id="state_property_form_view" model="ir.ui.view">
             <field name="name">state.property.form</field>
             <field name="model">state.property</field>
             <field name="arch" type="xml">
@@ -56,7 +56,7 @@
             </field>
         </record>
 
-        <record id="ModelName_search_view" model="ir.ui.view">
+        <record id="state_property_search_view" model="ir.ui.view">
             <field name="name">state.property.search</field>
             <field name="model">state.property</field>
             <field name="arch" type="xml">
@@ -69,7 +69,7 @@
             </field>
         </record>
 
-        <record id="ModelName_act_window" model="ir.actions.act_window">
+        <record id="state_property_act_window" model="ir.actions.act_window">
             <field name="name">ModelTitle</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">ProjectName.ModelName</field>
@@ -88,12 +88,12 @@
                 sequence="10"
         />
 
-<!--        <menuitem-->
-<!--                id="state_property_menu"-->
-<!--                name="Real State Curso"-->
-<!--                action="state_proprty_action"-->
-<!--                parent="state_menu"-->
-<!--                sequence="10"-->
-<!--        />-->
+        <menuitem
+                id="state_property_menu"
+                name="Real State Curso"
+                action="state_property_act_window"
+                parent="state_menu"
+                sequence="10"
+        />
     </data>
 </odoo>
