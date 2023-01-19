@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+<record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Real Estate</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p>
+            Define a new Real Estate
+          </p>
+        </field>
+    </record>  
+ <!-- Menu Cuban Real Estate -->
+    <menuitem
+        id="menu_estate"
+        name="Real Estate"
+        />
+    <menuitem
+        id="menu_estate_property"
+        name="Real Estate Property"
+        parent="menu_estate"
+        action="estate_property_action"
+    />
+</odoo>
