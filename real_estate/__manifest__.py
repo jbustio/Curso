@@ -23,12 +23,17 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        
+        'security/real_estate_security.xml',
+        'security/ir.model.access.csv',
+        'views/real_estate_view.xml',
+        'views/real_estate_menu.xml',
+        
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    'license': 'LGPL-3',
+    'application':False,
 }

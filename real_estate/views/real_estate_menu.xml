@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Real Estate Menu -->
+    <menuitem
+        id="real_estate_menu"
+        name="Real Estate"
+        />
+    <record id="action_real_estate" model="ir.actions.act_window">
+        <field name="name">Real Estate</field>
+        <field name="res_model">real_estate.real_estate</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>>
+    <!--Menu Item para abrir la lista Houses-->
+    <menuitem
+        id="menu_real_estate_houses"
+        name="Houses"
+        parent="real_estate_menu"
+        action="action_real_estate"/>
+</odoo>

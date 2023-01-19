@@ -10,20 +10,20 @@ class real_estate(models.Model):
     name = fields.Char(required=True)
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Text()
+    date_availability = fields.Date()
     expected_price = fields.Float(required=True)
     selling_price = fields.Float()
     bedrooms = fields.Integer()
     living_area = fields.Integer()
-    facades = fields.Integer('facades')
-    garage = fields.Boolean('garage')
-    garden = fields.Boolean('garden')
-    garden_area = fields.Integer('garden_area')
+    facades = fields.Integer('Facades')
+    garage = fields.Boolean('Garage')
+    garden = fields.Boolean('Garden')
+    garden_area = fields.Integer('Garden area')
     garden_orientation = fields.Selection([
         ('North', 'North'),
         ('South', 'South'),
         ('East', 'East'),
         ('West', 'West'),
-    ], string='garden orientation')
+    ], string='Garden orientation')
     
     
