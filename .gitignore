@@ -19,12 +19,16 @@ lib64/
 parts/
 sdist/
 var/
+# Odoo source code and virtual enviroment
+odoo/
+env_odoo/
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.txt
 MANIFEST
 
 # PyInstaller
