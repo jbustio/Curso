@@ -18,6 +18,7 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection([
         ('north', 'North'),('south','South'),('east','East'),('west','West'),
     ], string='Garden Orientation')
+    property_type_id = fields.Many2one('estate.property.type', string='Property Type')
 class EstatePropertyType(models.Model):
     _name = 'estate.property.type'
     _description = 'Estate Property Type'
