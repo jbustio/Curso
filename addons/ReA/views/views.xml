@@ -1,0 +1,4 @@
+<tree string="Tests">
+    <field name="name"/>
+    <field name="last_seen"/>
+</tree>
