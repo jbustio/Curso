@@ -24,12 +24,13 @@
 
     # always loaded
     'data': [
-        #'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'security/ir.model.access.csv',
+        #'views/views.xml',
+        'views/real_estate_property_view.xml',
+        'views/real_estate_property_type_view.xml',
+        'views/real_estate_property_tags_view.xml',
+        #'views/templates.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+
 }
