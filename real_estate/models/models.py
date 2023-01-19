@@ -11,7 +11,7 @@ class real_estate(models.Model):
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Text()
-    expected_price = fields.Float()
+    expected_price = fields.Float(required=True)
     selling_price = fields.Float()
     bedrooms = fields.Integer()
     living_area = fields.Integer()
