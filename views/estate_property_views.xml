@@ -1,30 +1,50 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-<!-- form for estate.property -->
+  <!-- form for estate.property -->
   <record id="estate_property_form" model="ir.ui.view">
     <field name="name">estate.property.form</field>
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
       <form string="Real Estate">
-        <group>
-          <field name="name" />
-          <field name="description" />
-          <field name="postcode" />
-          <field name="date_availability" />
-          <field name="expected_price" />
-          <field name="selling_price" />
-          <field name="bedrooms" />
-          <field name="living_area" />
-          <field name="facades" />
-          <field name="garage" />
-          <field name="garden" />
-          <field name="garden_area" />
-          <field name="garden_orientation" />
-        </group>
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+            <field name="tags" widget="many2many_tags" />
+          </div>
+          <group>
+            <group>
+              <field name="property_type_id" />
+              <field name="postcode" />
+              <field name="date_availability" />
+              <field name="expected_price" />
+              <field name="selling_price" />
+              <field name="bedrooms" />
+            </group>
+            <group>
+              <field name="living_area" />
+              <field name="facades" />
+              <field name="garage" />
+              <field name="garden" />
+              <field name="garden_area" />
+              <field name="garden_orientation" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Description">
+              <field name="description" />
+            </page>
+            <page string="Other Info">
+             
+            </page>
+            
+          </notebook>
+        </sheet>
       </form>
     </field>
   </record>
-<!-- estate- property tree -->
+  <!-- estate- property tree -->
   <record id="estate_property_tree" model="ir.ui.view">
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property</field>
@@ -60,7 +80,8 @@
       <search string="Real Estate">
         <field name="name" />
         <field name="description" />
-        <filter string="Available today" name="date_availability" domain="[('date_availability','=',context_today())]"/>           
+        <filter string="Available today" name="date_availability"
+          domain="[('date_availability','=',context_today())]" />
       </search>
     </field>
   </record>
