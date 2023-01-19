@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+<!-- form for estate.property -->
   <record id="estate_property_form" model="ir.ui.view">
     <field name="name">estate.property.form</field>
     <field name="model">estate.property</field>
@@ -23,7 +24,7 @@
       </form>
     </field>
   </record>
-
+<!-- estate- property tree -->
   <record id="estate_property_tree" model="ir.ui.view">
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property</field>
@@ -47,7 +48,7 @@
   </record>
 
 
-  <!-- Search view for "model" -->
+  <!-- Search view for "estate.property" -->
   <record id="estate_property_search" model="ir.ui.view">
     <field name="name">estate.property.search</field>
     <field name="model">estate.property</field>
@@ -59,6 +60,7 @@
       <search string="Real Estate">
         <field name="name" />
         <field name="description" />
+        <filter string="Available today" name="date_availability" domain="[('date_availability','=',context_today())]"/>           
       </search>
     </field>
   </record>
