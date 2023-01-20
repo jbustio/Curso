@@ -77,7 +77,7 @@
                 <field name="bedrooms"></field>
                 <field name="living_area"></field>
                 <field name="fecades"></field>
-                <!--filter string="Availability" name="available" domain="[('date_availability','=',value)]"/-->
+                <filter string="Availability" name="available" domain="[('available','=',True)]"/>
             </search>
         </field>
     </record>

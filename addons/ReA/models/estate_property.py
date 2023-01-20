@@ -1,5 +1,5 @@
 from odoo import models, fields
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 class EstateProperty(models.Model):
 
@@ -18,4 +18,5 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden = fields.Boolean()
     garden_ares = fields.Integer()
+    available = fields.Boolean(default = True)
     garden_orientation = fields.Selection(string="Garden Orientation", selection=[('N', 'North'), ('S','South'), ('E', 'East'), ('W', 'West')])
