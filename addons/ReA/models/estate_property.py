@@ -1,17 +1,18 @@
 from odoo import models, fields
+from datetime import timedelta
 
 class EstateProperty(models.Model):
 
     _name = "estate.property"
     _description = "Some description"
-    
+
     name = fields.Char()
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date()
+    date_availability = fields.Date(copy=False, default=lambda self: fields.Datetime.now() + timedelta(days=54))
     expected_price = fields.Float()
-    sellin_price = fields.Float()
-    bedrooms = fields.Integer()
+    sellin_price = fields.Float(readonly=True, copy=False)
+    bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     fecades = fields.Integer()
     garage = fields.Boolean()

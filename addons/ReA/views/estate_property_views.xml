@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <record id="test_model_action" model="ir.actions.act_window">
-        <field name="name">Test action</field>
-        <field name="res_model">test.model</field>
+    <!--Action for custom model-->
+    <record id="estate_property_action" model="ir.actions.act_window"> 
+        <field name="name">Real Estate</field>
+        <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
+    </record>
+    <!--Menu itesm view-->
+    <menuitem name="Real State" id="rea_base_menu"/>
+    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu" action="estate_property_action"/>
+
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">Properties</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="postcode"></field>
+            <field name="bedrooms"></field>
+            <field name="living_area"></field>
+            <field name="expected_price"></field>
+            <field name="sellin_price"></field>
+            <field name="date_availability"/>
+        </tree>
+        </field>
     </record>
 
 </odoo>

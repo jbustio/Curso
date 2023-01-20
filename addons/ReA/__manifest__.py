@@ -9,6 +9,6 @@ Promote your house sale proposition to the world in order to build a brand, attr
 'website': "",
 'category': 'Uncategorized',
 'version': '13.0.1',
-'data': [#'views/estate_property_views.xml'
+'data': ['views/estate_property_views.xml'
 ]
 }
