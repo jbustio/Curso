@@ -27,8 +27,6 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/estate_menu_view.xml'
-        #'views/real_state_view.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
