@@ -19,8 +19,16 @@ class EstateProperty(models.Model):
         ('north', 'North'),('south','South'),('east','East'),('west','West'),
     ], string='Garden Orientation')
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
+    tag_ids = fields.Many2many('estate.property.tag', string='Tag')
+
 class EstatePropertyType(models.Model):
     _name = 'estate.property.type'
     _description = 'Estate Property Type'
 
     name = fields.Char('Type', required=True)
+
+class EstatePropertyTag(models.Model):
+    _name = 'estate.property.tag'
+    _description = 'Estate Property Tag'
+    
+    name = fields.Char('Tag', required=True)

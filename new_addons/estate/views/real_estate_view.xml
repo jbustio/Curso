@@ -22,6 +22,7 @@
                         <field name="garden_area">Garden Area</field>
                         <field name="garden_orientation">Garden Orientation</field>
                         <field name="property_type_id" widget="many2one_tags">Type</field>
+                        <field name="tag_ids" widget="many2many_tags">Tags</field>
                     </group>
                 </sheet>
             </form>
@@ -68,15 +69,37 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form,search</field>
     </record>
+    <record id="type_property_action" model="ir.actions.act_window">
+        <field name="name">Property Types </field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+    <record id="tags_property_action" model="ir.actions.act_window">
+        <field name="name">Property Tags</field>
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">tree,form</field>            
+    </record>
     <menuitem
         id="real_estate_menu"
-        name="Real Estate Property"
+        name="Real Estate"
         sequence="10"/>
     <menuitem
         id="estate_property_menu"
-        name="Estate Property"
+        name="Settings"
         parent="real_estate_menu"
         action="real_estate_action"
+        sequence="10"/>
+    <menuitem
+        id="type_property_menu"
+        name="Property Types"
+        parent="estate_property_menu"
+        action="type_property_action"
+        sequence="10"/>
+    <menuitem
+        id="tags_property_menu"
+        name="Property Tags"
+        action="tags_property_action"
+        parent="estate_property_menu"
         sequence="10"/>
 </odoo>
 
