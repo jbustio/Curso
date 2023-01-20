@@ -5,51 +5,62 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="EstateProperty">
-                <sheet>
-                    <group>
-                        <field name="name">Name</field>
-                        <field name="description">Description</field>
-                        <field name="expected_price">Expected Price</field>
-                        <field name="date_availability">Date Availability</field>
-                        <field name="selling_price">Selling Price</field>
-                        <field name="bedrooms">Bedrooms</field>
-                    </group>
-                    <group>
-                        <field name="living_area">Living Area</field>
-                        <field name="facades">Facades</field>
-                        <field name="garage">Garage</field>
-                        <field name="garden">Garden</field>
-                        <field name="garden_area">Garden Area</field>
-                        <field name="garden_orientation">Garden Orientation</field>
-                        <field name="property_type_id" widget="many2one_tags">Type</field>
-                        <field name="tag_ids" widget="many2many_tags">Tags</field>
-                    </group>
+                <sheet>                    
+                <notebook>
+                    <page name="description" string="Description">
+                        <group>
+                            <field name="name">Name</field>
+                            <field name="description">Description</field>
+                            <field name="expected_price">Expected Price</field>
+                            <field name="date_availability">Date Availability</field>
+                            <field name="selling_price">Selling Price</field>
+                            <field name="bedrooms">Bedrooms</field>
+                        </group>
+                        <group>
+                            <field name="living_area">Living Area</field>
+                            <field name="facades">Facades</field>
+                            <field name="garage">Garage</field>
+                            <field name="garden">Garden</field>
+                            <field name="garden_area">Garden Area</field>
+                            <field name="garden_orientation">Garden Orientation</field>
+                            <field name="property_type_id" widget="many2one_tags">Type</field>
+                            <field name="tag_ids" widget="many2many_tags">Tags</field>
+                            <field name="offer_ids" widget="many2many_tags">Offer</field>
+                        </group>
+                    </page>
+                    
+                    <page name="info" string="Other Info">
+                        
+                    </page>
+                </notebook>
+                
+                    
                 </sheet>
             </form>
         </field>
     </record>
 
-  <record id="estate_property_view_tree" model="ir.ui.view">
-    <field name="name">estate_property.view.tree</field>
-    <field name="model">estate.property</field>
-    <field name="arch" type="xml">
-        <tree>
-            <field name="name"/>
-            <field name="description" />
-            <field name="expected_price" />
-            <field name="date_availability"/>
-            <field name="selling_price"/>
-            <field name="bedrooms"/>
-            <field name="living_area"/>
-            <field name="facades"/>
-            <field name="garage"/>
-            <field name="garden"/>
-            <field name="garden_area"/>
-            <field name="garden_orientation"/>
-            <field name="property_type_id" widget="many2one_tags"/>
-        </tree>
-    </field>
-  </record>
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">estate_property.view.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description" />
+                <field name="expected_price" />
+                <field name="date_availability"/>
+                <field name="selling_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="facades"/>
+                <field name="garage"/>
+                <field name="garden"/>
+                <field name="garden_area"/>
+                <field name="garden_orientation"/>
+                <field name="property_type_id" widget="many2one_tags"/>
+            </tree>
+        </field>
+    </record>
 
     <record id="estate_property_view_search" model="ir.ui.view">
         <field name="name">estate_property.view.search</field>
@@ -63,6 +74,28 @@
             </search>
         </field>
     </record>
+    
+    <record id="offer_view_form" model="ir.ui.view">
+        <field name="name">offer.view.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form string="Offer">
+            <sheet>
+            <notebook>
+                <page name="offer" string="Offers">
+                    <group> 
+                        <field name="price">Price</field> 
+                        <field name="partner_id">Partner</field>
+                        <field name="status">Status</field>
+                    </group>
+                </page>
+            </notebook>
+            </sheet>  
+               
+            </form>
+        </field>
+    </record>
+    
 
     <record id="real_estate_action" model="ir.actions.act_window">
         <field name="name">Real State </field>

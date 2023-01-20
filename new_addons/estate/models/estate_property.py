@@ -20,6 +20,7 @@ class EstateProperty(models.Model):
     ], string='Garden Orientation')
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
     tag_ids = fields.Many2many('estate.property.tag', string='Tag')
+    offer_ids = fields.Many2many('estate.property.offer', string='Offer')
 
 class EstatePropertyType(models.Model):
     _name = 'estate.property.type'
@@ -32,3 +33,15 @@ class EstatePropertyTag(models.Model):
     _description = 'Estate Property Tag'
     
     name = fields.Char('Tag', required=True)
+
+class EstatePropertyOffer(models.Model):
+    _name = 'estate.property.offer'
+    _description = 'Estate Property Offer'
+
+    price = fields.Float('price')
+    status = fields.Selection([
+        ('accepted', 'Accepted'),('refused','Refused')
+    ], string='status')
+    partner_id = fields.Many2one('res.partner', string='partner', required=True)
+    property_id = fields.Many2one('estate.property', string='property',required=True)
+    
