@@ -29,6 +29,7 @@
         'views/real_estate_property_view.xml',
         'views/real_estate_property_type_view.xml',
         'views/real_estate_property_tags_view.xml',
+        'views/real_estate_property_offer_view.xml',
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode
