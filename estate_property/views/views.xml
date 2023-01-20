@@ -1,59 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate_property.view.form</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name">Name</field>
+                        <field name="description">Description</field>
+                        <field name="expected_price">Expected Price</field>
+                        <field name="date_availability">Date Availability</field>
+                        <field name="selling_price">Selling Price</field>
+                        <field name="bedrooms">Bedrooms</field>
+                    </group>
+                    <group>
+                        <field name="living_area">Living Area</field>
+                        <field name="facades">Facades</field>
+                        <field name="garage">Garage</field>
+                        <field name="garden">Garden</field>
+                        <field name="garden_area">Garden Area</field>
+                        <field name="garden_orientation">Orientation</field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-    <record model="ir.ui.view" id="estate_property.list">
-      <field name="name">estate_property list</field>
-      <field name="model">estate_property.estate_property</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-<!--           <field name="value"/>
-          <field name="value2"/> -->
+  <record id="estate_property_view_tree" model="ir.ui.view">
+    <field name="name">estate_property.view.tree</field>
+    <field name="model">estate_property.estate.property</field>
+    <field name="arch" type="xml">
+        <tree string="">
+            <field name="name"/>
+            <field name="description" />
+            <field name="expected_price" />
         </tree>
-      </field>
+    </field>
+  </record>
+    <record id="real_estate_action" model="ir.actions.act_window">
+        <field name="name">Real State </field>
+        <field name="res_model">estate_property.estate.property</field>
+        <field name="view_mode">tree,form</field>
     </record>
-
-
-    <!-- actions opening views on models -->
-
-    <record model="ir.actions.act_window" id="estate_property.action_window">
-      <field name="name">estate_property window</field>
-      <field name="res_model">estate_property.estate_property</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
-
-    <!-- server action to the one above -->
-
-    <record model="ir.actions.server" id="estate_property.action_server">
-      <field name="name">estate_property server</field>
-      <field name="model_id" ref="model_estate_property_estate_property"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
-
-
-    <!-- Top menu item -->
-
-    <menuitem name="estate_property" id="estate_property.menu_root"/>
-
-    <!-- menu categories -->
-
-    <menuitem name="Menu 1" id="estate_property.menu_1" parent="estate_property.menu_root"/>
-    <menuitem name="Menu 2" id="estate_property.menu_2" parent="estate_property.menu_root"/>
-
-    <!-- actions -->
-
-    <menuitem name="List" id="estate_property.menu_1_list" parent="estate_property.menu_1"
-              action="estate_property.action_window"/>
-    <menuitem name="Server to list" id="estate_property" parent="estate_property.menu_2"
-              action="estate_property.action_server"/>
-  </data>
+    <menuitem
+        id="real_estate_menu"
+        name="Real Estate Property"
+        sequence="10"/>
+    <menuitem
+        id="estate_property_menu"
+        name="Estate Property"
+        parent="real_estate_menu"
+        action="real_estate_action"
+        sequence="10"/>
 </odoo>
