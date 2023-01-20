@@ -1,0 +1,17 @@
+<record 
+    id='real_state_view_action' 
+    model='ir.actions.act_window'
+>
+    <field name="name">Real estate property</field>
+    <field name="res_model">estate_property.estate_property</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem 
+    name="Estate Property Menu" 
+    id="estate property menu" />
+<menuitem 
+    name="Estate Properties" 
+    id="estate_properties" 
+    parent="estate property menu"
+    action="list"/>
