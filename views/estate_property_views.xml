@@ -11,24 +11,18 @@
             <h1>
               <field name="name" />
             </h1>
-            <field name="tags" widget="many2many_tags" />
+            <field name="tag_ids" widget="many2many_tags" />
           </div>
           <group>
             <group>
-              <field name="property_type_id" />
-              <field name="postcode" />
+              <field name="property_type_id" style="color:blue;" />
               <field name="date_availability" />
-              <field name="expected_price" />
-              <field name="selling_price" />
-              <field name="bedrooms" />
             </group>
             <group>
-              <field name="living_area" />
-              <field name="facades" />
-              <field name="garage" />
-              <field name="garden" />
-              <field name="garden_area" />
-              <field name="garden_orientation" />
+              <field name="expected_price" />
+              <field name="selling_price"
+                readonly="1"
+              />
             </group>
           </group>
           <notebook>
@@ -36,9 +30,32 @@
               <field name="description" />
             </page>
             <page string="Other Info">
-             
+              <group>
+                <group>
+                  <field name="bedrooms" />
+                  <field name="living_area" />
+                  <field name="facades" />
+                  <field name="postcode" />
+                </group>
+                <group>
+                  <field name="garage" />
+                  <field name="garden" />
+                  <field name="garden_area" />
+                  <field name="garden_orientation" />
+                </group>
+              </group>
             </page>
-            
+
+            <page string="Buyer/Saler Info">
+              <group>
+                <field name="salesperson_id" />
+                <field name="buyer_id" />
+              </group>
+            </page>
+            <page string="Offers">
+              <field name="offer_ids"/>
+            </page>
+
           </notebook>
         </sheet>
       </form>
@@ -51,11 +68,10 @@
     <field name="arch" type="xml">
       <tree string="Real Estate" create="true" delete="true" edit="true">
         <field name="name" />
-        <field name="description" />
         <field name="postcode" />
         <field name="date_availability" />
         <field name="expected_price" />
-        <field name="selling_price" />
+        <field name="tag_ids" widget="many2many_tags"/>
         <field name="bedrooms" />
         <field name="living_area" />
         <field name="facades" />
@@ -63,11 +79,10 @@
         <field name="garden" />
         <field name="garden_area" />
         <field name="garden_orientation" />
+        <field name="selling_price" />
       </tree>
     </field>
   </record>
-
-
   <!-- Search view for "estate.property" -->
   <record id="estate_property_search" model="ir.ui.view">
     <field name="name">estate.property.search</field>
@@ -82,6 +97,15 @@
         <field name="description" />
         <filter string="Available today" name="date_availability"
           domain="[('date_availability','=',context_today())]" />
+        <separator />
+        <group expand="1" string="Group By">
+          <filter string="Postcode" name="postcode"
+            context="{'group_by':'postcode', 'residual_visible':True}" />
+          <filter string="Garden" name="garde"
+            context="{'group_by':'garden', 'residual_visible':True}" />
+          <filter string="Garage" name="garage"
+            context="{'group_by':'garage', 'residual_visible':True}" />
+        </group>
       </search>
     </field>
   </record>

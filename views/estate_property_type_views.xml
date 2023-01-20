@@ -13,7 +13,7 @@
     </field>
   </record>
 <!-- estate- property tree -->
-  <record id="estate_property_tree" model="ir.ui.view">
+  <record id="estate_property_type_tree" model="ir.ui.view">
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property.type</field>
     <field name="arch" type="xml">
