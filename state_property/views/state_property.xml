@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="state_property_menu_act" name="State property" action="state_property_action"/>
+
+    <!-- state property action window -->
+    <record id="state_property_action" model="ir.actions.act_window">
+        <field name="name">State property</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">state_property.state_property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                State Property
+            </p>
+            <p>
+                More details about what a user can do with this object will be OK
+            </p>
+        </field>
+    </record>
+
+    <!-- state property form view -->
+    <record id="state_property_form" model="ir.ui.view">
+        <field name="name">State property form</field>
+        <field name="model">state_property.state_property</field>
+        <field name="arch" type="xml">
+            <form string="State property">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="postcode"/>
+                        <field name="date_availability"/>
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
+                    </group>
+                    <group>
+                        <field name="bedrooms"/>
+                        <field name="living_area"/>
+                        <field name="facades"/>
+                        <field name="garage"/>
+                        <field name="garden"/>
+                        <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/>
+                        <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- state property tree view -->
+    <record id="state_property_view_tree" model="ir.ui.view">
+        <field name="name">State property</field>
+        <field name="model">state_property.state_property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="date_availability"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- state_property search view -->
+    <record id="state_property_view_search" model="ir.ui.view">
+        <field name="name">State property</field>
+        <field name="model">state_property.state_property</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="date_availability"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>
