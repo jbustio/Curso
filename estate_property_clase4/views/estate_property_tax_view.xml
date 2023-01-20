@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_form_house" model="ir.ui.view">
+        <field name="name">Taxs Forms</field>
+        <field name="model">estate.property.taxes</field>
+        <field name="arch" type="xml">
+            <form string="Casas">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name"/>
+                            <field name="taxes" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_tree_house" model="ir.ui.view">
+        <field name="name">List Tax</field>
+        <field name="model">estate.property.taxes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="taxes" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_search_house" model="ir.ui.view">
+        <field name="name">Taxes filters</field>
+        <field name="model">estate.property.taxes</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+
+                <filter name="name"
+                        string="Inactive"
+                        domain="[('name','=','provided_value')]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

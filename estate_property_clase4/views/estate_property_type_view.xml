@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_form_house_type" model="ir.ui.view">
+        <field name="name">Estate Property Type</field>
+        <field name="model">real.estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="Property Type">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name" class="oe_inline"/>
+                            <field name="property_type_ids" class="oe_inline"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_tree_house_type" model="ir.ui.view">
+        <field name="name">Property  List List</field>
+        <field name="model">real.estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" class="oe_inline"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_search_house_type" model="ir.ui.view">
+        <field name="name">House filters</field>
+        <field name="model">real.estate.property.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="property_type_ids"/>
+
+                <filter name="name"
+                        string="Inactive"
+                        domain="[('name','=','provided_value')]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

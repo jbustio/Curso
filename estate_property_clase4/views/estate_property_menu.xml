@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Real Estate Menu -->
+    <menuitem
+            id="estate_property_menu"
+            name="Estate Property"
+    />
+    <record id="action_real_estate" model="ir.actions.act_window">
+        <field name="name">Estate Property</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+    <record id="action_real_estate_type" model="ir.actions.act_window">
+        <field name="name">Estate Property Types</field>
+        <field name="res_model">real.estate.property.type</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+    <record id="action_real_estate_taxes" model="ir.actions.act_window">
+        <field name="name">Estate Property Taxes</field>
+        <field name="res_model">estate.property.taxes</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+    <!--Menu Item para abrir la lista Houses-->
+    <menuitem
+            id="menu_estate_property_houses"
+            name="Advertisements"
+            parent="estate_property_menu"
+            action="action_real_estate"
+            sequence="0"/>
+    <menuitem
+            id="menu_estate_property_config_main"
+            name="Settings"
+            parent="estate_property_menu"
+            sequence="1"/>
+    <menuitem
+            id="menu_estate_property_types_child"
+            name="Property Type"
+            parent="menu_estate_property_config_main"
+            action="action_real_estate_type"
+            sequence="1"/>
+    <menuitem
+            id="menu_estate_property_taxes_child"
+            name="Property Taxes"
+            parent="menu_estate_property_config_main"
+            action="action_real_estate_taxes"
+            sequence="2"/>
+</odoo>
