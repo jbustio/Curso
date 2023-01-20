@@ -2,15 +2,16 @@
 
 from odoo import models, fields, api
 
+print('==========================================IMPORTED==========================================')
 
 class estate_property(models.Model):
-    _name = 'estate_property.estate_property'
-    _description = 'estate_property.estate_property'
+    _name = 'estate_property.estate.property'
+    _description = 'estate_property.estate.property'
 
     name = fields.Char(required = True)
     description = fields.Text()
-    postcode = fields.Char(compute="_value_pc", store=True)
-    date_availabity = fields.Date()
+    postcode = fields.Char()
+    date_availability = fields.Date()
     expected_price = fields.Float(required = True)
     selling_price = fields.Float()
     bedrooms = fields.Integer()
