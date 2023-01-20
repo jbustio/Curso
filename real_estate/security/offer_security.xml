@@ -2,21 +2,17 @@
 <odoo>
 
     <data >
-        <record id="real_estate_group_user" model="res.groups">
-            <field name="name">User</field>
+        <record id="offer_group_user" model="res.groups">
+            <field name="name">OfferUser</field>
             <field name="category_id" ref="base.module_category_services_library"></field>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
             <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
         </record>
-        <record id="real_estate_group_manager" model="res.groups">
-            <field name="name">Manager</field>
+        <record id="offer_group_manager" model="res.groups">
+            <field name="name">OfferManager</field>
             <field name="category_id" ref="base.module_category_services_library"></field>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
             <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
         </record>
-        
-    
     </data>
-    
-
 </odoo>

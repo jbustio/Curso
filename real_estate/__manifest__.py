@@ -24,11 +24,18 @@
     # always loaded
     'data': [
         
-        'security/real_estate_security.xml',
+        
         'security/ir.model.access.csv',
+        'security/real_estate_security.xml',
+        'security/type_security.xml',
+        'security/tag_security.xml',
+        'security/offer_security.xml',
         'views/real_estate_view.xml',
         'views/real_estate_menu.xml',
-        
+        'views/estate_type_menu.xml',
+        'views/estate_type_view.xml',
+        'views/estate_tag_view.xml',
+        'views/estate_offer_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -7,23 +7,42 @@
             <form string="House"> 
             <sheet>
                 <group name="group_top">
-                <group name="group_left">
-                    <field name="name"/>
-                    <field name="description"/>
-                    <field name="postcode"/>
-                    <field name="date_availability"/>
-                    <field name="expected_price" class="oe_inline"/>
-                </group>
+                
                 <group name="group_right">
                     <field name="selling_price"/>
-                    <field name="bedrooms"/>
-                    <field name="living_area" class="oe_inline"/>
-                    <field name="facades"/>
+                    
                     <field name="garage"/>
                     <field name="garden"/>
-                    <field name="garden_area"/>
+                    
                     <field name="garden_orientation"/>
                     </group>
+                </group>
+                <group name="group_bottom">
+                   
+                    <notebook>
+                        <page string="Description">
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                            <field name="expected_price" class="oe_inline"/>
+                            <field name="property_type_id"/>
+                            <field name="tag_id" widget="many2many_tags"/>
+                            <field name="offer"/>
+                        </page>
+                        <page  string="Buyer and seller">
+                            <field name="salesperson"/>
+                            <field name="buyer"/>       
+                        </page>
+                        <page string="Measures and area">
+                            <field name="bedrooms"/>
+                            <field name="facades"/>
+                            <field name="living_area" class="oe_inline"/>
+                            <field name="garden_area"/>
+                            <field name="total_area"/>
+                        </page>
+                    </notebook>
+                    
                 </group>
                 </sheet>
             </form>
@@ -36,27 +55,46 @@
             <tree>
                 <field name="name"/>
                 <field name="description"/>
+                <field name="property_type_id"/>
+                <field name="tag_id" widget="many2many_tags"/>
+                <field name="offer"/>
+                <field name="salesperson"/>
+                <field name="buyer"/>
                 <field name="postcode"/>
                 <field name="selling_price"/>
                 <field name="bedrooms"/>
-                <field name="living_area" class="oe_inline"/>
+                <field name="living_area" />
+                <field name="garden_area"/>
+                <field name="total_area"/>
                 <field name="facades"/>
                 <field name="garage"/>
                 <field name="garden"/>
             </tree>
         </field>
     </record>
+    
+    <!-- <record id="type_view_tree_house" model="ir.ui.view">
+        <field name="name">House Types</field>
+        <field name="model">real_estate_property_type.real_estate_property_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field> 
+    </record> -->
     <record id="view_search_house" model="ir.ui.view">
         <field name="name">House filters</field>
         <field name="model">real_estate.real_estate</field>
         <field name="arch" type="xml">
         <search>
             <field name="selling_price"/>
-        
+            <field name="property_type_id"></field>
             <filter name="selling_price"
-                    string="Inactive"
+                    string="Selling price"
                     domain="[('selling_price','=','provided_value')]"/>
-            
+            <filter name="property_type_id"
+                    string="Type"
+                    domain="[('property_type_id','=','provided_value')]"/>
            
            
         </search>

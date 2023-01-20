@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="estate_type_action" model="ir.actions.act_window">
+        <field name="name">Type action</field>
+        <field name="res_model">estate.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="estate_tag_action" model="ir.actions.act_window">
+        <field name="name">Tag action</field>
+        <field name="res_model">estate.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="type_menu_root"  name="Tipo">
+        <menuitem
+            id="type_first_level_menu"
+            name="Primer nivel"
+            >
+            <menuitem id="estate_type_model_menu_action" action="estate_type_action"/>
+            <menuitem id="estate_tag_model_menu_action" action="estate_tag_action"/>
+        </menuitem>
+    </menuitem>
+</odoo>

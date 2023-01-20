@@ -10,12 +10,19 @@
         <field name="name">Real Estate</field>
         <field name="res_model">real_estate.real_estate</field>
         <field name="view_mode">tree,form</field>
+   </record>
+        
 
-    </record>>
     <!--Menu Item para abrir la lista Houses-->
-    <menuitem
-        id="menu_real_estate_houses"
-        name="Houses"
-        parent="real_estate_menu"
-        action="action_real_estate"/>
+    
+        <menuitem
+            id="menu_real_estate_houses"
+            name="Houses"
+            parent="real_estate_menu"
+            action="action_real_estate">
+        
+           
+ 
+    </menuitem>    
+    
 </odoo>
