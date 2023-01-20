@@ -2,8 +2,6 @@
 
 from odoo import models, fields, api
 
-print('==========================================IMPORTED==========================================')
-
 class estate_property(models.Model):
     _name = 'estate_property.estate.property'
     _description = 'estate_property.estate.property'
@@ -34,8 +32,55 @@ class estate_property(models.Model):
         ('Sold', 'Sold'),
         ('Canceled', 'Canceled')
     ])
+    property_type_id = fields.Many2one(
+                            "res.partner", 
+                            string = "Partner")
+    salesperson = fields.Many2one(
+                                'res.users',
+                                string="Salesperson",
+                                index=True, 
+                                default=lambda self:self.env.user)
+    buyer = fields.Many2one('res.partner',string="Buyer")
 
     @api.depends('value')
     def _value_pc(self):
         for record in self:
             record.value2 = float(record.value) / 100
+
+
+
+class proprety_type(models.Model):
+    _name = 'estate_property.property.type'
+    _description = 'Shows property type'
+
+    name = fields.Char(required = True)
+
+
+
+class tag(models.Model):
+    _name = 'estate_property.tag'
+    _description = 'Tags for appartment classification'
+
+    name = fields.Char(required=True)
+    estate_id = fields.Many2many(
+        'estate_property.estate.property',
+        string="Houses")
+
+class Offer(models.Model):
+    _name="estate.offer"
+    _description="Offerts done"
+
+    price = fields.Float()
+    status = fields.Selection([
+        ('accepted','Accepted'),
+        ('refused','Refused')
+        ],
+        string="Status")
+    partner_id = fields.Many2one(
+        'res.partner',
+        string="Partner",
+        required=True)
+    property_id = fields.Many2one(
+        'estate_property.estate.property',
+        string="Property"
+    )
