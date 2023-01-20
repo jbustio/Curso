@@ -10,6 +10,7 @@
     <menuitem name="Real State" id="rea_base_menu"/>
     <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu" action="estate_property_action"/>
 
+    <!--List-->
     <record id="estate_property_view_tree" model="ir.ui.view">
         <field name="name">Properties</field>
         <field name="model">estate.property</field>
@@ -20,10 +21,66 @@
             <field name="bedrooms"></field>
             <field name="living_area"></field>
             <field name="expected_price"></field>
-            <field name="sellin_price"></field>
+            <field name="selling_price"></field>
             <field name="date_availability"/>
         </tree>
         </field>
     </record>
+
+    <!--Form, groups displays data in columns-->
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">Estate Property Form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group> <!--Longes column-->
+                        
+                        <group>                     <!--Sub columns-->
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="expected_price"></field>
+                            <field name="selling_price"></field>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="description"/>
+                                    <field name="bedrooms"></field>
+                                    <field name="living_area"></field>
+                                    <field name="fecades"></field>
+                                    <field name="garage"></field>
+                                    <field name="garden"></field>
+                                    <field name="garden_ares">Garden Area(sqm)</field>
+                                    <field name="garden_orientation">Garden Orientation</field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">Estate Property Search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Estate Property">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="expected_price"></field>
+                <field name="bedrooms"></field>
+                <field name="living_area"></field>
+                <field name="fecades"></field>
+                <!--filter string="Availability" name="available" domain="[('date_availability','=',value)]"/-->
+            </search>
+        </field>
+    </record>
+    
 
 </odoo>
