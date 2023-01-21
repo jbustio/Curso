@@ -39,7 +39,18 @@ class StateProperty(models.Model):
 
 
 class StatePropertyType(models.Model):
-    _name = 'state_property_type.state_property_type'
+    _name = 'state.property.type'
+    _description = 'State property type'
+
+    _sql_constraints = [
+        ('unique_name', 'unique (name)', 'Name must be unique.')
+    ]
+
+    name = fields.Char("Name", required=True)
+
+
+class StatePropertyTag(models.Model):
+    _name = 'state.property.tag'
     _description = 'State property type'
 
     _sql_constraints = [
