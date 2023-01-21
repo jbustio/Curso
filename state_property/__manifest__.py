@@ -29,6 +29,7 @@
         'views/templates.xml',
         'views/menu_views.xml',
         'views/state_property.xml',
+        'views/state_property_offer.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
