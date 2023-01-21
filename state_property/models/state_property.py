@@ -14,7 +14,7 @@ class StateProperty(models.Model):
         ('check_expected_price', 'check (expected_price > 0)', 'Expected price must be non zero possitive number.')
     ]
 
-    orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
+    values_orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
 
     name = fields.Char("Name", required=True)
     description = fields.Text("Description")
@@ -22,14 +22,15 @@ class StateProperty(models.Model):
     date_availability = fields.Date("Date availability")
     expected_price = fields.Float("Expected price", required=True)
     selling_price = fields.Float("Selling price")
-    bedrooms = fields.Integer("Bedrooms")
+    bedrooms = fields.Integer("Bedrooms", default=0)
     living_area = fields.Integer("Living area")
     facades = fields.Integer("Facades")
     garage = fields.Boolean("Garage", default=False)
     garden = fields.Boolean("Garden", default=False)
     garden_area = fields.Integer("Garden area")
-    garden_orientation = fields.Selection(selection=orientation, string="Garden orientation")
-    # state_property_type = fields.Many2one("", related=)
+    garden_orientation = fields.Selection(selection=values_orientation, string="Garden orientation")
+    property_type_id = fields.Many2one("state.property.type", string="State property type", required=True)
+    tag_ids = fields.Many2many("state.property.tag", string='Tags')
 
     @api.constrains('date_availability')
     def _check_date_availability(self):
