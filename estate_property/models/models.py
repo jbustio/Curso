@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from datetime import date
+from datetime import date, timedelta
 
 class estate_property(models.Model):
     _name = 'estate_property.estate.property'
@@ -10,18 +10,26 @@ class estate_property(models.Model):
     name = fields.Char(required = True)
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date(copy = False, 
+    date_availability = fields.Date(
+                        copy = False, 
                         default = date(year = date.today().year, 
                                         month= date.today().month + 3, 
-                                        day = date.today().day))
-    expected_price = fields.Float(required = True)
-    selling_price = fields.Float(readonly = True, copy = False)
-    bedrooms = fields.Integer(default = 2)
-    living_area = fields.Integer()
-    facades = fields.Integer('Facades')
-    garage = fields.Boolean('Garage')
-    garden = fields.Boolean('Garden')
-    garden_area = fields.Integer('Garden area')
+                                        day = date.today().day),
+                        string = "Date availability")
+    expected_price = fields.Float(
+                    required = True, 
+                    string = 'Expected price'
+                )
+    selling_price = fields.Float(
+                    readonly = True,
+                    copy = False,
+                    string = 'Selling price')
+    bedrooms = fields.Integer(default = 2, string = 'Bedrooms')
+    living_area = fields.Integer(string = 'Living area')
+    facades = fields.Integer(string = 'Facades')
+    garage = fields.Boolean(string = 'Garage')
+    garden = fields.Boolean(string = 'Garden')
+    garden_area = fields.Integer(string = 'Garden area')
     garden_orientation = fields.Selection([
         ('North', 'North'),
         ('South', 'South'),
@@ -52,6 +60,12 @@ class estate_property(models.Model):
     buyer = fields.Many2one('res.partner',string="Buyer")
     tag_id = fields.Many2many('estate_property.tag',string="Tags")
     total_area = fields.Integer(compute = "_compute_area")
+    best_price = fields.Float(compute = "_compute_best_offer_price")
+
+    @api.depends('offer')
+    def _compute_best_offer_price(self):
+        for record in self:
+            record.best_price = max(record.offer.mapped('price'))
 
     @api.depends('living_area', 'garden_area')
     def _compute_area(self):
@@ -100,3 +114,36 @@ class offer(models.Model):
         'estate_property.estate.property',
         string="Property"
     )
+    create_date = fields.Date(
+            readonly = True,
+            string = 'Create date',
+            default= date.today()
+    )
+    validity = fields.Integer(
+                default = 7,
+                string = 'Validity(Days)')
+    date_deadline = fields.Date(
+        string = "Deadline",
+        compute = "_compute_date_deadline",
+        inverse = "_inverse_date_deadline"
+    )
+
+    @api.depends('date_deadline', 'validity')
+    def _compute_date_deadline(self):
+        for record in self:
+            record.date_deadline = date(
+                year = record.create_date.year, 
+                month = record.create_date.month, 
+                day = record.create_date.day
+            ) + timedelta(days = record.validity)
+        
+    def _inverse_date_deadline(self):
+        for record in self:
+            d = date(
+                year = record.date_deadline.year, 
+                month = record.date_deadline.month, 
+                day = record.date_deadline.day
+            ) - timedelta(days = record.validity)
+            record.create_date = d
+            record.validity = (record.date_deadline - record.create_date).days
+        

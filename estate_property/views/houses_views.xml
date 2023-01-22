@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     
-
     <record id="view_form_house" model="ir.ui.view">
         <field name="name">House form</field>
         <field name="model">estate_property.estate.property</field>
@@ -13,6 +12,7 @@
                             <field name="name"/>
                             <field name="date_availability"/>
                             <field name="tag_id" widget="many2many_tags" />
+                            <field name="postcode" />
                         </group>
                         <group>
                             <field name="expected_price" class="oe_inline" />
@@ -24,7 +24,6 @@
                                     <group>
                                         <field name="name"/>
                                         <field name="description"/>
-                                        <field name="postcode" />
                                         <field name="property_type_id" />
                                         <field name="active" />
                                         <field name="state" />
@@ -67,22 +66,11 @@
             <tree>
                 <field name="name"/>
                 <field name="description"/>
-                <field name="postcode"/>
                 <field name="property_type_id"/>
                 <field name="date_availability"/>
                 <field name="expected_price" />
                 <field name="selling_price"/>
-                <field name="bedrooms"/>
-                <field name="tag_id" widget="many2many_tags"/>
-                <field name="offer"/>
-                <field name="salesperson"/>
-                <field name="buyer"/>
-                <field name="living_area" />
-                <field name="garden_area"/>
-                <field name="total_area"/>
-                <field name="facades"/>
-                <field name="garage"/>
-                <field name="garden"/>
+                <field name="best_price" />
             </tree>
         </field>
     </record>
