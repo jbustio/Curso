@@ -5,9 +5,25 @@
         <field name="arch" type="xml">
             <form string="Real Estate Property Type">
                 <sheet>
-                    <group>
-                        <field name="name"/>
-                    </group>
+                    <div class="oe_edit_only">
+                        <label for="name"/>
+                    </div>
+                    <h1>
+                        <field name="name" class="mb16"/>
+                    </h1>
+                    <notebook>
+                        <page string="Properties">
+                            <field name="real_estate_property_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="expected_price"/>
+                                    <field name="state"/>
+                                </tree>
+
+                            </field>
+                        </page>
+
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -18,6 +34,7 @@
         <field name="model">real.estate.property.type</field>
         <field name="arch" type="xml">
             <tree string="Real Estate Property Type">
+                <field name="sequence" widget="handle"/>
                 <field name="name"/>
 
             </tree>

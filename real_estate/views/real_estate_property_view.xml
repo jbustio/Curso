@@ -6,6 +6,12 @@
             <form string="Real Estate Property">
                 <header>
                     <!-- Buttons will go here -->
+                    <button name="sell_property" type="object"
+                            string="Sold" confirm="Are you sure you want to sell this property?"/>
+                    <button name="cancel_property" type="object"
+                            string="Cancel" confirm="Are you sure you want to cancel this property?"/>
+                    <field name="state" widget="statusbar"/>
+
 
                 </header>
                 <sheet>
@@ -33,6 +39,7 @@
                         </group>
                         <group>
                             <field name="expected_price" options='{"type": "number", "step": 0.01}'/>
+                            <field name="best_offer"/>
                             <field name="selling_price"/>
                         </group>
                     </group>
@@ -44,6 +51,9 @@
                                     <field name="bedrooms" options='{"type": "number"}'/>
                                     <field name="living_area" options='{"type": "number"}' />
                                     <field name="facades" options='{"type": "number"}'/>
+                                    <field name="total_area"/>
+                                    <field name="active"/>
+
                                 </group>
                                 <group>
                                     <field name="garage"/>
