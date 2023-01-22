@@ -10,10 +10,12 @@ from dateutil.relativedelta import relativedelta
 class StateProperty(models.Model):
     _name = 'state_property.state_property'
     _description = 'State property'
+    _order = 'id desc'
 
     _sql_constraints = [
         ('unique_postcode', 'unique (postcode)', 'Postcode must be unique.'),
-        ('check_expected_price', 'check (expected_price > 0)', 'Expected price must be non zero possitive number.')
+        ('check_expected_price', 'check (expected_price > 0)', 'A property expected price must be strictly positive.'),
+        ('check_selling_price', 'check (selling_price > 0)', 'A property selling price must be strictly positive.')
     ]
 
     values_orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
@@ -52,9 +54,10 @@ class StateProperty(models.Model):
 class StatePropertyType(models.Model):
     _name = 'state.property.type'
     _description = 'State property type'
+    _order = 'name'
 
     _sql_constraints = [
-        ('unique_name', 'unique (name)', 'Name must be unique.')
+        ('unique_name', 'unique (name)', 'A property type name must be unique.')
     ]
 
     name = fields.Char("Name", required=True)
@@ -63,9 +66,10 @@ class StatePropertyType(models.Model):
 class StatePropertyTag(models.Model):
     _name = 'state.property.tag'
     _description = 'State property type'
+    _order = 'name'
 
     _sql_constraints = [
-        ('unique_name', 'unique (name)', 'Name must be unique.')
+        ('unique_name', 'unique (name)', 'A property tag name must be unique.')
     ]
 
     name = fields.Char("Name", required=True)

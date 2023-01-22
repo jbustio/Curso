@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo import models, fields, api
 
 
 class StatePropertyOffer(models.Model):
     _name = 'state.property.offer'
     _description = 'State property offer'
+    _order = 'price desc'
+
+    _sql_constraints = [
+        ('check_price', 'check (price > 0)', 'An offer price must be strictly positive.')
+    ]
 
     values_status = [('accepted', 'Accepted'), ('refused', 'Refused')]
 
