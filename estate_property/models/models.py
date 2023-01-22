@@ -4,7 +4,7 @@ from odoo import models, fields, api
 
 class estate_property(models.Model):
     _name = 'estate_property.estate.property'
-    _description = 'estate_property.estate.property'
+    _description = 'estate_property.estate_property'
 
     name = fields.Char(required = True)
     description = fields.Text()
@@ -66,8 +66,8 @@ class tag(models.Model):
         'estate_property.estate.property',
         string="Houses")
 
-class Offer(models.Model):
-    _name="estate.offer"
+class offer(models.Model):
+    _name="estate_property.offer"
     _description="Offerts done"
 
     price = fields.Float()
