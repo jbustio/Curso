@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base_setup'],
 
     # always loaded
     'data': [
@@ -36,6 +36,7 @@
         'views/estate_type_view.xml',
         'views/estate_tag_view.xml',
         'views/estate_offer_view.xml',
+        #'views/res_config_settings.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

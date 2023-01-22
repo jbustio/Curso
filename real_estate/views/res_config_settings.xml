@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_general_config_real_estate" model="ir.ui.view">
+        <field name="name">Configuration: add Real Estate options</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"></field>
+        <field name="arch" type="xml">
+            <div id="business_documents" position="before">
+            <h2>Real Estate</h2>
+                <div class="row mt16 0_settings_container">
+                    <!-- Show Description option-->
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="group_description" class="oe_inline"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_description"/>
+                            <div class="text-muted">
+                                Enable description on real estate 
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </field>
+    
+    </record>
+
+</odoo>

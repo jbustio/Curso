@@ -6,11 +6,17 @@
         <field name="arch" type="xml">
             <form string="House"> 
             <sheet>
+                <h1><field name="name"/></h1>
                 <group name="group_top">
+                <group name="group left">
+                    <field name="postcode"/>    
+                    <field name="date_availability"/>
                 
+                </group>
                 <group name="group_right">
+                    <field name="expected_price" class="oe_inline"/>
                     <field name="selling_price"/>
-                    
+                    <field name="best_price"/>
                     <field name="garage"/>
                     <field name="garden"/>
                     
@@ -21,14 +27,12 @@
                    
                     <notebook>
                         <page string="Description">
-                            <field name="name"/>
-                            <field name="description"/>
-                            <field name="postcode"/>
-                            <field name="date_availability"/>
-                            <field name="expected_price" class="oe_inline"/>
-                            <field name="property_type_id"/>
-                            <field name="tag_id" widget="many2many_tags"/>
+                           
+                            <p><b>Description </b><field name="description"/></p><br></br>                    
+                            <p><b>Type </b><field name="property_type_id"/></p><br></br>
+                            <p><b>Tags </b><field name="tag_id" widget="many2many_tags"/></p><br></br>
                             <field name="offer"/>
+                            
                         </page>
                         <page  string="Buyer and seller">
                             <field name="salesperson"/>
@@ -36,8 +40,9 @@
                         </page>
                         <page string="Measures and area">
                             <field name="bedrooms"/>
-                            <field name="facades"/>
                             <field name="living_area" class="oe_inline"/>
+                            <field name="facades"/>
+                            
                             <field name="garden_area"/>
                             <field name="total_area"/>
                         </page>
@@ -54,21 +59,13 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="description"/>
-                <field name="property_type_id"/>
-                <field name="tag_id" widget="many2many_tags"/>
-                <field name="offer"/>
-                <field name="salesperson"/>
-                <field name="buyer"/>
                 <field name="postcode"/>
-                <field name="selling_price"/>
                 <field name="bedrooms"/>
                 <field name="living_area" />
-                <field name="garden_area"/>
-                <field name="total_area"/>
-                <field name="facades"/>
-                <field name="garage"/>
-                <field name="garden"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <field name="date_availability"/>
+               
             </tree>
         </field>
     </record>
