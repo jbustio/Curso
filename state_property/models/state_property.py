@@ -17,6 +17,7 @@ class StateProperty(models.Model):
     ]
 
     values_orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
+    values_state = [('new', 'New'), ('offer_received', 'Offer received'), ('offer_accepted', 'Offer accepted'), ('sold', 'Sold'), ('canceled', 'Canceled')]
 
     name = fields.Char("Name", required=True)
     description = fields.Text("Description")
@@ -34,6 +35,7 @@ class StateProperty(models.Model):
     property_type_id = fields.Many2one("state.property.type", string="State property type", required=True)
     tag_ids = fields.Many2many("state.property.tag", string='Tags')
     active = fields.Boolean("Active", default=True)
+    state = fields.Selection(selection=values_state, string="State", required=True, copy=False, default=values_state[0][0])
 
     @api.constrains('date_availability')
     def _check_date_availability(self):
