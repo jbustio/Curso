@@ -6,46 +6,56 @@
         <field name="name">House form</field>
         <field name="model">estate_property.estate.property</field>
         <field name="arch" type="xml">
-            <form string="House"> 
-            <sheet>
-                <group name="group_top">
-                
-                <group name="group_right">
-                    <field name="selling_price"/>
-                    
-                    <field name="garage"/>
-                    <field name="garden"/>
-                    
-                    <field name="garden_orientation"/>
-                    </group>
-                </group>
-                <group name="group_bottom">
-                   
-                    <notebook>
-                        <page string="Description">
+            <form string="House">
+                <sheet>
+                    <group name="root_group">
+                        <group name = "left_group">
                             <field name="name"/>
-                            <field name="description"/>
-                            <field name="postcode"/>
                             <field name="date_availability"/>
-                            <field name="expected_price" class="oe_inline"/>
-                            <field name="property_type_id"/>
-                            <field name="tag_id" widget="many2many_tags"/>
-                            <field name="offer"/>
-                        </page>
-                        <page  string="Buyer and seller">
-                            <field name="salesperson"/>
-                            <field name="buyer"/>       
-                        </page>
-                        <page string="Measures and area">
-                            <field name="bedrooms"/>
-                            <field name="facades"/>
-                            <field name="living_area" class="oe_inline"/>
-                            <field name="garden_area"/>
-                            <field name="total_area"/>
-                        </page>
-                    </notebook>
-                    
-                </group>
+                            <field name="tag_id" widget="many2many_tags" />
+                        </group>
+                        <group>
+                            <field name="expected_price" class="oe_inline" />
+                            <field name="selling_price" readonly="1" />
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group name="Description Page">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field name="postcode" />
+                                        <field name="property_type_id" />
+                                        <field name="active" />
+                                        <field name="state" />
+                                    </group>
+                                    <group>
+                                        <field name="garage"/>
+                                        <field name="garden" />
+                                        <field name="garden_orientation" />
+                                        <field name="living_area" />
+                                        <field name="garden_area" />
+                                        <field name="total_area" />
+                                        <field name="bedrooms" />
+                                        <field name="facades"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Buyer and seller">
+                                <group name="Buyer and seller Page">
+                                    <field name="salesperson" />
+                                    <field name="buyer" />                                    
+                                </group>
+                            </page>
+                            <page string="Offer">
+                                <group name="Offer Page">
+                                    <field name="salesperson" />
+                                    <field name="buyer" />
+                                    <field name="offer" />                                   
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
                 </sheet>
             </form>
         </field>
