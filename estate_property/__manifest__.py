@@ -25,9 +25,12 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
         'views/templates.xml',
-        'views/estate_menu_view.xml',
+        'views/layout_menu_view.xml',
+        'views/houses_views.xml',
+        'views/offer_views.xml',
+        'views/type_views.xml',
+        'views/tag_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
