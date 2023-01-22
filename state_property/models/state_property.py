@@ -33,6 +33,7 @@ class StateProperty(models.Model):
     garden_orientation = fields.Selection(selection=values_orientation, string="Garden orientation")
     property_type_id = fields.Many2one("state.property.type", string="State property type", required=True)
     tag_ids = fields.Many2many("state.property.tag", string='Tags')
+    active = fields.Boolean("Active", default=True)
 
     @api.constrains('date_availability')
     def _check_date_availability(self):
