@@ -30,6 +30,7 @@
         'security/type_security.xml',
         'security/tag_security.xml',
         'security/offer_security.xml',
+        
         'views/real_estate_view.xml',
         'views/real_estate_menu.xml',
         'views/estate_type_menu.xml',

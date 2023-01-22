@@ -1,11 +1,15 @@
 
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 from datetime import timedelta
 
 class real_estate(models.Model):
     _name = 'real_estate.real_estate'
     _description = 'Modelo principal en la app real estate para el manejo de los bienes raices'
+    _order = "id desc"
+
+
 
     name = fields.Char(required=True,default="New House")
     #groups='real_estate.group_description'
@@ -19,7 +23,7 @@ class real_estate(models.Model):
     date_availability = fields.Date(copy=False,default=fields.Date.today()+timedelta(days=90),string="Available From")
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(readonly=True,copy=False)
-    best_price = fields.Float(compute="_compute_price")
+    best_price = fields.Float(compute="_compute_price",default=0)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer('Facades')
@@ -40,10 +44,18 @@ class real_estate(models.Model):
         ('Offer Accepted','Offer Accepted'),
         ('Sold','Sold'),
         ('Canceled','Canceled'),
-    ])
+    ],string="Status")
 
 
-
+    def sold(self):
+        if self.state == 'New':
+            self.state = 'Sold'
+        elif self.state == 'Canceled':
+            raise UserError("Canceled properties cannot be set to sold state")
+        else:
+            self.state = "Sold"
+    def cancel(self):
+        self.state = 'Canceled'
 
 
 
@@ -57,13 +69,26 @@ class real_estate(models.Model):
     def _compute_price(self):
         prices_to_iter = []
         for record in self:
-            if(record.offer != None or record.offer.property_id == record.id):
-                for offer in record.offer:
-                    prices_to_iter.append(offer.price)
+            if(record.offer.price != None ):
+                #for offer in record.offer:
+                prices_to_iter.append(record.offer.price)
                 self.best_price = max(prices_to_iter)
             else:
                 self.best_price = 0
     
+
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        for record in self:
+            if (record.garden == True):
+                record.garden_area = 10
+                record.garden_orientation = 'North'
+            else:
+                record.garden_area = 0
+                record.garden_orientation = ''
+
+
+
     #############################
     #Metodos para hacer testing
     def north_direction(self):

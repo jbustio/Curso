@@ -5,10 +5,16 @@
         <field name="model">real_estate.real_estate</field>
         <field name="arch" type="xml">
             <form string="House"> 
+            <header>
+                <button name="sold" type="object" string="Sold"/>
+                <button name="cancel" type="object" string="Cancel"/>
+            </header>
             <sheet>
                 <h1><field name="name"/></h1>
                 <group name="group_top">
                 <group name="group left">
+                    <field name="state" widget="statusbar"/>
+                    <field name="property_type_id" options="{'no_create_edit':True}"/>
                     <field name="postcode"/>    
                     <field name="date_availability"/>
                 
@@ -17,8 +23,7 @@
                     <field name="expected_price" class="oe_inline"/>
                     <field name="selling_price"/>
                     <field name="best_price"/>
-                    <field name="garage"/>
-                    <field name="garden"/>
+                    
                     
                     <field name="garden_orientation"/>
                     </group>
@@ -28,20 +33,22 @@
                     <notebook>
                         <page string="Description">
                            
-                            <p><b>Description </b><field name="description"/></p><br></br>                    
-                            <p><b>Type </b><field name="property_type_id"/></p><br></br>
-                            <p><b>Tags </b><field name="tag_id" widget="many2many_tags"/></p><br></br>
+                            <p><b>Description </b><field name="description"/></p>                  
+                            
+                            <p><b>Tags </b><field name="tag_id" widget="many2many_tags" options="{'color_field':'color'}"/></p>
+                            <p><b>Garage </b><field name="garage"/></p>
+                            <p><b>Garden </b><field name="garden"/></p>
                             <field name="offer"/>
                             
                         </page>
                         <page  string="Buyer and seller">
-                            <field name="salesperson"/>
-                            <field name="buyer"/>       
+                            <p><b>Salesperson </b><field name="salesperson"/></p>
+                            <p><b>Buyer </b><field name="buyer"/></p>       
                         </page>
                         <page string="Measures and area">
-                            <field name="bedrooms"/>
-                            <field name="living_area" class="oe_inline"/>
-                            <field name="facades"/>
+                            <p><b>Bedroom </b><field name="bedrooms"/></p>
+                            <p><b>Living Area </b><field name="living_area" class="oe_inline"/></p>
+                            <p><b>Facades </b><field name="facades"/></p>
                             
                             <field name="garden_area"/>
                             <field name="total_area"/>
