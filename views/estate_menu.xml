@@ -37,7 +37,7 @@
   />
   <menuitem
     id="menu_estate_property"
-    name="Real Estate Property"
+    name="Properties"
     parent="menu_estate"
     action="estate_property_action"
   />

@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
 
 
@@ -8,15 +8,20 @@ class EstateProperty(models.Model):
     _order = 'name ASC'
 
     name = fields.Char(default=lambda self: 'New Real Estate', required=True)
+    state = fields.Selection(required=True, default="new", copy=False,
+    selection=[('new', 'New'), ('offer_receive', 'Offer Received'), (
+        'offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('canceled', 'Canceled'),])
     tag_ids = fields.Many2many('estate.property.tag')
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(
-        default=lambda self: fields.datetime.now() + relativedelta(months=2),
+        default=lambda self: fields.datetime.today() + relativedelta(months=3),
         copy=False, string="Available from")
     expected_price = fields.Float(required=True)
-    selling_price = fields.Float()
-    bedrooms = fields.Integer()
+    selling_price = fields.Float(
+        readonly=True, copy=False
+    )
+    bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer()
     garage = fields.Boolean()
@@ -32,6 +37,14 @@ class EstateProperty(models.Model):
         'res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
     buyer_id = fields.Many2one('res.partner', string="Buyer", copy=False)
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
+    total_area = fields.Float(compute="_compute_total_area")
+    active = fields.Boolean(default=1)
+    
+
+    @api.depends("garden_area", "living_area")
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.garden_area + record.living_area
 
 
 class EstatePropertyType(models.Model):

@@ -17,12 +17,14 @@
             <group>
               <field name="property_type_id" style="color:blue;" />
               <field name="date_availability" />
+              <field name="state" />
             </group>
             <group>
               <field name="expected_price" />
               <field name="selling_price"
                 readonly="1"
               />
+              <field name="active" />
             </group>
           </group>
           <notebook>
@@ -42,10 +44,10 @@
                   <field name="garden" />
                   <field name="garden_area" />
                   <field name="garden_orientation" />
+                  <field name="total_area" />
                 </group>
               </group>
             </page>
-
             <page string="Buyer/Saler Info">
               <group>
                 <field name="salesperson_id" />
@@ -55,7 +57,6 @@
             <page string="Offers">
               <field name="offer_ids"/>
             </page>
-
           </notebook>
         </sheet>
       </form>
@@ -69,6 +70,7 @@
       <tree string="Real Estate" create="true" delete="true" edit="true">
         <field name="name" />
         <field name="postcode" />
+        <field name="state" />
         <field name="date_availability" />
         <field name="expected_price" />
         <field name="tag_ids" widget="many2many_tags"/>
@@ -80,6 +82,7 @@
         <field name="garden_area" />
         <field name="garden_orientation" />
         <field name="selling_price" />
+        <field name="active" />
       </tree>
     </field>
   </record>
@@ -101,7 +104,7 @@
         <group expand="1" string="Group By">
           <filter string="Postcode" name="postcode"
             context="{'group_by':'postcode', 'residual_visible':True}" />
-          <filter string="Garden" name="garde"
+          <filter string="Garden" name="garden"
             context="{'group_by':'garden', 'residual_visible':True}" />
           <filter string="Garage" name="garage"
             context="{'group_by':'garage', 'residual_visible':True}" />

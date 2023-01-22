@@ -1,42 +1,41 @@
 # Osvaldo Cobacho Aguilera
 
-## Clase 2
+## Semana 1 parte1
 
-Exercise 1
+- [x] Ejercicio 1  
+- [x] Ejercicio 2
+- [x] Ejercicio 3
+- [x] Ejercicio 4
+- [x] Ejercicio 5
+- [x] Ejercicio 6
 
-Add basic fields to the Real Estate Property table.
+## Semana 1 parte2
 
-Add the following basic fields to the table:
+- [ ] Ejercicio 7
+- [ ] Ejercicio 8
+- [ ] Ejercicio 9
+- [ ] Ejercicio 10
+- [ ] Ejercicio 11
+- [ ] Ejercicio 12
+- [ ] Ejercicio 13
+- [ ] Ejercicio 14
+- [ ] Ejercicio 15
+- [ ] Ejercicio 16
+- [ ] Ejercicio 17
+- [ ] Ejercicio 18
+- [ ] Ejercicio 19
+- [ ] Ejercicio 20
+- [ ] Ejercicio 21
+- [ ] Ejercicio 22
+- [ ] Ejercicio 23
+- [ ] Ejercicio 24
+- [ ] Ejercicio 25
 
 
-| Field  | Type |
-| ------------- | ------------- |
-| name  | Char  |
-| description  | Text  |
-| postcode  | Char  |
-| date_availability  | Date  |
-| expected_price  | Float  |
-| selling_price  | Float  |
-| bedrooms  | Integer  |
-| living_area  | Integer  |
-| facades  | Integer  |
-| garage  | Boolean  |
-| garden  | Boolean  |
-| garden_area  | Integer  |
-| garden_orientation  | Selection  |
 
-The garden_orientation field must have 4 possible values: ‘North’, ‘South’, ‘East’ and ‘West’. The selection list is defined as a list of tuples
 
-### Test Clase 2 exercise 1
 
-Connect to database 
-```shell script
-$ psql -d databasename
 
-```
 
-Shows all the fields created for the estate_property table
-```shell script
-$ databasename=# \d estate_property;
 
-```
+
