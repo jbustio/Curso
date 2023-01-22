@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from datetime import date
 
 class estate_property(models.Model):
     _name = 'estate_property.estate.property'
@@ -9,10 +10,13 @@ class estate_property(models.Model):
     name = fields.Char(required = True)
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date(copy = False)
+    date_availability = fields.Date(copy = False, 
+                        default = date(year = date.today().year, 
+                                        month= date.today().month + 3, 
+                                        day = date.today().day))
     expected_price = fields.Float(required = True)
-    selling_price = fields.Float(readonly = True)
-    bedrooms = fields.Integer()
+    selling_price = fields.Float(readonly = True, copy = False)
+    bedrooms = fields.Integer(default = 2)
     living_area = fields.Integer()
     facades = fields.Integer('Facades')
     garage = fields.Boolean('Garage')
@@ -33,14 +37,26 @@ class estate_property(models.Model):
         ('Canceled', 'Canceled')
     ])
     property_type_id = fields.Many2one(
-                            "res.partner", 
-                            string = "Partner")
+                            "estate_property.property.type", 
+                            string = "Type",
+                            ondelete = "cascade")
+    offer = fields.One2many(
+                            'estate_property.offer',
+                            'property_id',
+                            string="Offer")
     salesperson = fields.Many2one(
                                 'res.users',
                                 string="Salesperson",
                                 index=True, 
                                 default=lambda self:self.env.user)
     buyer = fields.Many2one('res.partner',string="Buyer")
+    tag_id = fields.Many2many('estate_property.tag',string="Tags")
+    total_area = fields.Integer(compute = "_compute_area")
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_area(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
 
     @api.depends('value')
     def _value_pc(self):
