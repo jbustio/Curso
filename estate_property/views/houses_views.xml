@@ -1,54 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    
+
+    <record id="view_form_house" model="ir.ui.view">
+        <field name="name">House form</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+            <form string="House"> 
+            <sheet>
+                <group name="group_top">
+                
+                <group name="group_right">
+                    <field name="selling_price"/>
+                    
+                    <field name="garage"/>
+                    <field name="garden"/>
+                    
+                    <field name="garden_orientation"/>
+                    </group>
+                </group>
+                <group name="group_bottom">
+                   
+                    <notebook>
+                        <page string="Description">
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                            <field name="expected_price" class="oe_inline"/>
+                            <field name="property_type_id"/>
+                            <field name="tag_id" widget="many2many_tags"/>
+                            <field name="offer"/>
+                        </page>
+                        <page  string="Buyer and seller">
+                            <field name="salesperson"/>
+                            <field name="buyer"/>       
+                        </page>
+                        <page string="Measures and area">
+                            <field name="bedrooms"/>
+                            <field name="facades"/>
+                            <field name="living_area" class="oe_inline"/>
+                            <field name="garden_area"/>
+                            <field name="total_area"/>
+                        </page>
+                    </notebook>
+                    
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">Houses List</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="postcode"/>
+                <field name="property_type_id"/>
+                <field name="date_availability"/>
+                <field name="expected_price" />
+                <field name="selling_price"/>
+                <field name="bedrooms"/>
+                <field name="tag_id" widget="many2many_tags"/>
+                <field name="offer"/>
+                <field name="salesperson"/>
+                <field name="buyer"/>
+                <field name="living_area" />
+                <field name="garden_area"/>
+                <field name="total_area"/>
+                <field name="facades"/>
+                <field name="garage"/>
+                <field name="garden"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_search_house" model="ir.ui.view">
+        <field name="name">House filters</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+        <search>
+            <field name="selling_price"/>
+                <field name="property_type_id"></field>
+                <filter name="selling_price"
+                        string="Selling price"
+                        domain="[('selling_price','=','provided_value')]"/>
+                <filter name="property_type_id"
+                        string="Type"
+                        domain="[('property_type_id','=','provided_value')]"/>
+            </search>
+        </field>
+    </record>
+    <record 
+        id="real_estate_action" 
+        model="ir.actions.act_window"
+    >
+        <field name="name">Real State</field>
+        <field name="res_model">estate_property.estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <menuitem
         id="estate_property_menu"
         name="Houses"
         parent="real_estate_menu"
         action="real_estate_action"
         sequence="10"/>
-    
-        <record id="estate_property_view_form" model="ir.ui.view">
-        <field name="name">estate_property.view.form</field>
-        <field name="model">estate_property.estate.property</field>
-        <field name="arch" type="xml">
-            <form string="">
-                <sheet>
-                    <group>
-                        <field name="name">Name</field>
-                        <field name="description">Description</field>
-                        <field name="expected_price">Expected Price</field>
-                        <field name="date_availability">Date Availability</field>
-                        <field name="selling_price">Selling Price</field>
-                        <field name="bedrooms">Bedrooms</field>
-                        <field name="living_area">Living Area</field>
-                        <field name="facades">Facades</field>
-                        <field name="garage">Garage</field>
-                        <field name="garden">Garden</field>
-                        <field name="garden_area">Garden Area</field>
-                        <field name="garden_orientation">Orientation</field>
-                        <field name="active"> Active </field>
-                        <field name="state"> state </field>
-                         <field name="tag_id" widget="many2many_tags"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-  <record id="estate_property_view_tree" model="ir.ui.view">
-    <field name="name">estate_property.view.tree</field>
-    <field name="model">estate_property.estate.property</field>
-    <field name="arch" type="xml">
-        <tree string="">
-            <field name="name"/>
-            <field name="description" />
-            <field name="expected_price" />
-        </tree>
-    </field>
-  </record>
-    <record id="real_estate_action" model="ir.actions.act_window">
-        <field name="name">Real State </field>
-        <field name="res_model">estate_property.estate.property</field>
-        <field name="view_mode">tree,form</field>
-    </record>
 </odoo>
