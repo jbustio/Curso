@@ -8,7 +8,7 @@ from odoo.exceptions import UserError, ValidationError
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Real Estate Property'
-    _order = 'name ASC'
+    _order = "id desc"
 
     name = fields.Char(default=lambda self: 'New Real Estate', required=True)
     state = fields.Selection(required=True, default="new", copy=False,
@@ -97,7 +97,7 @@ class EstatePropertyType(models.Model):
         string='Name',
         required=True,
     )
-    
+
     property_ids = fields.One2many(
         "estate.property", "property_type_id", string="Real Estates")
 
@@ -118,6 +118,7 @@ class EstatePropertyTag(models.Model):
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'EstatePropertyOffer'
+    _order = "price desc"
 
     price = fields.Float()
     status = fields.Selection(
@@ -145,14 +146,13 @@ class EstatePropertyOffer(models.Model):
             delta = record.date_deadline - record.create_date
             record.validity = delta.days
 
-
     def action_accept(self):
         for record in self:
             record.status = 'accepted'
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
             for offer in record.property_id.offer_ids:
-                if offer.id != record.id and offer.status == 'accepted': 
+                if offer.id != record.id and offer.status == 'accepted':
                     offer.status = None
 
     def action_refuse(self):
