@@ -18,8 +18,8 @@
 - [x] Ejercicio 11
 - [x] Ejercicio 12
 - [X] Ejercicio 13
-- [ ] Ejercicio 14
-- [ ] Ejercicio 15
+- [X] Ejercicio 14
+- [X] Ejercicio 15
 - [ ] Ejercicio 16
 - [ ] Ejercicio 17
 - [ ] Ejercicio 18

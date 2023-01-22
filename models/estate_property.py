@@ -113,6 +113,7 @@ class EstatePropertyTag(models.Model):
         string='Name',
         required=True,
     )
+    sequence = fields.Integer()
 
 
 class EstatePropertyOffer(models.Model):
