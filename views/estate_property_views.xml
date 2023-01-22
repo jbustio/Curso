@@ -14,6 +14,7 @@
           <button name="action_sell" string="Sold"
             type="object" class="oe_highlight"
             attrs="{'d': ['|',('state','=','canceled'), ('state','=','sold')]}" />
+          <field name="state" widget="statusbar" statusbar_visible="new,offer_receive,offer_accepted,sold,canceled" />
 
         </header>
         <sheet>
