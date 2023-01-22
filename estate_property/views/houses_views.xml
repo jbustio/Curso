@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="estate_property_menu"
+        name="Houses"
+        parent="real_estate_menu"
+        action="real_estate_action"
+        sequence="10"/>
+    
+        <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate_property.view.form</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name">Name</field>
+                        <field name="description">Description</field>
+                        <field name="expected_price">Expected Price</field>
+                        <field name="date_availability">Date Availability</field>
+                        <field name="selling_price">Selling Price</field>
+                        <field name="bedrooms">Bedrooms</field>
+                        <field name="living_area">Living Area</field>
+                        <field name="facades">Facades</field>
+                        <field name="garage">Garage</field>
+                        <field name="garden">Garden</field>
+                        <field name="garden_area">Garden Area</field>
+                        <field name="garden_orientation">Orientation</field>
+                        <field name="active"> Active </field>
+                        <field name="state"> state </field>
+                         <field name="tag_id" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+  <record id="estate_property_view_tree" model="ir.ui.view">
+    <field name="name">estate_property.view.tree</field>
+    <field name="model">estate_property.estate.property</field>
+    <field name="arch" type="xml">
+        <tree string="">
+            <field name="name"/>
+            <field name="description" />
+            <field name="expected_price" />
+        </tree>
+    </field>
+  </record>
+    <record id="real_estate_action" model="ir.actions.act_window">
+        <field name="name">Real State </field>
+        <field name="res_model">estate_property.estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
