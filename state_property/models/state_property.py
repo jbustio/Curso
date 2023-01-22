@@ -21,7 +21,7 @@ class StateProperty(models.Model):
     postcode = fields.Char("Postcode")
     date_availability = fields.Date("Date availability")
     expected_price = fields.Float("Expected price", required=True)
-    selling_price = fields.Float("Selling price")
+    selling_price = fields.Float("Selling price", readonly=True, copy=False)
     bedrooms = fields.Integer("Bedrooms", default=0)
     living_area = fields.Integer("Living area")
     facades = fields.Integer("Facades")
