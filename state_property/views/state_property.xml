@@ -11,6 +11,7 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="active" widget="boolean_toggle"/>
                             <field name="name"/>
                             <field name="property_type_id"/>
                             <field name="description"/>
@@ -20,8 +21,8 @@
                             <field name="selling_price"/>
                         </group>
                         <group>
-                            <field name="bedrooms" options="{'type':'number','min':0}"/>
-                            <field name="living_area"/>
+                            <field name="state"/>
+                            <field name="bedrooms" options="{'type':'number'}"/>
                             <field name="facades"/>
                             <field name="garage" widget="boolean_toggle"/>
                             <field name="garden" widget="boolean_toggle"/>
