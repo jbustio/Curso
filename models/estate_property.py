@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
 class EstateProperty(models.Model):
@@ -14,7 +15,7 @@ class EstateProperty(models.Model):
     tag_ids = fields.Many2many('estate.property.tag')
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date(
+    date_availability = fields.Datetime(
         default=lambda self: fields.datetime.today() + relativedelta(months=3),
         copy=False, string="Available from")
     expected_price = fields.Float(required=True)
@@ -45,7 +46,13 @@ class EstateProperty(models.Model):
     @api.depends('offer_ids')
     def _compute_best_price(self):
         for record in self:
-            record.best_price = max(record.offer_ids.mapped('price'))
+            if record.offer_ids:
+                print("!!!!!", record.offer_ids)
+                bp = max(record.offer_ids.mapped('price'))
+                record.best_price = bp
+            else:
+                print("!!! no hay offers")
+                record.best_price = 0
 
     @api.depends("garden_area", "living_area")
     def _compute_total_area(self):
@@ -94,3 +101,19 @@ class EstatePropertyOffer(models.Model):
     property_id = fields.Many2one('estate.property',
                                   required=True
                                   )
+
+    date_deadline = fields.Datetime(
+        compute='_compute_date_deadline',  inverse='_inverse_date_deadline')
+
+    validity = fields.Integer(string="Validity (days)", default=7)
+
+    @api.depends('validity')
+    def _compute_date_deadline(self):
+        for record in self:
+            now = record.create_date if record.create_date else datetime.now()
+            record.date_deadline = now + relativedelta(days=record.validity)
+
+    def _inverse_date_deadline(self):
+        for record in self:
+            delta = record.date_deadline - record.create_date
+            record.validity = delta.days

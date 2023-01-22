@@ -7,13 +7,11 @@
         <field name="arch" type="xml">
             <form string="Property Offer">
                 <group>
-                    <group>
                         <field name="price" />
                         <field name="partner_id" />
-                    </group>
-                    <group>
                         <field name="status" />
-                    </group>
+                        <field name="validity" />
+                        <field name="date_deadline" />
                 </group>
                 
             </form>
@@ -27,6 +25,8 @@
             <tree string="Property Offer">
                 <field name="price" />
                 <field name="partner_id" />
+                <field name="validity" />
+                <field name="date_deadline" />
                 <field name="status" />
             </tree>
         </field>
