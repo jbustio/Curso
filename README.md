@@ -11,8 +11,8 @@
 
 ## Semana 1 parte2
 
-- [ ] Ejercicio 7
-- [ ] Ejercicio 8
+- [x] Ejercicio 7
+- [x] Ejercicio 8
 - [ ] Ejercicio 9
 - [ ] Ejercicio 10
 - [ ] Ejercicio 11

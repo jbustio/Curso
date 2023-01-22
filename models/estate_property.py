@@ -9,8 +9,8 @@ class EstateProperty(models.Model):
 
     name = fields.Char(default=lambda self: 'New Real Estate', required=True)
     state = fields.Selection(required=True, default="new", copy=False,
-    selection=[('new', 'New'), ('offer_receive', 'Offer Received'), (
-        'offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('canceled', 'Canceled'),])
+                             selection=[('new', 'New'), ('offer_receive', 'Offer Received'), (
+                                 'offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('canceled', 'Canceled'),])
     tag_ids = fields.Many2many('estate.property.tag')
     description = fields.Text()
     postcode = fields.Char()
@@ -21,6 +21,7 @@ class EstateProperty(models.Model):
     selling_price = fields.Float(
         readonly=True, copy=False
     )
+
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer()
@@ -39,7 +40,12 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
     total_area = fields.Float(compute="_compute_total_area")
     active = fields.Boolean(default=1)
-    
+    best_price = fields.Float(compute='_compute_best_price')
+
+    @api.depends('offer_ids')
+    def _compute_best_price(self):
+        for record in self:
+            record.best_price = max(record.offer_ids.mapped('price'))
 
     @api.depends("garden_area", "living_area")
     def _compute_total_area(self):
