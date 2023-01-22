@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 
 class StateProperty(models.Model):
