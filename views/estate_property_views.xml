@@ -6,6 +6,16 @@
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
       <form string="Real Estate">
+        <header>
+          <button name="action_cancel" string="Cancel"
+            type="object" class="oe_highlight"
+            attrs="{'d': ['|',('state','=','sold') ,('state','=','canceled')]}" />
+
+          <button name="action_sell" string="Sold"
+            type="object" class="oe_highlight"
+            attrs="{'d': ['|',('state','=','canceled'), ('state','=','sold')]}" />
+
+        </header>
         <sheet>
           <div class="oe_title">
             <h1>
