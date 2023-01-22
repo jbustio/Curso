@@ -36,6 +36,11 @@ class StateProperty(models.Model):
     tag_ids = fields.Many2many("state.property.tag", string='Tags')
     active = fields.Boolean("Active", default=True)
     state = fields.Selection(selection=values_state, string="State", required=True, copy=False, default=values_state[0][0])
+    total_area = fields.Integer("Total Area", compute="_compute_total_area")
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+        self.total_area = self.living_area + self.garden_area
 
     @api.constrains('date_availability')
     def _check_date_availability(self):
@@ -64,4 +69,3 @@ class StatePropertyTag(models.Model):
     ]
 
     name = fields.Char("Name", required=True)
-    # state_property = fields.One2many("StateProperty")
