@@ -18,3 +18,6 @@ Shows all the fields created for the estate_property table
 $ databasename=# \d estate_property;
 
 ```
+## Clase 4
+
+Agregados permisos y grupos
