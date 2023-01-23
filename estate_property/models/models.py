@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from datetime import date, timedelta
+
+from pydantic import ValidationError
 
 class estate_property(models.Model):
     _name = 'estate_property.estate.property'
     _description = 'estate_property.estate_property'
+    _order = "id desc"
 
     name = fields.Char(required = True)
     description = fields.Text()
@@ -39,7 +42,8 @@ class estate_property(models.Model):
     active = fields.Boolean(default = True)
     state = fields.Selection([
         ('New', 'New'),
-        ('Offer Received', 'Offer Received'), 
+        ('Offer Received', 'Offer Received'),
+        ('Offer Refused', 'Offer Refused'), 
         ('Offer Accepted', 'Offer Accepted'), 
         ('Sold', 'Sold'),
         ('Canceled', 'Canceled')
@@ -77,19 +81,50 @@ class estate_property(models.Model):
         for record in self:
             record.value2 = float(record.value) / 100
 
+    """ @api.onchange('garden')
+    def _onchange_garden(self):
+        for record in self:
+            if record.garden:
+                record.garden_area = 10
+                record.garden_orientation = 'North' """
 
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = 'North'
+
+    def action_cancel(self):
+        for record in self:
+            if record.state == 'Sold':
+                raise exceptions.UserError("A sold property cannot be canceled")
+            record.state = 'Canceled'
+
+    def action_sold(self):
+        for record in self:
+            if record.state == 'Canceled':
+                raise exceptions.UserError("A canceled property cannot be sold")
+            record.state = 'Sold'
 
 class proprety_type(models.Model):
     _name = 'estate_property.property.type'
     _description = 'Shows property type'
+    _order = 'sequence, name'
+
 
     name = fields.Char(required = True)
-
-
+    property_ids = fields.One2many(
+        'estate_property.estate.property', 
+        'property_type_id')
+    sequence = fields.Integer(
+        'Sequence', 
+        help="Used to order stages. Lower is better."
+        )
 
 class tag(models.Model):
     _name = 'estate_property.tag'
     _description = 'Tags for appartment classification'
+    _order = 'name'
 
     name = fields.Char(required=True)
     estate_id = fields.Many2many(
@@ -99,6 +134,7 @@ class tag(models.Model):
 class offer(models.Model):
     _name="estate_property.offer"
     _description="Offerts done"
+    _order = 'price desc'
 
     price = fields.Float()
     status = fields.Selection([
@@ -147,3 +183,17 @@ class offer(models.Model):
             record.create_date = d
             record.validity = (record.date_deadline - record.create_date).days
         
+    def action_accept(self):
+        for record in self:
+            if record.property_id.state == 'Offer Accepted':
+                raise exceptions.UserError("Pay attention: Only one offer can be accepted for a given property")
+            record.property_id.state = 'Offer Accepted'
+            record.property_id.buyer = record.partner_id
+            record.property_id.selling_price = record.price
+            record.status = 'accepted'
+
+
+    def action_refuse(self):
+        for record in self:
+            record.property_id.state = 'Offer Refused'
+            record.status = 'refused'
