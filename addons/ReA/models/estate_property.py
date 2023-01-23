@@ -22,3 +22,9 @@ class EstateProperty(models.Model):
                                     ('C','Canceled')],copy = False, default = "N")
     garden_orientation = fields.Selection(string="Garden Orientation", selection=[('N', 'North'), ('S','South'), ('E', 'East'), ('W', 'West')])
     active = fields.Boolean("Active?", default=True)
+
+
+class PropertyType(models.Model):
+    _name =  "property.type"
+    _description = "Type of properties"
+    name = fields.Char(required=True)

@@ -2,13 +2,15 @@
 <odoo>
     <!--Action for custom model-->
     <record id="estate_property_action" model="ir.actions.act_window"> 
-        <field name="name">Real Estate</field>
+        <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
     </record>
     <!--Menu itesm view-->
-    <menuitem name="Real State" id="rea_base_menu"/>
-    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu" action="estate_property_action"/>
+    <menuitem name="Real Estate" id="rea_base_menu"/><!--Menu root, name appears in sidebar and main window-->
+    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu"/><!--Second name-->
+    <!--The name for the third menu is taken from the name of the action.-->
+    <menuitem name="Properties" id="properties_menu" parent="estate_property_menu" action="estate_property_action"/>
 
     <!--List-->
     <record id="estate_property_view_tree" model="ir.ui.view">

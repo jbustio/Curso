@@ -14,7 +14,8 @@ Promote your house sale proposition to the world in order to build a brand, attr
 'data': [
     'security/rea_security_groups.xml',
     'security/ir.model.access.csv',
-    'views/estate_property_views.xml'
+    'views/estate_property_views.xml',
+    'views/property_type_views.xml' # We use as base menu item created in estate_property_view
 ],
 "license": "AGPL-3",
 "application": True,

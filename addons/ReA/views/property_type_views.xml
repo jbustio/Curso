@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Action for custom model-->
+    <record id="property_type_action" model="ir.actions.act_window"> 
+        <field name="name">Property Type</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--Menu itesm view-->
+    <menuitem name="Settings" id="estate_property_settings" parent="rea_base_menu" action="property_type_action"/><!--rea_base_menu was created in state property view-->
+    
+
+</odoo>
