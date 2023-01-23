@@ -11,11 +11,13 @@
                     name="action_accept" 
                     type="object" 
                     icon="fa-check"
+                    attrs="{'invisible': [('status','in', ['accepted', 'refused'])]}"
                     />
                 <button 
                     name="action_refuse" 
                     type="object" 
                     icon="fa-times"
+                    attrs="{'invisible': [('status','in', ['accepted', 'refused'])]}"
                     />
                 <field name="status"/>
                 <field name="partner_id"/>

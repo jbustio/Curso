@@ -130,6 +130,7 @@ class tag(models.Model):
     estate_id = fields.Many2many(
         'estate_property.estate.property',
         string="Houses")
+    color = fields.Integer()
 
 class offer(models.Model):
     _name="estate_property.offer"

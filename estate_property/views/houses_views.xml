@@ -11,11 +11,13 @@
                         name="action_cancel" 
                         type="object" 
                         string="Cancel"
+                        states="New,Offer Received,Offer Refused,Offer Accepted"
                         />
                     <button 
                         name="action_sold" 
                         type="object" 
                         string="Sold"
+                        states="New,Offer Received,Offer Refused,Offer Accepted"
                         />
                     <field name="state" widget="statusbar"/> 
                 </header>
@@ -24,7 +26,10 @@
                         <group name = "left_group">
                             <field name="name"/>
                             <field name="date_availability"/>
-                            <field name="tag_id" widget="many2many_tags" />
+                            <field 
+                                name="tag_id" 
+                                widget="many2many_tags" 
+                                options="{'color_field': 'color'}"/>
                             <field name="postcode" />
                         </group>
                         <group>
@@ -37,16 +42,24 @@
                                     <group>
                                         <field name="name"/>
                                         <field name="description"/>
-                                        <field name="property_type_id" />
+                                        <field 
+                                            name="property_type_id" 
+                                            options="{'no_create': True, 'no_open': True}"
+                                        />
                                         <field name="active" />
                                        
                                     </group>
                                     <group>
                                         <field name="garage"/>
                                         <field name="garden" />
-                                        <field name="garden_orientation" />
+                                        <field 
+                                            name="garden_orientation" 
+                                            attrs="{'invisible': [('garden', '=', False)]}"/>
                                         <field name="living_area" />
-                                        <field name="garden_area" />
+                                        <field 
+                                            name="garden_area" 
+                                            attrs="{'invisible': [('garden', '=', False)]}"
+                                        />
                                         <field name="total_area" />
                                         <field name="bedrooms" />
                                         <field name="facades"/>
