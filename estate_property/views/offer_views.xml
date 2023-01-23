@@ -4,8 +4,8 @@
     <record id="tree_offer" model="ir.ui.view">
         <field name="name">Offers</field>
         <field name="model">estate_property.offer</field>
-        <field name="arch" type="xml">
-            <tree>
+        <field name="arch" type="xml" >
+            <tree editable="bottom">
                 <field name="price"/>
                 <button 
                     name="action_accept" 
@@ -22,6 +22,10 @@
                 <field name="status"/>
                 <field name="partner_id"/>
                 <field name="property_id"/>
+                <field 
+                    name="property_state" 
+                    invisible="1" 
+                />
             </tree>
         </field>
 
