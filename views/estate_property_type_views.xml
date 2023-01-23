@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-<!-- form for estate.property -->
+  <!-- form for estate.property -->
+
   <record id="estate_property_type_form" model="ir.ui.view">
     <field name="name">estate.property.type.form</field>
     <field name="model">estate.property.type</field>
@@ -8,25 +9,27 @@
       <form string="Real Estate Type">
         <header>
           <button name="%(estate_property_offers_action)d" class="btn btn-lg oe_stat_button"
-          icon="fa-money" type="action" attrs="{'invisible': [('offer_count','=',0),]}" >
-          <field name="offer_count"/>
-        </button>
-      </header>
+          context="{'search_default_expected': True}"
+            icon="fa-money" title="Offers" type="action" attrs="{'invisible': [('offer_count','=',0),]}">
+            <field name="offer_count" />
+          </button>
+        </header>
         <group>
           <field name="name" />
-          <field name="sequence"/>
+          <field name="sequence" />
         </group>
       </form>
     </field>
   </record>
-<!-- estate- property tree -->
+  <!-- estate- property tree -->
   <record id="estate_property_type_tree" model="ir.ui.view">
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property.type</field>
     <field name="arch" type="xml">
-      <tree string="Real Estate Type" create="true" delete="true" edit="true">
+      <tree string="Real Estate Type">
         <field name="name" />
-        <field name="sequence" widget="handle"/>
+        <!-- <field name="offer_count" /> -->
+        <field name="sequence" widget="handle" readonly='1'/>
       </tree>
     </field>
   </record>
@@ -44,10 +47,12 @@
       <search string="Real Estate">
         <field name="name" />
         <!-- <field name="description" /> -->
-        <!-- <filter string="Available today" name="date_availability" domain="[('date_availability','=',context_today())]"/>            -->
+        <!-- <filter string="Available today" name="date_availability"
+        domain="[('date_availability','=',context_today())]"/>            -->
       </search>
     </field>
   </record>
+ 
 
 
 </odoo>

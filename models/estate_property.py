@@ -12,7 +12,8 @@ class EstateProperty(models.Model):
     _order = "id desc"
 
     _sql_constraints = [
-        ('expected_price_positive', 'CHECK (expected_price > 0)', 'Price must be positive'),
+        ('expected_price_positive',
+         'CHECK (expected_price > 0)', 'Price must be positive'),
         ('selling_price_positive', 'CHECK (selling_price > 0)', 'Price must be positive'),
     ]
 
@@ -110,7 +111,6 @@ class EstatePropertyType(models.Model):
          "Name must be unique."),
     ]
 
-
     name = fields.Char(
         string='Name',
         required=True,
@@ -121,15 +121,21 @@ class EstatePropertyType(models.Model):
     sequence = fields.Integer(
         default=1, help="Used to order. Lower is better.")
 
-    offer_ids = fields.One2many('estate.property.offer', 'property_type_id')
-    offer_count = fields.Integer(compute="_compute_offer_count",
-                                 readonly=True
-                                 )
+    offer_ids = fields.One2many('estate.property.offer', 'property_type_id',
+                                readonly=True
+                                )
+    offer_count = fields.Integer(compute="_compute_offer_count")
 
-    @api.depends('offer_ids')
+    @api.depends('offer_ids', 'property_ids')
     def _compute_offer_count(self):
         for record in self:
-            record.offer_count = record.offer_ids.search_count([])
+            print("111",record.id, record.name)
+            count = record.offer_ids.search_count([('property_type_id', '=', record.id)])
+            record.offer_count = count
+            
+        # for record in self:
+        #     count = self.env['estate.property.offer'].search_count([('property_type_id', '=', record.id)])
+        #     self.offer_count = count
 
 
 class EstatePropertyTag(models.Model):
