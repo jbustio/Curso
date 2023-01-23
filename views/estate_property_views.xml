@@ -90,7 +90,7 @@
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
-      <tree string="Real Estate" >
+      <tree string="Real Estate" decoration-bf="(state=='offer_accepted')" decoration-muted="(state=='sold')" decoration-success="(state=='offer_receive')or(state=='offer_accepted')"  >
         <field name="name" readonly="1"/>
         <field name="postcode" readonly="1"/>
         <field name="state" readonly="1"/>
