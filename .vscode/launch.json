@@ -12,6 +12,7 @@
             "console": "integratedTerminal",
             "args": [
                 "--config=/home/diazrock/Carrera/Odoo/odoo.conf",
+                "-p 9001",
                 "--dev=all"
             ]
         }
