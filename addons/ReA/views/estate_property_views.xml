@@ -56,6 +56,11 @@
                                     <field name="garden"></field>
                                     <field name="garden_ares">Garden Area(sqm)</field>
                                     <field name="garden_orientation">Garden Orientation</field>
+                                    <field name="active"></field>
+
+                                </group>
+                                <group >
+                                    <field name="status"></field>
                                 </group>
                             </page>
                         </notebook>
@@ -77,7 +82,8 @@
                 <field name="bedrooms"></field>
                 <field name="living_area"></field>
                 <field name="fecades"></field>
-                <filter string="Availability" name="available" domain="[('available','=',True)]"/>
+                <field name="status"></field>
+                <filter name="active" domain="[('active','=',False)]"/>
             </search>
         </field>
     </record>
