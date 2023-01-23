@@ -19,7 +19,8 @@ class StateProperty(models.Model):
     ]
 
     values_orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
-    values_state = [('new', 'New'), ('offer_received', 'Offer received'), ('offer_accepted', 'Offer accepted'), ('sold', 'Sold'), ('canceled', 'Canceled')]
+    values_state = [('new', 'New'), ('offer_received', 'Offer received'), ('offer_accepted', 'Offer accepted'),
+                    ('sold', 'Sold'), ('canceled', 'Canceled')]
 
     name = fields.Char("Name", required=True)
     description = fields.Text("Description")
@@ -39,6 +40,9 @@ class StateProperty(models.Model):
     active = fields.Boolean("Active", default=True)
     state = fields.Selection(selection=values_state, string="State", required=True, copy=False, default=values_state[0][0])
     total_area = fields.Integer("Total Area", compute="_compute_total_area")
+    state_property_offer_id = fields.One2many("state.property.offer", "property_id", string="State property offer")
+    buyer = fields.Many2one('res.partner', string='Buyer')
+    salesperson = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
