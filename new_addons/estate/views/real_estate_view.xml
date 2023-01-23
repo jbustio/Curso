@@ -5,17 +5,26 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="EstateProperty">
-                <sheet>                    
+                <sheet>
+                <group>
+                    <h1><field name="name">Name</field></h1>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"></field>
+                    <field name="state" widget="statusbar"></field>
+                </group>                  
+                <group>   
+                    <field name="property_type_id" widget="many2one_tags">Type</field>                 
+                    <field name="description">Description</field>
+                    <field name="date_availability">Date Availability</field>                     
+                </group>
+                <group>
+                    <field name="expected_price">Expected Price</field>                    
+                    <field name="selling_price">Selling Price</field>
+                    <field name="bedrooms">Bedrooms</field>
+                    <field name="best_price"></field>
+                </group>   
+                              
                 <notebook>
-                    <page name="description" string="Description">
-                        <group>
-                            <field name="name">Name</field>
-                            <field name="description">Description</field>
-                            <field name="expected_price">Expected Price</field>
-                            <field name="date_availability">Date Availability</field>
-                            <field name="selling_price">Selling Price</field>
-                            <field name="bedrooms">Bedrooms</field>
-                        </group>
+                    <page name="description" string="Description">                        
                         <group>
                             <field name="living_area">Living Area</field>
                             <field name="facades">Facades</field>
@@ -23,14 +32,19 @@
                             <field name="garden">Garden</field>
                             <field name="garden_area">Garden Area</field>
                             <field name="garden_orientation">Garden Orientation</field>
-                            <field name="property_type_id" widget="many2one_tags">Type</field>
-                            <field name="tag_ids" widget="many2many_tags">Tags</field>
-                            <field name="offer_ids" widget="many2many_tags">Offer</field>
                         </group>
-                    </page>
-                    
+                    </page>                    
                     <page name="info" string="Other Info">
                         
+                    </page>
+                    <page name="offert" string="Offert">
+                        <field name="offer_ids">
+                        <tree>
+                            <field name="price">Price</field> 
+                            <field name="partner_id">Partner</field>
+                            <field name="status">Status</field>
+                        </tree>
+                        </field>
                     </page>
                 </notebook>
                 

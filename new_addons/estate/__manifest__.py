@@ -21,7 +21,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        #'security/estate_property_security.xml',
+        'security/estate_property_security.xml',
         'views/views.xml',
         'views/templates.xml',
         'views/real_estate_view.xml',
