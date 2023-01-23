@@ -122,8 +122,8 @@
       <search string="Real Estate">
         <field name="name" />
         <field name="description" />
-        <filter string="Available today" name="date_availability"
-          domain="[('date_availability','=',context_today())]" />
+        <filter string="Available" name="available"
+          domain="[('date_availability','&lt;',context_today())]" />
         <separator />
         <group expand="1" string="Group By">
           <filter string="Postcode" name="postcode"
