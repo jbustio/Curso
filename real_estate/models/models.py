@@ -37,6 +37,13 @@ class RealEstatePropertyType(models.Model):
         required=True
     )
     real_estate_property_ids = fields.One2many('real.estate.property', inverse_name="property_type_id", string="Real Estate Properties")
+    offer_ids = fields.One2many('real.estate.property.offer', inverse_name="property_type_id", string="Real Estate Offers")
+    offer_count = fields.Integer(compute='_count_offers')
+
+    @api.depends("offer_ids")
+    def _count_offers(self):
+        for record in self:
+            record.offer_count = record.offer_ids.search_count([])
 
 
 class RealEstateProperty(models.Model):
@@ -151,6 +158,8 @@ class RealEstatePropertyOffer(models.Model):
     date_deadline = fields.Date(compute="_compute_date_deadline", inverse="_inverse_date_deadline")
     partner_id = fields.Many2one('res.partner', string="Real Estate Partner")
     property_id = fields.Many2one('real.estate.property', string="Real Estate Property")
+    property_type_id = fields.Many2one('real.estate.property.type', string="Property Type",
+                                       related="property_id.property_type_id", store=True)
 
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
