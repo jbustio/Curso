@@ -21,8 +21,8 @@
 - [X] Ejercicio 14
 - [X] Ejercicio 15
 - [X] Ejercicio 16
-- [ ] Ejercicio 17
-- [ ] Ejercicio 18
+- [x] Ejercicio 17
+- [X] Ejercicio 18
 - [ ] Ejercicio 19
 - [ ] Ejercicio 20
 - [ ] Ejercicio 21
