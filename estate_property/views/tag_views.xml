@@ -8,7 +8,7 @@
         <field name="name">Tag List</field>
         <field name="model">estate_property.tag</field>
         <field name="arch" type = "xml">
-            <tree>
+            <tree editable="bottom">
                 <field name="name" />
                 <field 
                     name="estate_id" 
