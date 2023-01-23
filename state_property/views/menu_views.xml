@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- state property type action window -->
+    <record id="state_property_type_action" model="ir.actions.act_window">
+        <field name="name">State property type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">state.property.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                State Property Type
+            </p>
+            <p>
+                More details about what a user can do with this object will be OK
+            </p>
+        </field>
+    </record>
+    <!-- state property tag action window -->
+    <record id="state_property_tag_action" model="ir.actions.act_window">
+        <field name="name">State property tag</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">state.property.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                State Property Tag
+            </p>
+            <p>
+                More details about what a user can do with this object will be OK
+            </p>
+        </field>
+    </record>
+    <!-- State property action -->
+    <record id="state_property_action" model="ir.actions.act_window">
+        <field name="name">State property</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">state_property.state_property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                State Property
+            </p>
+            <p>
+                More details about what a user can do with this object will be OK
+            </p>
+        </field>
+    </record>
+    <!-- State property offer action -->
+    <record id="state_property_offer_action" model="ir.actions.act_window">
+        <field name="name">State property offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">state.property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                State Property Offer
+            </p>
+            <p>
+                More details about what a user can do with this object will be OK
+            </p>
+        </field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="State property" id="state_property_menu"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <!-- Menu State Property Type -->
+    <menuitem id="state_property_type_menu" name="State property type" parent="state_property_menu" action="state_property_type_action"/>
+    <!-- Menu State Property Tag -->
+    <menuitem id="state_property_tag_menu" name="State property tag" parent="state_property_menu" action="state_property_tag_action"/>
+    <!-- Menu State Property -->
+    <menuitem id="state_property_simple_menu" name="State property" parent="state_property_menu" action="state_property_action"/>
+    <!-- Menu State Property Offer -->
+    <menuitem id="state_property_offer_menu" name="State property offer" parent="state_property_menu" action="state_property_offer_action"/>
+
+</odoo>

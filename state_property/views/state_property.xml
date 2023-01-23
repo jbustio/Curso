@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!--STATE PROPERTY -->
+    <!-- form view -->
+    <record id="state_property_form" model="ir.ui.view">
+        <field name="name">State property form</field>
+        <field name="model">state_property.state_property</field>
+        <field name="arch" type="xml">
+            <form string="State property">
+                <header>
+                    <button name="action_sold" type="object" string="Sold"/>
+                    <button name="action_cancel" type="object" string="Cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="property_type_id"/>
+                        </group>
+                        <group>
+                            <field name="date_availability"/>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                            <field name="best_price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <group>
+                                    <field name="active" widget="boolean_toggle"/>
+                                    <field name="state"/>
+                                    <field name="bedrooms" options="{'type':'number'}"/>
+                                    <field name="postcode"/>
+                                    <field name="description"/>
+                                </group>
+                                <group>
+                                    <field name="facades"/>
+                                    <field name="garage" widget="boolean_toggle"/>
+                                    <field name="garden" widget="boolean_toggle"/>
+                                    <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/>
+                                    <field name="living_area"/>
+                                    <field name="total_area"/>
+                                    <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Offers" name="offers">
+                            <field name="state_property_offer_id">
+                                <tree editable="top">
+                                    <field name="price"/>
+                                    <field name="status"/>
+                                    <field name="partner_id"/>
+                                    <field name="validity"/>
+                                    <field name="date_deadline"/>
+                                    <button name="action_accept" type="object" title="Accept" icon="fa-check"/>
+                                    <button name="action_refuse" type="object" title="Refuse" icon="fa-close"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="price"/>
+                                        <field name="status"/>
+                                        <field name="partner_id"/>
+                                        <field name="validity"/>
+                                        <field name="date_deadline"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="salesperson"/>
+                                <field name="buyer"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view -->
+    <record id="state_property_view_tree" model="ir.ui.view">
+        <field name="name">State property</field>
+        <field name="model">state_property.state_property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="date_availability"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- search view -->
+    <record id="state_property_view_search" model="ir.ui.view">
+        <field name="name">State property</field>
+        <field name="model">state_property.state_property</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!--búsqueda rápida-->
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="date_availability"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <!--búsqueda agrupada-->
+                <group expand="0" string="Agrupar por ..." colspan="12" col="10">
+                    <filter name="property_type_id" string="Property type" context="{'group_by':'property_type_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- state_property search view -->
+    <record id="state_property_type_view_search" model="ir.ui.view">
+        <field name="name">State property tag</field>
+        <field name="model">state.property.tag</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!--STATE PROPERTY TAG -->
+    <!-- state property tag form view -->
+    <record id="state_property_tag_form" model="ir.ui.view">
+        <field name="name">State property tag form</field>
+        <field name="model">state.property.tag</field>
+        <field name="arch" type="xml">
+            <form string="State property tag">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- state property type tree view -->
+    <record id="state_property_type_view_tree" model="ir.ui.view">
+        <field name="name">State property tag</field>
+        <field name="model">state.property.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--STATE PROPERTY TYPE -->
+    <!-- state property form view -->
+    <record id="state_property_type_form" model="ir.ui.view">
+        <field name="name">State property type form</field>
+        <field name="model">state.property.type</field>
+        <field name="arch" type="xml">
+            <form string="State property type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- state property type tree view -->
+    <record id="state_property_type_view_tree" model="ir.ui.view">
+        <field name="name">State property type</field>
+        <field name="model">state.property.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- state_property search view -->
+    <record id="state_property_type_view_search" model="ir.ui.view">
+        <field name="name">State property type</field>
+        <field name="model">state.property.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>
