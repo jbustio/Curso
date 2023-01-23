@@ -15,28 +15,67 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="active" widget="boolean_toggle"/>
                             <field name="name"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
                             <field name="property_type_id"/>
-                            <field name="description"/>
-                            <field name="postcode"/>
+                        </group>
+                        <group>
                             <field name="date_availability"/>
                             <field name="expected_price"/>
                             <field name="selling_price"/>
-                        </group>
-                        <group>
-                            <field name="state"/>
-                            <field name="bedrooms" options="{'type':'number'}"/>
-                            <field name="facades"/>
-                            <field name="garage" widget="boolean_toggle"/>
-                            <field name="garden" widget="boolean_toggle"/>
-                            <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/>
-                            <field name="living_area"/>
-                            <field name="total_area"/>
-                            <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}"/>
-                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="best_price"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <group>
+                                    <field name="active" widget="boolean_toggle"/>
+                                    <field name="state"/>
+                                    <field name="bedrooms" options="{'type':'number'}"/>
+                                    <field name="postcode"/>
+                                    <field name="description"/>
+                                </group>
+                                <group>
+                                    <field name="facades"/>
+                                    <field name="garage" widget="boolean_toggle"/>
+                                    <field name="garden" widget="boolean_toggle"/>
+                                    <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/>
+                                    <field name="living_area"/>
+                                    <field name="total_area"/>
+                                    <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Offers" name="offers">
+                            <field name="state_property_offer_id">
+                                <tree editable="top">
+                                    <field name="price"/>
+                                    <field name="status"/>
+                                    <field name="partner_id"/>
+                                    <field name="validity"/>
+                                    <field name="date_deadline"/>
+                                    <button name="action_accept" type="object" title="Accept" icon="fa-check"/>
+                                    <button name="action_refuse" type="object" title="Refuse" icon="fa-close"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="price"/>
+                                        <field name="status"/>
+                                        <field name="partner_id"/>
+                                        <field name="validity"/>
+                                        <field name="date_deadline"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="salesperson"/>
+                                <field name="buyer"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
