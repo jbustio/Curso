@@ -16,5 +16,7 @@ class StatePropertyOffer(models.Model):
 
     price = fields.Float("Price")
     status = fields.Selection(selection=values_status, string="Status", copy=False)
+    validity = fields.Integer("Validity", default=7)
+    date_deadline = fields.Date()
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
     property_id = fields.Many2one(comodel_name="state_property.state_property", string="State property", required=True)
