@@ -5,6 +5,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo.exceptions import ValidationError, UserError
+from odoo.tools import float_is_zero
 
 
 class RealEstatePropertyTag(models.Model):
@@ -43,7 +44,7 @@ class RealEstatePropertyType(models.Model):
     @api.depends("offer_ids")
     def _count_offers(self):
         for record in self:
-            record.offer_count = record.offer_ids.search_count([])
+            record.offer_count = record.offer_ids.search_count([('property_type_id', '=', record.id)])
 
 
 class RealEstateProperty(models.Model):
@@ -108,6 +109,14 @@ class RealEstateProperty(models.Model):
             if record.garden and not record.garden_orientation:
                 raise ValidationError("Please provide an orientation for the garden.")
 
+    @api.onchange("expected_price", "selling_price")
+    @api.constrains('expected_price', 'selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            # check that garden is True
+            if not float_is_zero(record.selling_price, precision_rounding=0.01) and record.selling_price < record.expected_price * 0.9:
+                raise ValidationError("The selling price can't be lower than 90%.")
+
     @api.depends("garden_area", "living_area")
     def _compute_total_area(self):
         for record in self:
@@ -152,7 +161,7 @@ class RealEstatePropertyOffer(models.Model):
     _description = 'Real Estate Property Offer model class'
     _order = "price desc"
     _sql_constraints = [
-        ('offer_price_positive_integer', 'CHECK(bedrooms > 0)', "The price must be a positive numeric value"),
+        ('offer_price_positive_integer', 'CHECK(price > 0)', "The price must be a positive numeric value"),
 
     ]
 
