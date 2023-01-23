@@ -26,7 +26,7 @@ class Offer(models.Model):
                 #raise UserError("This offer was refused")
             else:    
                 record.status = "accepted"
-                record.property_id.state = "Offer Acepted"
+                record.property_id.state = "Offer Accepted"
                 record.property_id.selling_price = record.price
                 record.property_id.buyer = record.partner_id
 

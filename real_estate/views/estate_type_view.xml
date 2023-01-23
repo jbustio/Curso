@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="property_id"/>
+                <field name="property_ids"/>
                 <field name="sequence" widget="handle"/>
             </tree>
         </field>
@@ -18,7 +18,7 @@
     <form string="Types">
         <sheet>
             <field name="name"/>
-            <field name="property_id"/>
+            <field name="property_ids"/>
         </sheet>
     </form>
     </field> 

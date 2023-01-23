@@ -4,7 +4,7 @@
     <field name="name">Offer List</field>
     <field name="model">estate.offer</field>
     <field name="arch" type="xml">
-        <tree>
+        <tree editable="bottom" decoration-danger="status=='refused'" decoration-success="status=='accepted'">
             <field name="price"/>
             
             <field name="validity"/>
@@ -13,7 +13,7 @@
             <field name="property_id"/>
             <button name="accept" type="object" icon="fa-check" attrs="{'invisible':[('status','=','accepted')]}"/>
             <button name="refuse" type="object" icon="fa-close" attrs="{'invisible':[('status','=','accepted')]}"/>
-            <field name="status"/>
+            <field name="status" invisible="1" />
         </tree>
     </field>
     </record>

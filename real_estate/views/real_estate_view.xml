@@ -41,7 +41,7 @@
                                 <p><b>Garden Area </b><field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/></p>
                                 <p><b>Garden Orientation </b><field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}"/></p>
                                 <p><b>Total Area </b><field name="total_area"/></p>
-                                <field name="offer" attrs="{'readonly':[('state','=','Offer Accepted')]}"/>
+                                <field name="offer" attrs="{'readonly':['|',('state','=','Offer Accepted'),'|',('state','=','Sold'),('state','=','Canceled')]}"/>
                             
                             </page>
                             <page  string="Buyer and seller">
@@ -66,15 +66,16 @@
         <field name="name">Houses List</field>
         <field name="model">real_estate.real_estate</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="offer > 1" decoration-bf="state=='Offer Accepted'" decoration-muted="state=='Sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
                 <field name="living_area" />
                 <field name="expected_price"/>
                 <field name="selling_price"/>
-                <field name="date_availability"/>
-               
+                <field name="date_availability" optional="1"/>
+                <field name="offer" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -95,6 +96,15 @@
         <search>
             <field name="selling_price"/>
             <field name="property_type_id"/>
+            <field name="living_area"
+                    string="Living area"
+                    filter_domain="[('living_area','>=',self)]"/>
+            
+            
+            <filter name="available" 
+                    string="Available"
+                    domain="[('state','=','New')]" />
+            
             <filter name="selling_price"
                     string="Selling price"
                     domain="[('selling_price','=','provided_value')]"/>

@@ -10,6 +10,7 @@
         <field name="name">Real Estate</field>
         <field name="res_model">real_estate.real_estate</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_available':True}</field>
    </record>
         
 

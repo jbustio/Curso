@@ -8,5 +8,5 @@ class Type(models.Model):
     _order = "sequence,name"
 
     name = fields.Char()
-    property_id = fields.One2many('real_estate.real_estate','property_type_id',string="Houses")
+    property_ids = fields.One2many('real_estate.real_estate','property_type_id',string="Houses")
     sequence = fields.Integer()
