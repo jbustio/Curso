@@ -8,8 +8,7 @@
       <form string="Real Estate">
         <header>
           <button name="action_sell" string="Sold" states="new,offer_receive"
-            class="btn btn-outline-primary"
-            type="object"
+            class="btn btn-outline-primary disabled"
           />
           <button name="action_sell" string="Sold" states="offer_accepted" class="oe_highlight"
             type="object" decoration-primary="1==1"

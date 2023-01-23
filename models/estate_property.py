@@ -10,6 +10,11 @@ class EstateProperty(models.Model):
     _description = 'Real Estate Property'
     _order = "id desc"
 
+    _sql_constraints = [
+        ('expected_price_positive', 'CHECK (expected_price > 0)', 'Price must be positive'),
+        ('selling_price_positive', 'CHECK (selling_price > 0)', 'Price must be positive'),
+    ]
+
     name = fields.Char(default=lambda self: 'New Real Estate', required=True)
     state = fields.Selection(required=True, default="new", copy=False,
                              selection=[('new', 'New'), ('offer_receive', 'Offer Received'), (
@@ -84,6 +89,13 @@ class EstateProperty(models.Model):
                 return True
             raise UserError(f"A {record.state} property can not be sold")
 
+    @api.constrains('selling_price')
+    def _check_expected_price(self):
+        for record in self:
+            ninety_percent = record.expected_price / 100 * 90
+            if record.selling_price < ninety_percent:
+                raise ValidationError("Selling price cannot be lower than 90%")
+
 
 class EstatePropertyType(models.Model):
     _name = 'estate.property.type'
@@ -92,6 +104,12 @@ class EstatePropertyType(models.Model):
     _rec_name = 'name'
     _order = 'name ASC'
 
+    _sql_constraints = [
+        ("estate_property_type_name", "UNIQUE (name)",
+         "Name must be unique."),
+    ]
+
+
     name = fields.Char(
         string='Name',
         required=True,
@@ -99,7 +117,18 @@ class EstatePropertyType(models.Model):
 
     property_ids = fields.One2many(
         "estate.property", "property_type_id", string="Real Estates")
-    sequence = fields.Integer(default=1, help="Used to order. Lower is better.")
+    sequence = fields.Integer(
+        default=1, help="Used to order. Lower is better.")
+
+    offer_ids = fields.One2many('estate.property.offer', 'property_type_id')
+    offer_count = fields.Integer(compute="_compute_offer_count",
+                                 readonly=True
+                                 )
+
+    @api.depends('offer_ids')
+    def _compute_offer_count(self):
+        for record in self:
+            record.offer_count = record.offer_ids.search_count([])
 
 
 class EstatePropertyTag(models.Model):
@@ -109,18 +138,26 @@ class EstatePropertyTag(models.Model):
     _rec_name = 'name'
     _order = 'name ASC'
 
+    _sql_constraints = [
+        ("estate_property_tag_name", "UNIQUE (name)",
+         "Name must be unique."),
+    ]
+
     name = fields.Char(
         string='Name',
         required=True,
     )
     color = fields.Integer()
-    
 
 
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'EstatePropertyOffer'
     _order = "price desc"
+
+    _sql_constraints = [
+        ('expected_price', 'CHECK (price > 0)', 'Price must be positive'),
+    ]
 
     price = fields.Float()
     status = fields.Selection(
@@ -136,6 +173,8 @@ class EstatePropertyOffer(models.Model):
         compute='_compute_date_deadline',  inverse='_inverse_date_deadline')
 
     validity = fields.Integer(string="Validity (days)", default=7)
+    property_type_id = fields.Many2one(
+        string="Property Type", related='property_id.property_type_id', store=True)
 
     @api.depends('validity')
     def _compute_date_deadline(self):
@@ -150,22 +189,20 @@ class EstatePropertyOffer(models.Model):
 
     def action_accept(self):
         for record in self:
-            q =  record.property_id.offer_ids.search([
-                ('status','=', 'accepted'),
-                '!', ('id','=', record.id),
+            q = record.property_id.offer_ids.search([
+                ('status', '=', 'accepted'),
+                '!', ('id', '=', record.id),
             ])
             for o in q:
                 o.status = None
-            
+
             record.status = 'accepted'
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
             record.property_id.state = "offer_accepted"
-                    
 
     def action_refuse(self):
         for record in self:
             if record.status == 'accepted':
                 record.property_id.state = "offer_receive"
             record.status = 'refuse'
-            

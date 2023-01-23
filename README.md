@@ -27,9 +27,9 @@
 - [x] Ejercicio 20
 - [x] Ejercicio 21
 - [x] Ejercicio 22
-- [ ] Ejercicio 23
-- [ ] Ejercicio 24
-- [ ] Ejercicio 25
+- [X] Ejercicio 23
+- [x] Ejercicio 24
+- [x] Ejercicio 25
 
 
 

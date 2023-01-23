@@ -6,6 +6,12 @@
     <field name="model">estate.property.type</field>
     <field name="arch" type="xml">
       <form string="Real Estate Type">
+        <header>
+          <button name="%(estate_property_offers_action)d" class="btn btn-lg oe_stat_button"
+          icon="fa-money" type="action" attrs="{'invisible': [('offer_count','=',0),]}" >
+          <field name="offer_count"/>
+        </button>
+      </header>
         <group>
           <field name="name" />
           <field name="sequence"/>
@@ -42,4 +48,6 @@
       </search>
     </field>
   </record>
+
+
 </odoo>
