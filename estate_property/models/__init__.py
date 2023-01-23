@@ -1,1 +1,1 @@
-from . import estate_property, property_type, property_tag
+from . import estate_property, property_type, property_tag, property_offer

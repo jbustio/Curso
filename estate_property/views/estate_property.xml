@@ -2,14 +2,15 @@
 <odoo>
 
     <record id="action_estate_property" model="ir.actions.act_window">
-        <field name="name">Estate Property</field>
+        <field name="name">Estate Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
     </record>
 
         <menuitem
         id="estate_property_menu"
-        name="Estate Property"
+        groups="base.group_user"
+        name="Real State"
         action = "action_estate_property"
         sequence="10"/>
 
@@ -21,10 +22,49 @@
                 <form string="">
                     <sheet>
                         <group>
-                            <field name="name"></field>
-                            <field name="description"></field>
-                            <field name="expected_price"></field>
-                            <field name="property_type_id"></field>
+                            <group>
+                                <field name="name"></field> 
+                                <field name="expected_price"></field>
+                                <field name="selling_price"></field>
+                            </group>
+                            <group>
+                                <field name="postcode"></field>
+                                <field name="date_availability"></field>
+                                <field name="active"></field>
+                            </group>
+                            <notebook>
+                                <page name="page1" string="Description">
+                                    <group>
+                                        <field name="description"></field> 
+                                        <field name="property_type_id"></field>
+                                        <field name="property_tag_ids" widget = "many2many_tags"></field>
+                                        <field name="state"></field>
+                                    </group>
+                                </page>
+                                <page name="page2" string="House Properties">
+                                        <group> 
+                                        <field name="total_area"></field>
+                                        <field name="bedrooms" string = "Bedrooms"></field>
+                                        <field name="living_area"></field>
+                                        <field name="facades"></field>
+                                        <field name="garage"></field>
+                                        <field name="garden"></field>
+                                        <field name="garden_area"></field>
+                                        <field name="garden_orientation"></field>
+                                        </group>
+                                </page>
+                                <page name="page3" string="Offers">
+                                    <group>
+                                        <field name="offer"></field> 
+                                    </group>
+                                </page>
+                                <page name="page4" string="Other Info">
+                                    <group>
+                                        <field name="sales_person"></field> 
+                                        <field name="buyer"></field>
+                                    </group>
+                                </page>
+                            </notebook>
                         </group>
                     </sheet>
                 </form>
@@ -40,6 +80,7 @@
                     <field name="description"></field>
                     <field name="expected_price"></field>
                     <field name="property_type_id"></field>
+                    <field name="property_tag_ids" widget = "many2many_tags"></field>
                 </tree>
             </field>
         </record>
@@ -53,6 +94,7 @@
                     <field name="expected_price"></field>
                     <field name="description"></field>
                     <field name="property_type_id"></field>
+                    <field name="property_tag_ids" widget = "many2many_tags"></field>
                     
                 </search>
             </field>

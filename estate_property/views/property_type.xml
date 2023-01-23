@@ -9,7 +9,9 @@
 
         <menuitem
         id="property_type_menu"
-        name="Property Type"
+        name="Property Types"
+        groups="base.group_user"
+        parent = "estate_property_menu"
         action = "action_property_type"
         sequence="10"/>
 

@@ -7,5 +7,5 @@ class PropertyTag(models.Model):
     _description = "Property Tag"
     
     
-    name = fields.Char( "Property Tag",required=True)
+    name = fields.Char( "Property Tag")
     

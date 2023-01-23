@@ -9,9 +9,11 @@
 
         <menuitem
         id="property_tag_menu"
-        name="Property Tag"
+        name="Property Tags"
+        groups="base.group_user"
+        parent = "estate_property_menu"
         action = "action_property_tag"
-        sequence="10"/>
+        sequence="8"/>
 
 
         <record id="property_tag_view_form" model="ir.ui.view">
