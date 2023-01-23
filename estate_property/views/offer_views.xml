@@ -26,6 +26,7 @@
                     name="property_state" 
                     invisible="1" 
                 />
+                
             </tree>
         </field>
 
@@ -58,6 +59,7 @@
         <field name="name">Estate Offer</field>
         <field name="res_model">estate_property.offer</field>
         <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[('property_type_id', '=',active_id)]</field> -->
     </record>
     <menuitem
         id="estate_offers_menu"

@@ -64,12 +64,13 @@ class estate_property(models.Model):
     buyer = fields.Many2one('res.partner',string="Buyer")
     tag_id = fields.Many2many('estate_property.tag',string="Tags")
     total_area = fields.Integer(compute = "_compute_area")
-    best_price = fields.Float(compute = "_compute_best_offer_price")
+    best_price = fields.Float(compute = "_compute_best_offer_price", default = 0)
 
     @api.depends('offer')
     def _compute_best_offer_price(self):
         for record in self:
-            record.best_price = max(record.offer.mapped('price'))
+            if record.offer:
+                record.best_price = max(record.offer.mapped('price'))
 
     @api.depends('living_area', 'garden_area')
     def _compute_area(self):
@@ -110,8 +111,10 @@ class proprety_type(models.Model):
     _name = 'estate_property.property.type'
     _description = 'Shows property type'
     _order = 'sequence, name'
-
-
+    
+    offer_ids = fields.One2many(
+        'estate_property.offer',
+        'property_type_id')
     name = fields.Char(required = True)
     property_ids = fields.One2many(
         'estate_property.estate.property', 
@@ -120,6 +123,12 @@ class proprety_type(models.Model):
         'Sequence', 
         help="Used to order stages. Lower is better."
         )
+    offer_count = fields.Integer(compute = "_compute_count")
+
+    @api.depends('offer_ids')
+    def _compute_count(self):
+        for record in self:
+            record.offer_count = len(record.offer_ids.mapped(record.name))
 
 class tag(models.Model):
     _name = 'estate_property.tag'
@@ -151,6 +160,9 @@ class offer(models.Model):
         'estate_property.estate.property',
         string="Property"
     )
+    property_type_id = fields.Many2one(
+        related = "property_id.property_type_id"
+    )
     create_date = fields.Date(
             readonly = True,
             string = 'Create date',
@@ -168,6 +180,7 @@ class offer(models.Model):
         string = "State",
         related = "property_id.state"
         )
+
 
     @api.depends('date_deadline', 'validity')
     def _compute_date_deadline(self):
