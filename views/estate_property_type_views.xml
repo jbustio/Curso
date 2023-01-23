@@ -8,6 +8,7 @@
       <form string="Real Estate Type">
         <group>
           <field name="name" />
+          <field name="sequence"/>
         </group>
       </form>
     </field>
@@ -19,6 +20,7 @@
     <field name="arch" type="xml">
       <tree string="Real Estate Type" create="true" delete="true" edit="true">
         <field name="name" />
+        <field name="sequence" widget="handle"/>
       </tree>
     </field>
   </record>

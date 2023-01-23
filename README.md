@@ -20,7 +20,7 @@
 - [X] Ejercicio 13
 - [X] Ejercicio 14
 - [X] Ejercicio 15
-- [ ] Ejercicio 16
+- [X] Ejercicio 16
 - [ ] Ejercicio 17
 - [ ] Ejercicio 18
 - [ ] Ejercicio 19

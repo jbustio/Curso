@@ -100,6 +100,7 @@ class EstatePropertyType(models.Model):
 
     property_ids = fields.One2many(
         "estate.property", "property_type_id", string="Real Estates")
+    sequence = fields.Integer(default=1, help="Used to order. Lower is better.")
 
 
 class EstatePropertyTag(models.Model):
@@ -113,7 +114,8 @@ class EstatePropertyTag(models.Model):
         string='Name',
         required=True,
     )
-    sequence = fields.Integer()
+    color = fields.Integer()
+    
 
 
 class EstatePropertyOffer(models.Model):
