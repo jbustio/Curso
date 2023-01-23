@@ -3,6 +3,7 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare
 
 
 class EstateProperty(models.Model):
@@ -93,7 +94,7 @@ class EstateProperty(models.Model):
     def _check_expected_price(self):
         for record in self:
             ninety_percent = record.expected_price / 100 * 90
-            if record.selling_price < ninety_percent:
+            if float_compare(record.selling_price, ninety_percent, 2) == -1:
                 raise ValidationError("Selling price cannot be lower than 90%")
 
 
