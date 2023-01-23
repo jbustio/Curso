@@ -26,6 +26,7 @@ class Offer(models.Model):
                 #raise UserError("This offer was refused")
             else:    
                 record.status = "accepted"
+                record.property_id.state = "Offer Acepted"
                 record.property_id.selling_price = record.price
                 record.property_id.buyer = record.partner_id
 
@@ -34,7 +35,7 @@ class Offer(models.Model):
         that set the status to Refused"""
         for record in self:
             record.status = "refused"
-
+            record.property_id.state = "Offer Acepted"
 
     @api.depends("validity","create_date")
     def _compute_date_deadline(self):

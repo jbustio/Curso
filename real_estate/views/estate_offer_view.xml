@@ -11,8 +11,8 @@
             <field name="date_deadline" />
             <field name="partner_id"/>
             <field name="property_id"/>
-            <button name="accept" type="object" icon="fa-check"/>
-            <button name="refuse" type="object" icon="fa-close"/>
+            <button name="accept" type="object" icon="fa-check" attrs="{'invisible':[('status','=','accepted')]}"/>
+            <button name="refuse" type="object" icon="fa-close" attrs="{'invisible':[('status','=','accepted')]}"/>
             <field name="status"/>
         </tree>
     </field>

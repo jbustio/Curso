@@ -38,13 +38,13 @@ class real_estate(models.Model):
         ('West', 'West'),
     ], string='Garden orientation')
     active = fields.Boolean('Active',default=True)
-    state = fields.Selection([
+    state = fields.Selection(selection=[
         ('New','New'),
         ('Offer Received','Offer Received'),
         ('Offer Accepted','Offer Accepted'),
         ('Sold','Sold'),
         ('Canceled','Canceled'),
-    ],string="Status")
+    ],string="Status",default="New")
 
 
     def sold(self):

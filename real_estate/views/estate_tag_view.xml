@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_tree_tag" model="ir.ui.view">
+    <record id="view_tree_tag" model="ir.ui.view" >
         <field name="name">Type List</field>
         <field name="model">estate.tag</field>
         <field name="arch" type="xml">
