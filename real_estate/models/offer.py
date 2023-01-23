@@ -7,6 +7,11 @@ class Offer(models.Model):
     _description="Ofertas hechas"
     _order = "price desc"
 
+    _sql_constraints = [
+        ('check_price','CHECK(price > 0)','The offer price should be strictly positive'),
+    ]
+
+
     
     price = fields.Float(required=True)
     status = fields.Selection([('accepted','Accepted'),('refused','Refused')],string="Status")
@@ -14,7 +19,7 @@ class Offer(models.Model):
     date_deadline = fields.Date(readonly=True,compute="_compute_date_deadline",inverse="_inverse_date_deadline")
     partner_id = fields.Many2one('res.partner',string="Partner",required=True)
     property_id = fields.Many2one('real_estate.real_estate',string="Property")
-    
+    property_type_id = fields.Many2one(related='property_id.property_type_id',string="Property Type")
 
     def accept(self):
         """This method is for create a button in the form view
@@ -42,10 +47,10 @@ class Offer(models.Model):
         for record in self:
             try:
                 if record.create_date != None:
-                    record.date_deadline = fields.Date(self.create_date).add(fields.Date.to_date(fields.Date.today()+ timedelta(days=self.validity)))
+                    record.date_deadline = fields.Date(record.create_date).add(fields.Date.to_date(fields.Date.today()+ timedelta(days=record.validity)))
             except ValueError as e:
                 print(e)
     def _inverse_date_deadline(self):
         for record in self:
             if record.date_deadline:
-                record.create_date = fields.Date(self.date_deadline).subtract(fields.Date.to_date(fields.Date.today()+timedelta(days=self.validity)))
+                record.create_date = fields.Date(record.date_deadline).subtract(fields.Date.to_date(fields.Date.today()+timedelta(days=record.validity)))

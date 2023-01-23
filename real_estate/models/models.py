@@ -1,15 +1,20 @@
-
-
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 from datetime import timedelta
+from odoo.tools.float_utils import * 
 
 class real_estate(models.Model):
     _name = 'real_estate.real_estate'
     _description = 'Modelo principal en la app real estate para el manejo de los bienes raices'
     _order = "id desc"
 
-
+    _sql_constraints = [
+         ('check_expected_price','CHECK(expected_price > 1)','The expected price should be strictly positive'),
+         ('check_selling_price','CHECK(selling_price >= 1)','The selling price must be positive'),
+         ('unique_tag','UNIQUE(tag_id)','The tag must be unique'),
+         ('unique_type','UNIQUE(property_type_id)','The type must be unique'),
+        ]
 
     name = fields.Char(required=True,default="New House")
     #groups='real_estate.group_description'
@@ -21,7 +26,7 @@ class real_estate(models.Model):
     buyer = fields.Many2one('res.partner',string="Buyer")
     postcode = fields.Char()
     date_availability = fields.Date(copy=False,default=fields.Date.today()+timedelta(days=90),string="Available From")
-    expected_price = fields.Float(required=True)
+    expected_price = fields.Float(required=True, default=1)
     selling_price = fields.Float(readonly=True,copy=False)
     best_price = fields.Float(compute="_compute_price",default=0)
     bedrooms = fields.Integer(default=2)
@@ -65,14 +70,14 @@ class real_estate(models.Model):
         for record in self:
             record.total_area = record.garden_area + record.living_area
 
-    @api.depends("offer")
+    @api.depends("offer.price")
     def _compute_price(self):
         prices_to_iter = []
         for record in self:
-            if(record.offer.price != None ):
+            if record.offer != None:
                 #for offer in record.offer:
-                prices_to_iter.append(record.offer.price)
-                self.best_price = max(prices_to_iter)
+                record.best_price = max(record.mapped('offer.price'))
+                
             else:
                 self.best_price = 0
     
@@ -88,9 +93,15 @@ class real_estate(models.Model):
                 record.garden_orientation = ''
 
 
-
     #############################
-    #Metodos para hacer testing
+    """Python constraints"""
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if (record.selling_price < record.expected_price * 0.9)and not(float_is_zero(record.selling_price,10)):
+                raise ValidationError("El precio de venta no puede ser menor del 90'%' del esperado")
+    #############################
+    """ Metodos para hacer testing """
     def north_direction(self):
         self.write({'garden_direction':'North'})
 
