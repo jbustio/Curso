@@ -19,6 +19,7 @@ class RealEstatePropertyTag(models.Model):
     name = fields.Char(
         required=True,
     )
+    color = fields.Integer(default=1)
 
 
 class RealEstatePropertyType(models.Model):
@@ -26,7 +27,7 @@ class RealEstatePropertyType(models.Model):
     _description = 'Real Estate Property Type model class'
 
     _rec_name = 'name'
-    _order = 'sequence name'
+    _order = 'sequence,name'
     _sql_constraints = [
         ('name_uniq', 'UNIQUE (name)', 'You can\'t have two property types with the same name !')
     ]
@@ -173,16 +174,19 @@ class RealEstatePropertyOffer(models.Model):
             record.validity = delta.days
 
     def accept_offer(self):
+        # # check if any other offer has been accepted
+        # if record.search([("property_id.offer_ids.status", "=", "accepted")]).exists():
+        #     raise UserError("This property has already been accepted")
         for record in self:
-
-            # check if any other offer has been accepted
-            if record.search([("property_id.offer_ids.status", "=", "accepted")]).exists():
+            data = record.property_id.offer_ids.mapped('status')
+            if 'accepted' in data:
                 raise UserError("This property has already been accepted")
 
             if record.status != 'refused':
                 record.status = 'accepted'
                 record.property_id.buyer_id = record.partner_id
                 record.property_id.selling_price = record.price
+                record.property_id.state = 'offer_accepted'
 
                 # refuse all other offers
                 other_offers = record.property_id.offer_ids.filtered(lambda offer: offer.id != record.id)

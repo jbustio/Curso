@@ -13,15 +13,15 @@
         </field>
     </record>
 
-<!--    <record id="real_estate_property_tags_tree_view" model="ir.ui.view">-->
-<!--        <field name="name">Real Estate Property Tags List</field>-->
-<!--        <field name="model">real.estate.property.tag</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <tree string="Real Estate Property Tags">-->
-<!--                <field name="name"/>-->
-<!--            </tree>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="real_estate_property_tags_tree_view" model="ir.ui.view">
+        <field name="name">Real Estate Property Tags List</field>
+        <field name="model">real.estate.property.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Real Estate Property Tags" editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
 
     <record id="real_estate_property_tags_action" model="ir.actions.act_window">
         <field name="name">Real Estate Property Tags</field>

@@ -29,18 +29,20 @@
         <field name="name">Real Estate Property Offer List</field>
         <field name="model">real.estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree string="State Property">
+            <tree string="State Property" decoration-success="status=='accepted'" decoration-danger="status=='refused'" editable="top">
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
+                <field name="status" invisible="1"/>
+
 
                 <button name="accept_offer" type="object"  icon="fa-check"
-                        string="Accept" confirm="Are you sure you want to accept this offer?"/>
+                        string="Accept" confirm="Are you sure you want to accept this offer?"
+                        attrs="{'invisible':['|',('status', '=', 'accepted'), ('status', '=', 'refused')]}"/>
                 <button name="refuse_offer" type="object" icon="fa-times"
-                        string="Refuse" confirm="Are you sure you want to refuse this offer?"/>
-
-                <field name="status"/>
+                        string="Refuse" confirm="Are you sure you want to refuse this offer?"
+                        attrs="{'invisible':['|',('status', '=', 'accepted'), ('status', '=', 'refused')]}"/>
 
             </tree>
         </field>
