@@ -82,8 +82,9 @@
                 <field name="bedrooms"></field>
                 <field name="living_area"></field>
                 <field name="fecades"></field>
-                <field name="status"></field>
+                <filter name="status" domain="['|',('status','=','N'), ('status','=','OR')]"/>
                 <filter name="active" domain="[('active','=',False)]"/>
+                <filter name="groupby_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
             </search>
         </field>
     </record>
