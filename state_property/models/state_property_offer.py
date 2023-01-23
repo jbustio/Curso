@@ -20,3 +20,17 @@ class StatePropertyOffer(models.Model):
     date_deadline = fields.Date()
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
     property_id = fields.Many2one(comodel_name="state_property.state_property", string="State property", required=True)
+
+    # Actions Buttons
+    def action_accept(self):
+        for record in self:
+            if not record.status:
+                record.status = 'accepted'
+                record.property_id.selling_price = record.price
+        return True
+
+    def action_refuse(self):
+        for record in self:
+            if not record.status:
+                record.status = 'refused'
+        return True
