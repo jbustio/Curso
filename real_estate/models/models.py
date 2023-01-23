@@ -52,9 +52,9 @@ class RealEstateProperty(models.Model):
     _sql_constraints = [
         ('bedrooms_positive_integer', 'CHECK(bedrooms >= 0)', "The bedrooms must be a positive numeric value"),
         ('living_area_positive_integer', 'CHECK(living_area >= 0)', "The living_area must be a positive numeric value"),
-        ('expected_price_positive_integer', 'CHECK(expected_price >= 0)',
+        ('expected_price_positive_integer', 'CHECK(expected_price > 0)',
          "The expected price must be a positive numeric value"),
-        ('selling_price_positive_integer', 'CHECK(selling_price >= 0)',
+        ('selling_price_positive_integer', 'CHECK(selling_price > 0)',
          "The selling price must be a positive numeric value"),
     ]
     _order = "id desc"
@@ -151,6 +151,10 @@ class RealEstatePropertyOffer(models.Model):
     _name = 'real.estate.property.offer'
     _description = 'Real Estate Property Offer model class'
     _order = "price desc"
+    _sql_constraints = [
+        ('offer_price_positive_integer', 'CHECK(bedrooms > 0)', "The price must be a positive numeric value"),
+
+    ]
 
     price = fields.Float()
     status = fields.Selection(selection=[("accepted", "Accepted"), ('refused', "Refused")], copy=False)
