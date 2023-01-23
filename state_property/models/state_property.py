@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from odoo.tools.float_utils import float_compare, float_is_zero
 from datetime import date
 from dateutil.relativedelta import relativedelta
@@ -44,15 +44,43 @@ class StateProperty(models.Model):
     buyer = fields.Many2one('res.partner', string='Buyer')
     salesperson = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
 
+    # Method _computed
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
-        self.total_area = self.living_area + self.garden_area
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
 
     @api.constrains('date_availability')
     def _check_date_availability(self):
-        for rec in self:
-            if rec.date_availability and rec.date_availability < fields.Date.today():
+        for record in self:
+            if record.date_availability and record.date_availability < fields.Date.today():
                 raise ValidationError(_("The entered date availability is not acceptable !"))
+
+    # Method _onchange
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        if self.garden is True:
+            self.garden_area = 10
+            self.garden_orientation = 'north'
+        else:
+            self.total_area = self.total_area - 10
+            self.garden_orientation = None
+            self.garden_area = 0
+
+    # Actions Buttons
+    def action_sold(self):
+        for record in self:
+            if record.state == 'canceled':
+                raise UserError(_("A canceled property cannot be set as sold !"))
+            record.state = 'sold'
+        return True
+
+    def action_cancel(self):
+        for record in self:
+            if record.state == 'sold':
+                raise UserError(_("A sold property cannot be set as canceled !"))
+            record.state = 'canceled'
+        return True
 
 
 class StatePropertyType(models.Model):
