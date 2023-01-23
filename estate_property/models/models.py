@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, exceptions
+from odoo.tools.float_utils import * 
 from datetime import date, timedelta
 
 from pydantic import ValidationError
@@ -106,6 +107,36 @@ class estate_property(models.Model):
             if record.state == 'Canceled':
                 raise exceptions.UserError("A canceled property cannot be sold")
             record.state = 'Sold'
+    
+    _sql_constraints = [
+        (
+            'check_expected_price', 
+            'CHECK(expected_price > 0)',
+            'A property expected price must be strictly positive'
+        ),
+        (
+            'check_selling_price', 
+            'CHECK(selling_price >= 0)',
+            'A property selling price must be positive'
+        ),
+        (
+            'unique_tag',
+            'UNIQUE(tag_id)',
+            'The tag must be unique'
+        ),
+        (
+            'unique_type',
+            'UNIQUE(property_type_id)',
+            'The type must be unique'
+        )
+        
+    ]
+
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if (record.selling_price < record.expected_price * 0.9) and not(float_is_zero(record.selling_price,10)):
+                raise ValidationError("The selling price cannot be lower than 90% of the expected price.")
 
 class proprety_type(models.Model):
     _name = 'estate_property.property.type'
@@ -181,6 +212,13 @@ class offer(models.Model):
         related = "property_id.state"
         )
 
+    _sql_constraints = [
+        (
+            'check_offer_price', 
+            'CHECK(price >= 0)',
+            'An offer price must be strictly positive'
+        )
+    ]
 
     @api.depends('date_deadline', 'validity')
     def _compute_date_deadline(self):
