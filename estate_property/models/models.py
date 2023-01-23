@@ -164,6 +164,10 @@ class offer(models.Model):
         compute = "_compute_date_deadline",
         inverse = "_inverse_date_deadline"
     )
+    property_state = fields.Selection(
+        string = "State",
+        related = "property_id.state"
+        )
 
     @api.depends('date_deadline', 'validity')
     def _compute_date_deadline(self):
