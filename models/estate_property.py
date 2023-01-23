@@ -49,7 +49,6 @@ class EstateProperty(models.Model):
     def _compute_best_price(self):
         for record in self:
             if record.offer_ids:
-                print("!!!!!", record.offer_ids)
                 bp = max(record.offer_ids.mapped('price'))
                 record.best_price = bp
             else:
@@ -151,14 +150,17 @@ class EstatePropertyOffer(models.Model):
 
     def action_accept(self):
         for record in self:
+            q =  record.property_id.offer_ids.search([
+                ('status','=', 'accepted'),
+                '!', ('id','=', record.id),
+            ])
+            for o in q:
+                o.status = None
             
             record.status = 'accepted'
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
             record.property_id.state = "offer_accepted"
-            for offer in record.property_id.offer_ids:
-                if offer.id != record.id and offer.status == 'accepted':
-                    offer.status = None
                     
 
     def action_refuse(self):

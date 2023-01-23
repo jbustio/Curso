@@ -90,22 +90,23 @@
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
-      <tree string="Real Estate" create="true" delete="true" edit="true">
-        <field name="name" />
-        <field name="postcode" />
-        <field name="state" />
-        <field name="date_availability" />
-        <field name="expected_price" />
+      <tree string="Real Estate" >
+        <field name="name" readonly="1"/>
+        <field name="postcode" readonly="1"/>
+        <field name="state" readonly="1"/>
+        <field name="date_availability" readonly="1" optional="hide"/>
+        <field name="expected_price" readonly="1"/>
         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
-        <field name="bedrooms" />
-        <field name="living_area" />
-        <field name="facades" />
-        <field name="garage" />
-        <field name="garden" />
-        <field name="garden_area" />
-        <field name="garden_orientation" />
-        <field name="selling_price" />
-        <field name="active" />
+        <field name="bedrooms" readonly="1"/>
+        <field name="living_area" readonly="1"/>
+        <field name="offer_ids" readonly="0"/>
+        <field name="facades" readonly="1"/>
+        <field name="garage" readonly="1"/>
+        <field name="garden" readonly="1"/>
+        <field name="garden_area" readonly="1"/>
+        <field name="garden_orientation" readonly="1"/>
+        <field name="selling_price" readonly="1"/>
+        <field name="active" readonly="1"/>
       </tree>
     </field>
   </record>
