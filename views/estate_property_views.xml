@@ -7,13 +7,18 @@
     <field name="arch" type="xml">
       <form string="Real Estate">
         <header>
-          <button name="action_cancel" string="Cancel"
-            type="object" class="oe_highlight"
-            attrs="{'d': ['|',('state','=','sold') ,('state','=','canceled')]}" />
+          <button name="action_sell" string="Sold" states="new,offer_receive" class="btn btn-outline-primary"
+            type="object" 
+          />
+          <button name="action_sell" string="Sold" states="offer_accepted" class="oe_highlight"
+            type="object" decoration-primary="1==1"
+          />
 
-          <button name="action_sell" string="Sold"
-            type="object" class="oe_highlight"
-            attrs="{'d': ['|',('state','=','canceled'), ('state','=','sold')]}" />
+          <button name="action_cancel" string="Cancel" decoration-info="1==1"
+            type="object" states="new,offer_receive,offer_accepted" />
+          <!-- attrs="{'highlight': ['|',('state','=','sold') ,('state','=','canceled')]}" /> -->
+
+
           <field name="state" widget="statusbar"
             statusbar_visible="new,offer_receive,offer_accepted,sold,canceled" />
 
@@ -87,7 +92,7 @@
         <field name="state" />
         <field name="date_availability" />
         <field name="expected_price" />
-        <field name="tag_ids" widget="many2many_tags"  options="{'color_field': 'color'}"/>
+        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
         <field name="bedrooms" />
         <field name="living_area" />
         <field name="facades" />
