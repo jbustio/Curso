@@ -6,6 +6,19 @@
         <field name="model">estate_property.estate.property</field>
         <field name="arch" type="xml">
             <form string="House">
+                <header>
+                    <button 
+                        name="action_cancel" 
+                        type="object" 
+                        string="Cancel"
+                        />
+                    <button 
+                        name="action_sold" 
+                        type="object" 
+                        string="Sold"
+                        />
+                    <field name="state" widget="statusbar"/> 
+                </header>
                 <sheet>
                     <group name="root_group">
                         <group name = "left_group">
@@ -26,7 +39,7 @@
                                         <field name="description"/>
                                         <field name="property_type_id" />
                                         <field name="active" />
-                                        <field name="state" />
+                                       
                                     </group>
                                     <group>
                                         <field name="garage"/>

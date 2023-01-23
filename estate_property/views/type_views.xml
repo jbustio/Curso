@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record 
-        id="type_action" 
-        model="ir.actions.act_window">
-        <field name="name">Type action</field>
-        <field name="res_model">estate_property.property.type</field>
-        <field name="view_mode">tree,form</field>
-    </record>
     <record id="tag_action" model="ir.actions.act_window">
-        <field name="name">Tag action</field>
+        <field name="name">Tag</field>
         <field name="res_model">estate_property.tag</field>
         <field name="view_mode">tree,form</field>
     </record>
+
     <menuitem
         id="type_menu_root"
         name="Type"
         parent="real_estate_menu"
         />
     <menuitem
-        id="property_type_menu"
-        name="Property Type"
-        action="type_action"
-        parent="type_menu_root"
-        sequence="10"/>
-    <menuitem
         id="tag_menu"
         name="Estate Tag"
         action="tag_action"
         parent="type_menu_root"
         sequence="10"/>
+    <record 
+        id="view_tree_tag" 
+        model="ir.ui.view"
+    >
+        <field name="name">Type List</field>
+        <field name="model">estate_property.property.type</field>
+        <field name="arch" type = "xml">
+            <tree>
+                <field 
+                    name="sequence" 
+                    widget="handle"
+                />
+                <field 
+                    name="name" 
+                />
+                <field 
+                    name="property_ids"
+                />
+            </tree>
+        </field>
+    </record>
+    <record 
+        id="type_action" 
+        model="ir.actions.act_window">
+        <field name="name">Property types</field>
+        <field name="res_model">estate_property.property.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+    id="property_type_menu"
+    name="Property Type"
+    action="type_action"
+    parent="type_menu_root"
+    sequence="10"/>
 </odoo>

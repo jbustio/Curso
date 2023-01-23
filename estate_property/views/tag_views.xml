@@ -5,7 +5,7 @@
         id="view_tree_tag" 
         model="ir.ui.view"
     >
-        <field name="name">Type List</field>
+        <field name="name">Tag List</field>
         <field name="model">estate_property.tag</field>
         <field name="arch" type = "xml">
             <tree>
