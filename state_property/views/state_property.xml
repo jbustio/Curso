@@ -32,7 +32,6 @@
                             <group>
                                 <group>
                                     <field name="active" widget="boolean_toggle"/>
-                                    <field name="state"/>
                                     <field name="bedrooms" options="{'type':'number'}"/>
                                     <field name="postcode"/>
                                     <field name="description"/>
@@ -87,8 +86,7 @@
         <field name="name">State property</field>
         <field name="model">state_property.state_property</field>
         <field name="arch" type="xml">
-            <tree>
-                <!-- Add your fields here -->
+            <tree decoration-success="state == 'offer_received'" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="date_availability"/>
