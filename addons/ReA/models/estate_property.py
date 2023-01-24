@@ -28,8 +28,8 @@ class EstateProperty(models.Model):
     buyer_id = fields.Many2one("res.partner", copy = False)
     tag_ids = fields.Many2many("property.tag")
     offer_ids = fields.One2many("property.offer", 'property_id')
-    total_area = fields.Float(compute="get_total_area", readonly=True)
-    best_offer = fields.Float(compute="get_best_offer",readonly=True)
+    total_area = fields.Float(compute="_get_total_area", readonly=True)
+    best_offer = fields.Float(compute="_get_best_offer",readonly=True)
 
     @api.constrains("garden_ares", "garden_orientation")
     def _check_if_there_is_a_garden(self):
@@ -38,7 +38,7 @@ class EstateProperty(models.Model):
             raise ValidationError("There is not any garden so no garden area nor orientation")
 
     @api.depends('living_area', 'garden_ares')
-    def get_total_area(self):
+    def _get_total_area(self):
         try:
             self.ensure_one()    
             self.total_area=self.living_area+self.garden_ares
@@ -46,14 +46,14 @@ class EstateProperty(models.Model):
             return
 
     @api.depends('offer_ids')
-    def get_best_offer(self):
+    def _get_best_offer(self):
         try:
             self.best_offer = max(offer.price for offer in self.offer_ids)
         except ValueError:
             self.best_offer = 0
 
     @api.onchange('garden')
-    def set_defaults(self):
+    def _set_defaults(self):
         if self.garden:
             self.garden_ares=10
             self.garden_orientation="N"
@@ -84,14 +84,14 @@ class PropertyOffer(models.Model):
     partner_id=fields.Many2one('res.partner',required=True)
     property_id = fields.Many2one('estate.property',required=True)
     validity = fields.Integer(default=7)
-    date_deadline= fields.Date(compute="get_deadline", inverse="get_validity")
+    date_deadline= fields.Date(compute="_get_deadline", inverse="_get_validity")
 
     @api.depends('validity')
-    def get_deadline(self):
+    def _get_deadline(self):
         for offer in self:
             offer.date_deadline =offer.create_date + timedelta(days=offer.validity) if offer.create_date else None
 
-    def get_validity(self):
+    def _get_validity(self):
         for offer in self:
             if  offer.date_deadline:
                 cd = offer.create_date
