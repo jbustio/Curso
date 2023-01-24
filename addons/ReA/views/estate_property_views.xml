@@ -68,6 +68,12 @@
                                     <field name="status"></field>
                                 </group>
                             </page>
+                             <page string="Description">
+                                <group>
+                                    <field name="seller_id" string="Salesman"/>
+                                    <field name="buyer_id">Buyer</field>
+                                </group>
+                            </page>
                         </notebook>
                     </group>
                 </sheet>

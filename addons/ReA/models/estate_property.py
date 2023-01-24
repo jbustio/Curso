@@ -23,6 +23,8 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection(string="Garden Orientation", selection=[('N', 'North'), ('S','South'), ('E', 'East'), ('W', 'West')])
     active = fields.Boolean("Active?", default=True)
     type_id = fields.Many2one("property.type", ondelete='cascade')
+    seller_id = fields.Many2one("res.users", default = lambda self: self.env.user)
+    buyer_id = fields.Many2one("res.partner", copy = False)
 
 
 class PropertyType(models.Model):
