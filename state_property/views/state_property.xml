@@ -89,7 +89,8 @@
             <tree decoration-success="state == 'offer_received'" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
                 <field name="name"/>
                 <field name="postcode"/>
-                <field name="date_availability"/>
+                <field name="state"/>
+                <field name="date_availability" optional="hide"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
             </tree>
