@@ -12,14 +12,29 @@
         groups="base.group_user"
         name="Real State"
         action = "action_estate_property"
-        sequence="10"/>
+        sequence="0"/>
 
 
         <record id="property_estate_view_form" model="ir.ui.view">
             <field name="name">property_estate.view.form</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <form string="">
+                <form string="Property">
+                    <header>
+                        <button 
+                            name="action_cancel" 
+                            type="object" 
+                            string="Cancel"
+                            states="New,Offer Received,Offer Refused,Offer Accepted"
+                            />
+                        <button 
+                            name="action_sold" 
+                            type="object" 
+                            string="Sold"
+                            states="New,Offer Received,Offer Refused,Offer Accepted"
+                            />
+                        <field name="state"  widget="statusbar"/> 
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -32,6 +47,8 @@
                                 <field name="date_availability"></field>
                                 <field name="active"></field>
                             </group>
+                        </group>
+                        <group>
                             <notebook>
                                 <page name="page1" string="Description">
                                     <group>
@@ -49,12 +66,13 @@
                                         <field name="facades"></field>
                                         <field name="garage"></field>
                                         <field name="garden"></field>
-                                        <field name="garden_area"></field>
-                                        <field name="garden_orientation"></field>
+                                        <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                        <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
                                         </group>
                                 </page>
                                 <page name="page3" string="Offers">
                                     <group>
+                                        <field name="best_price"></field>
                                         <field name="offer"></field> 
                                     </group>
                                 </page>

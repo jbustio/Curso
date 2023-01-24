@@ -9,3 +9,6 @@ class PropertyTag(models.Model):
     
     name = fields.Char( "Property Tag")
     
+    estate_id = fields.Many2many('estate.property',string="Houses")
+    
+    
