@@ -27,6 +27,7 @@ class EstateProperty(models.Model):
     seller_id = fields.Many2one("res.users", default = lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", copy = False)
     tag_ids = fields.Many2many("property.tag")
+    offer_ids = fields.One2many("property.offer", 'property_id')
 
     @api.constrains("garden_ares", "garden_orientation")
     def _check_if_there_is_a_garden(self):
@@ -47,3 +48,12 @@ class PropertyTag(models.Model):
     _name="property.tag"
     _description="Specific characteristics of the property"
     name = fields.Char(required=True)
+
+class PropertyOffer(models.Model):
+    _name="property.offer"
+    _description="Buyers offers for certain property"
+
+    price = fields.Float()
+    status = fields.Selection(selection = [('A', 'Accepted'), ('R', 'Refused')], copy=False)
+    partner_id=fields.Many2one('res.partner',required=True)
+    property_id = fields.Many2one('estate.property',required=True)

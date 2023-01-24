@@ -5,3 +5,5 @@ access_type_user,TypeUser,model_property_type,rea_group_user,1,1,1,0
 access_type_manager,TypeManager,model_property_type,rea_group_manager,1,1,1,1
 access_tag_user,TagUser,model_property_tag,rea_group_user,1,1,1,0
 access_tag_manager,TagManager,model_property_tag,rea_group_manager,1,1,1,1
+access_offer_user,OfferUser,model_property_offer,rea_group_user,1,1,1,0
+access_offer_manager,OfferManager,model_property_offer,rea_group_manager,1,1,1,1

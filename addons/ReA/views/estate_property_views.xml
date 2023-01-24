@@ -69,12 +69,20 @@
                                     <field name="status"></field>
                                 </group>
                             </page>
+
                              <page string="Other info">
                                 <group>
                                     <field name="seller_id" string="Salesman"/>
                                     <field name="buyer_id">Buyer</field>
                                 </group>
                             </page>
+
+                            <page string="Offers">
+                                <group>
+                                    <field name="offer_ids"/>
+                                </group>
+                            </page>
+
                         </notebook>
                     </group>
                 </sheet>
