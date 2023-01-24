@@ -117,16 +117,6 @@
         </field>
     </record>
 
-    <!-- state_property search view -->
-    <record id="state_property_type_view_search" model="ir.ui.view">
-        <field name="name">State property tag</field>
-        <field name="model">state.property.tag</field>
-        <field name="arch" type="xml">
-            <search string="Search Description">
-                <field name="name"/>
-            </search>
-        </field>
-    </record>
 
     <!--STATE PROPERTY TAG -->
     <!-- state property tag form view -->
@@ -147,7 +137,7 @@
     </record>
 
     <!-- state property type tree view -->
-    <record id="state_property_type_view_tree" model="ir.ui.view">
+    <record id="state_property_tag_view_tree" model="ir.ui.view">
         <field name="name">State property tag</field>
         <field name="model">state.property.tag</field>
         <field name="arch" type="xml">
@@ -158,9 +148,20 @@
         </field>
     </record>
 
+    <!-- state_property search view -->
+    <record id="state_property_tag_view_search" model="ir.ui.view">
+        <field name="name">State property tag</field>
+        <field name="model">state.property.tag</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
 
     <!--STATE PROPERTY TYPE -->
-    <!-- state property form view -->
+    <!-- state property type form view -->
     <record id="state_property_type_form" model="ir.ui.view">
         <field name="name">State property type form</field>
         <field name="model">state.property.type</field>
@@ -189,7 +190,7 @@
         </field>
     </record>
 
-    <!-- state_property search view -->
+    <!-- state_property type search view -->
     <record id="state_property_type_view_search" model="ir.ui.view">
         <field name="name">State property type</field>
         <field name="model">state.property.type</field>
