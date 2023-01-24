@@ -47,9 +47,20 @@ class EstateProperty(models.Model):
 
     @api.depends('offer_ids')
     def get_best_offer(self):
-        self.best_offer = max(offer.price for offer in self.offer_ids)
+        try:
+            self.best_offer = max(offer.price for offer in self.offer_ids)
+        except ValueError:
+            self.best_offer = 0
 
-        
+    @api.onchange('garden')
+    def set_defaults(self):
+        if self.garden:
+            self.garden_ares=10
+            self.garden_orientation="N"
+            return
+            
+        self.garden_ares=0
+        self.garden_orientation=None       
         
 
 
