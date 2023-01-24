@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 from datetime import timedelta, datetime
 
 class EstateProperty(models.Model):
@@ -25,9 +26,24 @@ class EstateProperty(models.Model):
     type_id = fields.Many2one("property.type", ondelete='cascade')
     seller_id = fields.Many2one("res.users", default = lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", copy = False)
+    tag_ids = fields.Many2many("property.tag")
+
+    @api.constrains("garden_ares", "garden_orientation")
+    def _check_if_there_is_a_garden(self):
+        self.ensure_one()
+        if not self.garden and (self.garden_ares or self.garden_orientation):
+            raise ValidationError("There is not any garden so no garden area nor orientation")
+        
+        
 
 
 class PropertyType(models.Model):
     _name =  "property.type"
     _description = "Type of properties"
+    name = fields.Char(required=True)
+
+
+class PropertyTag(models.Model):
+    _name="property.tag"
+    _description="Specific characteristics of the property"
     name = fields.Char(required=True)

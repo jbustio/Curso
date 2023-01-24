@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Action for custom model-->
+    <record id="property_tag_action" model="ir.actions.act_window"> 
+        <field name="name">Property Tag</field>
+        <field name="res_model">property.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="PropertyTags" id="property_tag_menu" parent="settings_menu" action="property_tag_action" sequence="1"/><!--Group acces are defined to show menu item-->
+</odoo>

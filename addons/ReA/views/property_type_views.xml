@@ -8,7 +8,7 @@
     </record>
 
      <menuitem name="Settings" id="settings_menu" parent="rea_base_menu"/><!--Menu appears if it or its submenu have action-->
-     <menuitem name="PropertyTypes" id="property_type_menu" parent="settings_menu" action="property_type_action"/>
+     <menuitem name="PropertyTypes" id="property_type_menu" parent="settings_menu" action="property_type_action" sequence="0"/>
     
      <!--List-->
     <record id="property_type_view_tree" model="ir.ui.view">

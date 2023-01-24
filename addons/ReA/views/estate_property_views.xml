@@ -8,7 +8,7 @@
     </record>
     <!--Menu itesm view-->
     <menuitem name="Real Estate" id="rea_base_menu"/><!--Menu root, name appears in sidebar and main window-->
-    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu" sequence="1"/><!--Second name-->
+    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu"/><!--Second name-->
     <!--The name for the third menu is taken from the name of the action.-->
     <menuitem name="Properties" id="properties_menu" parent="estate_property_menu" action="estate_property_action"/>
 
@@ -27,6 +27,7 @@
             <field name="selling_price"></field>
             <field name="date_availability"/>
             <field name="type_id"></field>
+            <field name="tag_ids"></field>
         </tree>
         </field>
     </record>
@@ -39,9 +40,11 @@
             <form>
                 <sheet>
                     <h1><field name="name"/></h1>
+                    <field name="tag_ids" widget="many2many_tags"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
                     <group> <!--Longes column-->
                         
                         <group>                     <!--Sub columns-->
+                            <field name="type_id">Property Type</field>
                             <field name="postcode"/>
                             <field name="date_availability"/>
                         </group>
@@ -61,8 +64,6 @@
                                     <field name="garden_ares">Garden Area(sqm)</field>
                                     <field name="garden_orientation">Garden Orientation</field>
                                     <field name="active"></field>
-                                    <field name="type_id"></field>
-
                                 </group>
                                 <group >
                                     <field name="status"></field>
