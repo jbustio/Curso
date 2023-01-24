@@ -159,7 +159,7 @@ class proprety_type(models.Model):
     @api.depends('offer_ids')
     def _compute_count(self):
         for record in self:
-            record.offer_count = len(record.offer_ids.mapped(record.name))
+            record.offer_count = len(record.offer_ids)
 
 class tag(models.Model):
     _name = 'estate_property.tag'
