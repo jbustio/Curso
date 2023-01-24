@@ -53,7 +53,20 @@ class EstateProperty(models.Model):
         if self.garden:
             self.garden_area =10
             self.garden_orientation = 'north'
-            
+        else:
+            self.garden_area =0
+            self.garden_orientation = ''
+    
+    def action_cancel(self):
+        for record in self:
+            if not record.state == "s":
+                record.state = "c"                
+        return True
+    def action_sold(self):
+        for record in self:
+            if not record.state == 'c':
+                record.state = "s"
+        return True
 class EstatePropertyType(models.Model):
     _name = 'estate.property.type'
     _description = 'Estate Property Type'
@@ -82,5 +95,17 @@ class EstatePropertyOffer(models.Model):
     partner_id = fields.Many2one('res.partner', string='partner', required=True)
     property_id = fields.Many2one('estate.property', string='property',required=True)
     validity = fields.Integer('Validity', default=7)
-    date_deadline = fields.Date('Date deadline' , compute='_compute_date')
+    date_deadline = fields.Char(compute='_compute_date_deadline',inverse='_inverse_date_deadline', string='Date deadline')
     
+    
+    def _compute_date_deadline(self):
+        self.date_deadline = 100
+    def _inverse_date_deadline(self):
+        self.date_deadline = 100
+
+    def action_accept(self):
+        self.status = 'accepted'
+        self.property_id.selling_price = self.price
+    
+    def action_refuse(self):
+        self.status = 'refused'

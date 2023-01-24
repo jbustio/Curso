@@ -5,9 +5,13 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="EstateProperty">
+                <header>
+                    <button string="Cancel" name="action_cancel" type="object" class="oe_highlight"/>
+                    <button string="Sold" name="action_sold" type="object" class="oe_highlight"/>
+                </header>
                 <sheet>
                 <group>
-                    <h1><field name="name">Name</field></h1>
+                    <h1><field name="name"></field></h1>
                     <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"></field>
                     <field name="state" widget="statusbar"></field>
                 </group>                  
@@ -30,8 +34,8 @@
                             <field name="facades">Facades</field>
                             <field name="garage">Garage</field>
                             <field name="garden">Garden</field>
-                            <field name="garden_area">Garden Area</field>
-                            <field name="garden_orientation">Garden Orientation</field>
+                            <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}">Garden Area</field>
+                            <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}">Garden Orientation</field>
                         </group>
                     </page>                    
                     <page name="info" string="Other Info">
@@ -40,9 +44,14 @@
                     <page name="offert" string="Offert">
                         <field name="offer_ids">
                         <tree>
-                            <field name="price">Price</field> 
-                            <field name="partner_id">Partner</field>
-                            <field name="status">Status</field>
+                            <field name="price" string='Price'></field> 
+                            <field name="partner_id" string='Partner'></field>
+                            <field name="validity" string='Validity(days)'></field>
+                            <field name="date_deadline" string='Dead line'></field>
+                            <button icon='fa-check' name="action_accept" attrs="{'invisible':[('status','!=','None')]}" type="object"/>
+                            <button icon='fa-times' name="action_refuse" attrs="{'invisible':[('status','!=','None')]}" type="object"/>
+                            <field name="status" string='Status'></field>
+                            
                         </tree>
                         </field>
                     </page>
@@ -98,9 +107,9 @@
             <notebook>
                 <page name="offer" string="Offers">
                     <group> 
-                        <field name="price">Price</field> 
-                        <field name="partner_id">Partner</field>
-                        <field name="status">Status</field>
+                        <field name="price" string='Price'></field> 
+                        <field name="partner_id" string='Partner'></field>
+                        <field name="status" string='Status'></field>                        
                     </group>
                 </page>
             </notebook>
