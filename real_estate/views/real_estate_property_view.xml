@@ -6,13 +6,13 @@
             <form string="Real Estate Property">
                 <header>
                     <!-- Buttons will go here -->
-                    <button name="sell_property" type="object" class="oe_highlight" decoration-success="state=='offer_accepted'"
+                    <button name="sell_property" type="object" class="oe_highlight"
                             string="Sold" confirm="Are you sure you want to sell this property?"
-                            attrs="{'invisible':['|',('state', '=', 'sold'), ('state', '=', 'canceled')]}"
+                            attrs="{'invisible':['|', ('id', '=', False), ('state', '!=', 'offer_accepted')]}"
                     />
                     <button name="cancel_property" type="object"
                             string="Cancel" confirm="Are you sure you want to cancel this property?"
-                            attrs="{'invisible':['|',('state', '=', 'sold'), ('state', '=', 'canceled')]}"
+                            attrs="{'invisible':['|', '|', ('id', '=', False), ('state', '=', 'sold'), ('state', '=', 'canceled')]}"
                     />
                     <field name="state" widget="statusbar"/>
 
