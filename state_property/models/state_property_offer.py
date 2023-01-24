@@ -9,7 +9,7 @@ class StatePropertyOffer(models.Model):
     _order = 'price desc'
 
     _sql_constraints = [
-        ('check_price', 'check (price > 0)', 'An offer price must be strictly positive.')
+        ('check_price', 'CHECK (price < 0)', 'An offer price must be strictly positive.')
     ]
 
     values_status = [('accepted', 'Accepted'), ('refused', 'Refused')]
