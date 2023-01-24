@@ -28,7 +28,7 @@
         <field name="name">State property offer</field>
         <field name="model">state.property.offer</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'" editable="top">
                 <field name="price"/>
                 <field name="status"/>
                 <field name="partner_id"/>
