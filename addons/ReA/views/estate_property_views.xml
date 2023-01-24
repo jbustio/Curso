@@ -8,10 +8,11 @@
     </record>
     <!--Menu itesm view-->
     <menuitem name="Real Estate" id="rea_base_menu"/><!--Menu root, name appears in sidebar and main window-->
-    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu"/><!--Second name-->
+    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu" sequence="1"/><!--Second name-->
     <!--The name for the third menu is taken from the name of the action.-->
     <menuitem name="Properties" id="properties_menu" parent="estate_property_menu" action="estate_property_action"/>
 
+    
     <!--List-->
     <record id="estate_property_view_tree" model="ir.ui.view">
         <field name="name">Properties</field>
@@ -25,6 +26,7 @@
             <field name="expected_price"></field>
             <field name="selling_price"></field>
             <field name="date_availability"/>
+            <field name="type_id"></field>
         </tree>
         </field>
     </record>
@@ -59,6 +61,7 @@
                                     <field name="garden_ares">Garden Area(sqm)</field>
                                     <field name="garden_orientation">Garden Orientation</field>
                                     <field name="active"></field>
+                                    <field name="type_id"></field>
 
                                 </group>
                                 <group >
@@ -87,6 +90,7 @@
                 <filter name="status" domain="['|',('status','=','N'), ('status','=','OR')]"/>
                 <filter name="active" domain="[('active','=',False)]"/>
                 <filter name="groupby_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
+                <filter name="groupby_type" string="Type" context="{'group_by': 'type_id'}"/>
             </search>
         </field>
     </record>

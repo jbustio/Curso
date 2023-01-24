@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_property_user,PropertyUser,model_estate_property,rea_group_user,1,1,1,0
 access_property_manager,PropertyManager,model_estate_property,rea_group_manager,1,1,1,1
+access_type_user,TypeUser,model_property_type,rea_group_user,1,1,1,0
+access_type_manager,TypeManager,model_property_type,rea_group_manager,1,1,1,1
