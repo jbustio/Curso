@@ -103,7 +103,7 @@ class StatePropertyTag(models.Model):
     _order = 'name'
 
     _sql_constraints = [
-        ('unique_name', 'unique (name)', 'A property tag name must be unique.')
+        ('unique_name', 'UNIQUE (name)', 'A property tag name must be unique.')
     ]
 
     name = fields.Char("Name", required=True)
