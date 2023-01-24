@@ -28,12 +28,27 @@ class EstateProperty(models.Model):
     buyer_id = fields.Many2one("res.partner", copy = False)
     tag_ids = fields.Many2many("property.tag")
     offer_ids = fields.One2many("property.offer", 'property_id')
+    total_area = fields.Float(compute="get_total_area", readonly=True)
+    best_offer = fields.Float(compute="get_best_offer",readonly=True)
 
     @api.constrains("garden_ares", "garden_orientation")
     def _check_if_there_is_a_garden(self):
         self.ensure_one()
-        if not self.garden and (self.garden_ares or self.garden_orientation):
+        if not self.garden and (self.garden_ares or self.garden_orientation):# If there are not records self.value=False if value is selection type
             raise ValidationError("There is not any garden so no garden area nor orientation")
+
+    @api.depends('living_area', 'garden_ares')
+    def get_total_area(self):
+        try:
+            self.ensure_one()    
+            self.total_area=self.living_area+self.garden_ares
+        except ValidationError:
+            return
+
+    @api.depends('offer_ids')
+    def get_best_offer(self):
+        self.best_offer = max(offer.price for offer in self.offer_ids)
+
         
         
 
