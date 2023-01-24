@@ -1,6 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-from datetime import timedelta, datetime
+from datetime import timedelta, date
 
 class EstateProperty(models.Model):
 
@@ -72,3 +72,16 @@ class PropertyOffer(models.Model):
     status = fields.Selection(selection = [('A', 'Accepted'), ('R', 'Refused')], copy=False)
     partner_id=fields.Many2one('res.partner',required=True)
     property_id = fields.Many2one('estate.property',required=True)
+    validity = fields.Integer(default=7)
+    date_deadline= fields.Date(compute="get_deadline", inverse="get_validity")
+
+    @api.depends('validity')
+    def get_deadline(self):
+        for offer in self:
+            offer.date_deadline =offer.create_date + timedelta(days=offer.validity) if offer.create_date else None
+
+    def get_validity(self):
+        for offer in self:
+            if  offer.date_deadline:
+                cd = offer.create_date
+                offer.validity = (offer.date_deadline  - date(cd.year,cd.month,cd.day)).days 
