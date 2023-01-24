@@ -60,13 +60,14 @@ class StateProperty(models.Model):
     # Method _onchange
     @api.onchange('garden')
     def _onchange_garden(self):
-        if self.garden is True:
-            self.garden_area = 10
-            self.garden_orientation = 'north'
-        else:
-            self.total_area = self.total_area - 10
-            self.garden_orientation = None
-            self.garden_area = 0
+        for record in self:
+            if record.garden is True:
+                record.garden_area = 10
+                record.garden_orientation = 'north'
+            else:
+                record.total_area = record.total_area - 10
+                record.garden_orientation = None
+                record.garden_area = 0
 
     # Actions Buttons
     def action_sold(self):
