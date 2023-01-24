@@ -13,9 +13,10 @@ class StateProperty(models.Model):
     _order = 'id desc'
 
     _sql_constraints = [
-        ('unique_postcode', 'unique (postcode)', 'Postcode must be unique.'),
-        ('check_expected_price', 'check (expected_price > 0)', 'A property expected price must be strictly positive.'),
-        ('check_selling_price', 'check (selling_price > 0)', 'A property selling price must be strictly positive.')
+        ('unique_postcode', 'UNIQUE (postcode)', 'Postcode must be unique.'),
+        ('check_expected_price', 'CHECK (expected_price < 0)', 'A property expected price must be strictly positive.'),
+        ('check_selling_price', 'CHECK (selling_price < 0)', 'A property selling price must be strictly positive.'),
+        ('check_bedrooms', 'CHECK (bedrooms < 0)', 'A bedrooms must be strictly positive.')
     ]
 
     values_orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
@@ -89,7 +90,7 @@ class StatePropertyType(models.Model):
     _order = 'name'
 
     _sql_constraints = [
-        ('unique_name', 'unique (name)', 'A property type name must be unique.')
+        ('unique_name', 'UNIQUE (name)', 'A property type name must be unique.')
     ]
 
     name = fields.Char("Name", required=True)
