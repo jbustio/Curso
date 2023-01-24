@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_state_property_state_property,Acceso a state property,model_state_property_state_property,base.group_user,1,1,1,1
 access_state_property_offer,Acceso a state property offer,model_state_property_offer,base.group_user,1,1,1,1
+access_state_property_type,Acceso a state property type,model_state_property_type,base.group_user,1,1,1,1
+access_state_property_tag,Acceso a state property tag,model_state_property_tag,base.group_user,1,1,1,1
