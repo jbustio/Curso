@@ -71,7 +71,7 @@
     </record>
 
     <!-- Top menu item -->
-    <menuitem name="State property" id="state_property_menu"/>
+    <menuitem name="State property" id="state_property_menu" groups="base.group_user" />
 
     <!-- This Menu Item must have a parent and an action -->
     <!-- Menu State Property Type -->
