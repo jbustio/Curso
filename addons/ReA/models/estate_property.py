@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
 from datetime import timedelta, date
 
+
 class EstateProperty(models.Model):
 
     _name = "estate.property"
@@ -30,6 +31,8 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many("property.offer", 'property_id')
     total_area = fields.Float(compute="_get_total_area", readonly=True)
     best_offer = fields.Float(compute="_get_best_offer",readonly=True)
+
+    _sql_constraints = [('check_expected_price', 'CHECK(expected_price>0 AND selling_price>0)','Price must be positive.')]
 
     @api.constrains("garden_ares", "garden_orientation")
     def _check_if_there_is_a_garden(self):
@@ -74,20 +77,30 @@ class EstateProperty(models.Model):
         self.status = "S"
         return True
 
-       
+    @api.onchange('expected_price')
+    def _check_offers(self):
+        limit_price = 90 * self.expected_price / 100
+        for offer in self.offer_ids:
+            if offer.price < limit_price and offer.status=='A':
+                raise UserError('''The selling price must be at least 90% of expected price in order to accept any offer, 
+                so first refuse the accepted offer.''')
+
         
+   
 
 
 class PropertyType(models.Model):
     _name =  "property.type"
     _description = "Type of properties"
     name = fields.Char(required=True)
+    _sql_constraints = [('check_name', 'UNIQUE(name)',f'Name already exists.')]
 
 
 class PropertyTag(models.Model):
     _name="property.tag"
     _description="Specific characteristics of the property"
     name = fields.Char(required=True)
+    _sql_constraints = [('check_name', 'UNIQUE(name)',f'Name already exists.')]
 
 class PropertyOffer(models.Model):
     _name="property.offer"
@@ -100,10 +113,13 @@ class PropertyOffer(models.Model):
     validity = fields.Integer(default=7)
     date_deadline= fields.Date(compute="_get_deadline", inverse="_get_validity")
 
+    _sql_constraints = [('check_price', 'CHECK(price>0)','Price must be positive.')]
+
     @api.depends('validity')
     def _get_deadline(self):
         for offer in self:
             offer.date_deadline =offer.create_date + timedelta(days=offer.validity) if offer.create_date else None
+
 
     def _get_validity(self):
         for offer in self:
@@ -112,9 +128,11 @@ class PropertyOffer(models.Model):
                 offer.validity = (offer.date_deadline  - date(cd.year,cd.month,cd.day)).days 
 
     def accept_offer(self):
-        if self.env['property.offer'].search_count([('property_id.id','=',str(self.property_id.id)), ('status','=', 'A')]):
+        if self.search_count([('property_id.id','=',self.property_id.id), ('status','=', 'A')]):
             raise UserError('Only one offer can be accepted!')
         self.status='A'
+        if self.price < 90 * self.property_id.expected_price/100:
+            raise UserError('The selling price must be at least 90% of expected price in order to accept this offer.')
         self.property_id.selling_price = self.price
         self.property_id.buyer_id = self.partner_id
         return True
