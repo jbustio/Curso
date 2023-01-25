@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Action for custom model-->
+    <record id="estate_property_action" model="ir.actions.act_window"> 
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--Menu itesm view-->
+    <menuitem name="Real Estate" id="rea_base_menu"/><!--Menu root, name appears in sidebar and main window-->
+    <menuitem name="Advertisements" id="estate_property_menu" parent="rea_base_menu"/><!--Second name-->
+    <!--The name for the third menu is taken from the name of the action.-->
+    <menuitem name="Properties" id="properties_menu" parent="estate_property_menu" action="estate_property_action"/>
+
+    
+    <!--List-->
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">Properties</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="postcode"></field>
+            <field name="bedrooms"></field>
+            <field name="living_area"></field>
+            <field name="expected_price"></field>
+            <field name="selling_price"></field>
+            <field name="date_availability"/>
+            <field name="type_id"></field>
+            <field name="tag_ids"></field>
+        </tree>
+        </field>
+    </record>
+
+    <!--Form, groups displays data in columns-->
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">Estate Property Form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                <button name="cancel_property" type="object" string="Cancel"/>
+                <button name="set_property_as_sold" type="object" string="Sold"/>
+                </header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <field name="tag_ids" widget="many2many_tags"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
+                    <group> <!--Longes column-->
+                        
+                        <group>                     <!--Sub columns-->
+                            <field name="status"></field>
+                            <field name="type_id">Property Type</field>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="expected_price"></field>
+                            <field name="selling_price"></field>
+                            <field name="best_offer"></field>
+                        </group>
+                    </group>
+                    <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="description"/>
+                                    <field name="bedrooms"></field>
+                                    <field name="living_area"></field>
+                                    <field name="fecades"></field>
+                                    <field name="garage"></field>
+                                    <field name="garden"></field>
+                                    <field name="garden_ares">Garden Area(sqm)</field>
+                                    <field name="garden_orientation">Garden Orientation</field>
+                                    <field name="active"></field>
+                                    <field name="total_area"></field>
+                                </group>
+                            </page>
+
+                             <page string="Other info">
+                                <group>
+                                    <field name="seller_id" string="Salesman"/>
+                                    <field name="buyer_id">Buyer</field>
+                                </group>
+                            </page>
+
+                            <page string="Offers">
+                                 <field name="offer_ids"/>
+                            </page>
+
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">Estate Property Search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Estate Property">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="expected_price"></field>
+                <field name="bedrooms"></field>
+                <field name="living_area"></field>
+                <field name="fecades"></field>
+                <filter name="status" domain="['|',('status','=','N'), ('status','=','OR')]"/>
+                <filter name="active" domain="[('active','=',False)]"/>
+                <filter name="groupby_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
+                <filter name="groupby_type" string="Type" context="{'group_by': 'type_id'}"/>
+            </search>
+        </field>
+    </record>
+    
+
+</odoo>
