@@ -29,17 +29,17 @@ class EstateProperty(models.Model):
                 "move_type": 'out_invoice',
                 "invoice_line_ids": [
                     # name, quantity and price_unit
-                    Command.create({
-                        "name": record.name,
-                        "quantity": 1,
-                        "price_unit": record.selling_price,
-                    }),
+                    # Command.create({
+                    #     "name": record.name,
+                    #     "quantity": 1,
+                    #     "price_unit": record.selling_price,
+                    # }),
                     Command.create({
                         "name": "6% of sold price",
                         "quantity": 1,
                         "price_unit": record.selling_price / 100 * 6,
                     }),
-                     Command.create({
+                    Command.create({
                         "name": "Administrative fees",
                         "quantity": 1,
                         "price_unit": 100,
@@ -47,3 +47,4 @@ class EstateProperty(models.Model):
                 ],
             })
         return super().action_sell()
+n
