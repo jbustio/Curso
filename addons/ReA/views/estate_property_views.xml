@@ -39,9 +39,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                <field name="state" widget="statusbar" options="{'clickable': '1'}" ></field><!--statusbar_visible="new,offer received,offer accepted,sold"-->
-                <button name="cancel_property" type="object" string="Cancel"/>
-                <button name="set_property_as_sold" type="object" string="Sold"/>
+                <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible='N,OR,OA,S'></field><!--statusbar_visible="new,offer received,offer accepted,sold" des not work-->
+                <button name="cancel_property" type="object" string="Cancel" states='N,OR,OA'/>
+                <button name="set_property_as_sold" type="object" string="Sold" states='N,OR,OA'/>
                 </header>
                 <h1><field name="name"/></h1>
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
