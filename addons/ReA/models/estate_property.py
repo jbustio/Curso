@@ -7,6 +7,7 @@ class EstateProperty(models.Model):
 
     _name = "estate.property"
     _description = "Some description"
+    _order ="id desc"
 
     name = fields.Char()
     description = fields.Text()
@@ -20,7 +21,7 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden = fields.Boolean()
     garden_ares = fields.Integer(string="Garden Area")
-    status = fields.Selection(string="Status", selection=[('N', 'New'), ('OR','Offer Received'), ('OA','Offer Accepted'),('S','Sold'),
+    state = fields.Selection(string="Status", selection=[('N', 'New'), ('OR','Offer Received'), ('OA','Offer Accepted'),('S','Sold'),
                                     ('C','Canceled')],copy = False, default = "N")
     garden_orientation = fields.Selection(string="Garden Orientation", selection=[('N', 'North'), ('S','South'), ('E', 'East'), ('W', 'West')])
     active = fields.Boolean("Active?", default=True)
@@ -66,15 +67,15 @@ class EstateProperty(models.Model):
         self.garden_orientation=None   
 
     def cancel_property(self):
-        if self.status == "S":
+        if self.state == "S":
             raise UserError("A sold property can't be cancelled")
-        self.status="C"
+        self.state="C"
         return True
 
     def set_property_as_sold(self):
-        if self.status == "C":
+        if self.state == "C":
             raise UserError("Cancelled property can't be sold")
-        self.status = "S"
+        self.state = "S"
         return True
 
     @api.onchange('expected_price')
@@ -92,19 +93,26 @@ class EstateProperty(models.Model):
 class PropertyType(models.Model):
     _name =  "property.type"
     _description = "Type of properties"
+    _order = "name"
+    
     name = fields.Char(required=True)
+    property_ids = fields.One2many("estate.property", 'type_id')
+
     _sql_constraints = [('check_name', 'UNIQUE(name)',f'Name already exists.')]
 
 
 class PropertyTag(models.Model):
     _name="property.tag"
     _description="Specific characteristics of the property"
+    _order = "name"
+
     name = fields.Char(required=True)
     _sql_constraints = [('check_name', 'UNIQUE(name)',f'Name already exists.')]
 
 class PropertyOffer(models.Model):
     _name="property.offer"
     _description="Buyers offers for certain property"
+    _order = "price desc"
 
     price = fields.Float()
     status = fields.Selection(selection = [('A', 'Accepted'), ('R', 'Refused')], copy=False)

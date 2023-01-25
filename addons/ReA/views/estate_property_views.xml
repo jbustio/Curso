@@ -39,55 +39,53 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                <field name="state" widget="statusbar" options="{'clickable': '1'}" ></field><!--statusbar_visible="new,offer received,offer accepted,sold"-->
                 <button name="cancel_property" type="object" string="Cancel"/>
                 <button name="set_property_as_sold" type="object" string="Sold"/>
                 </header>
-                <sheet>
-                    <h1><field name="name"/></h1>
-                    <field name="tag_ids" widget="many2many_tags"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
-                    <group> <!--Longes column-->
-                        
-                        <group>                     <!--Sub columns-->
-                            <field name="status"></field>
-                            <field name="type_id">Property Type</field>
-                            <field name="postcode"/>
-                            <field name="date_availability"/>
-                        </group>
-                        <group>
-                            <field name="expected_price"></field>
-                            <field name="selling_price"></field>
-                            <field name="best_offer"></field>
-                        </group>
+                <h1><field name="name"/></h1>
+                <field name="tag_ids" widget="many2many_tags"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
+                <group> <!--Longes column-->
+                    
+                    <group>                     <!--Sub columns-->
+                        <field name="type_id">Property Type</field>
+                        <field name="postcode"/>
+                        <field name="date_availability"/>
                     </group>
-                    <notebook>
-                            <page string="Description">
-                                <group>
-                                    <field name="description"/>
-                                    <field name="bedrooms"></field>
-                                    <field name="living_area"></field>
-                                    <field name="fecades"></field>
-                                    <field name="garage"></field>
-                                    <field name="garden"></field>
-                                    <field name="garden_ares">Garden Area(sqm)</field>
-                                    <field name="garden_orientation">Garden Orientation</field>
-                                    <field name="active"></field>
-                                    <field name="total_area"></field>
-                                </group>
-                            </page>
+                    <group>
+                        <field name="expected_price"></field>
+                        <field name="selling_price"></field>
+                        <field name="best_offer"></field>
+                    </group>
+                </group>
+                <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description"/>
+                                <field name="bedrooms"></field>
+                                <field name="living_area"></field>
+                                <field name="fecades"></field>
+                                <field name="garage"></field>
+                                <field name="garden"></field>
+                                <field name="garden_ares">Garden Area(sqm)</field>
+                                <field name="garden_orientation">Garden Orientation</field>
+                                <field name="active"></field>
+                                <field name="total_area"></field>
+                            </group>
+                        </page>
 
-                             <page string="Other info">
-                                <group>
-                                    <field name="seller_id" string="Salesman"/>
-                                    <field name="buyer_id">Buyer</field>
-                                </group>
-                            </page>
+                            <page string="Other info">
+                            <group>
+                                <field name="seller_id" string="Salesman"/>
+                                <field name="buyer_id">Buyer</field>
+                            </group>
+                        </page>
 
-                            <page string="Offers">
-                                 <field name="offer_ids"/>
-                            </page>
+                        <page string="Offers">
+                                <field name="offer_ids"/>
+                        </page>
 
-                        </notebook>
-                </sheet>
+                    </notebook>
             </form>
         </field>
     </record>
@@ -104,7 +102,7 @@
                 <field name="bedrooms"></field>
                 <field name="living_area"></field>
                 <field name="fecades"></field>
-                <filter name="status" domain="['|',('status','=','N'), ('status','=','OR')]"/>
+                <filter name="state" domain="['|',('state','=','N'), ('state','=','OR')]"/>
                 <filter name="active" domain="[('active','=',False)]"/>
                 <filter name="groupby_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
                 <filter name="groupby_type" string="Type" context="{'group_by': 'type_id'}"/>
