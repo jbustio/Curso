@@ -93,10 +93,11 @@ class EstateProperty(models.Model):
 class PropertyType(models.Model):
     _name =  "property.type"
     _description = "Type of properties"
-    _order = "name"
-    
+    _order = "sequence,name"
+
     name = fields.Char(required=True)
     property_ids = fields.One2many("estate.property", 'type_id')
+    sequence = fields.Integer()
 
     _sql_constraints = [('check_name', 'UNIQUE(name)',f'Name already exists.')]
 
