@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from datetime import timedelta, date
 
 class EstateProperty(models.Model):
@@ -60,7 +60,21 @@ class EstateProperty(models.Model):
             return
             
         self.garden_ares=0
-        self.garden_orientation=None       
+        self.garden_orientation=None   
+
+    def cancel_property(self):
+        if self.status == "S":
+            raise UserError("A sold property can't be cancelled")
+        self.status="C"
+        return True
+
+    def set_property_as_sold(self):
+        if self.status == "C":
+            raise UserError("Cancelled property can't be sold")
+        self.status = "S"
+        return True
+
+       
         
 
 
@@ -96,3 +110,15 @@ class PropertyOffer(models.Model):
             if  offer.date_deadline:
                 cd = offer.create_date
                 offer.validity = (offer.date_deadline  - date(cd.year,cd.month,cd.day)).days 
+
+    def accept_offer(self):
+        if self.env['property.offer'].search_count([('property_id.id','=',str(self.property_id.id)), ('status','=', 'A')]):
+            raise UserError('Only one offer can be accepted!')
+        self.status='A'
+        self.property_id.selling_price = self.price
+        self.property_id.buyer_id = self.partner_id
+        return True
+    
+    def refuse_offer(self):
+        self.status='R'
+        return True

@@ -38,12 +38,17 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                <button name="cancel_property" type="object" string="Cancel"/>
+                <button name="set_property_as_sold" type="object" string="Sold"/>
+                </header>
                 <sheet>
                     <h1><field name="name"/></h1>
                     <field name="tag_ids" widget="many2many_tags"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
                     <group> <!--Longes column-->
                         
                         <group>                     <!--Sub columns-->
+                            <field name="status"></field>
                             <field name="type_id">Property Type</field>
                             <field name="postcode"/>
                             <field name="date_availability"/>
@@ -53,7 +58,8 @@
                             <field name="selling_price"></field>
                             <field name="best_offer"></field>
                         </group>
-                        <notebook>
+                    </group>
+                    <notebook>
                             <page string="Description">
                                 <group>
                                     <field name="description"/>
@@ -66,9 +72,6 @@
                                     <field name="garden_orientation">Garden Orientation</field>
                                     <field name="active"></field>
                                     <field name="total_area"></field>
-                                </group>
-                                <group >
-                                    <field name="status"></field>
                                 </group>
                             </page>
 
@@ -84,7 +87,6 @@
                             </page>
 
                         </notebook>
-                    </group>
                 </sheet>
             </form>
         </field>
