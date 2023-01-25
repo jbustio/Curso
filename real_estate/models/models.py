@@ -44,7 +44,7 @@ class RealEstatePropertyType(models.Model):
     @api.depends("offer_ids")
     def _count_offers(self):
         for record in self:
-            record.offer_count = record.offer_ids.search_count([('property_type_id', '=', record.id)])
+            record.offer_count = self.env['real.estate.property.offer'].search_count([('property_type_id', '=', record.id)])
 
 
 class RealEstateProperty(models.Model):
@@ -85,6 +85,12 @@ class RealEstateProperty(models.Model):
 
     total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
     best_offer = fields.Float(compute="_compute_best_offer")
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_canceled(self):
+        for record in self:
+            if record.state not in ['new', 'canceled']:
+                raise UserError(f"Only new or canceled properties can be deleted")
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -174,6 +180,29 @@ class RealEstatePropertyOffer(models.Model):
     property_type_id = fields.Many2one('real.estate.property.type', string="Property Type",
                                        related="property_id.property_type_id", store=True)
 
+    @api.model
+    def create(self, vals):
+
+        # check that price is not lower than any previous offers
+        if self.env['real.estate.property.offer'].search([('property_id', '=', vals.get('property_id')), ('price', '>', vals.get('price'))]).exists():
+            raise UserError("Unable to create an offer with a lower price than an existing offer")
+
+        # save record
+        records = super(RealEstatePropertyOffer, self).create(vals)
+        # # change state
+        property = self.env['real.estate.property'].browse(vals.get('property_id'))
+        if property.state != 'offer_received':
+            property.state = 'offer_received'
+
+        return records
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_and_update_property_state(self):
+        if not self.env['real.estate.property.offer'].search([('property_id', '=', self.property_id.id),
+                                                              ('id', 'not in',
+                                                               self.ids)]).exists() and self.property_id.state == 'offer_received':
+            self.property_id.state = 'new'
+
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
         for record in self:
@@ -196,9 +225,7 @@ class RealEstatePropertyOffer(models.Model):
             record.validity = delta.days
 
     def accept_offer(self):
-        # # check if any other offer has been accepted
-        # if record.search([("property_id.offer_ids.status", "=", "accepted")]).exists():
-        #     raise UserError("This property has already been accepted")
+        # check if any other offer has been accepted
         for record in self:
             data = record.property_id.offer_ids.mapped('status')
             if 'accepted' in data:
