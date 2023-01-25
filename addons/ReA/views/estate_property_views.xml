@@ -44,11 +44,11 @@
                 <button name="set_property_as_sold" type="object" string="Sold"/>
                 </header>
                 <h1><field name="name"/></h1>
-                <field name="tag_ids" widget="many2many_tags"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"></field> <!--Outside sinc inside a group it takes all columns space and look ugly-->
                 <group> <!--Longes column-->
                     
                     <group>                     <!--Sub columns-->
-                        <field name="type_id">Property Type</field>
+                        <field name="type_id" options="{'no_create': True}">Property Type</field>
                         <field name="postcode"/>
                         <field name="date_availability"/>
                     </group>
