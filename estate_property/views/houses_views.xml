@@ -144,5 +144,8 @@
         name="Houses"
         parent="real_estate_menu"
         action="real_estate_action"
-        sequence="10"/>
+        sequence="10"
+        />
+
+    
 </odoo>

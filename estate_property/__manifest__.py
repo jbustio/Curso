@@ -30,7 +30,9 @@
         'views/houses_views.xml',
         'views/offer_views.xml',
         'views/type_views.xml',
-        'views/tag_views.xml'
+        'views/tag_views.xml',
+        'report/estate_property_reports.xml',
+        'report/estate_property_templates.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
