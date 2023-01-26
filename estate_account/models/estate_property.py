@@ -47,4 +47,3 @@ class EstateProperty(models.Model):
                 ],
             })
         return super().action_sell()
-n
