@@ -13,10 +13,9 @@ class StateProperty(models.Model):
     _order = 'id desc'
 
     _sql_constraints = [
-        ('unique_postcode', 'UNIQUE (postcode)', 'Postcode must be unique.'),
-        ('check_expected_price', 'CHECK (expected_price < 0)', 'A property expected price must be strictly positive.'),
-        ('check_selling_price', 'CHECK (selling_price < 0)', 'A property selling price must be strictly positive.'),
-        ('check_bedrooms', 'CHECK (bedrooms < 0)', 'A bedrooms must be strictly positive.')
+        ('check_expected_price', 'CHECK (expected_price > 0)', 'A property expected price must be strictly positive.'),
+        ('check_selling_price', 'CHECK (selling_price >= 0)', 'A property selling price must be strictly positive.'),
+        ('check_bedrooms', 'CHECK (bedrooms >= 0)', 'A bedrooms must be strictly positive.')
     ]
 
     values_orientation = [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
@@ -29,6 +28,7 @@ class StateProperty(models.Model):
     date_availability = fields.Date("Date availability", copy=False, default=lambda x: date.today() + relativedelta(months=3))
     expected_price = fields.Float("Expected price", required=True)
     selling_price = fields.Float("Selling price", readonly=True, copy=False)
+    best_price = fields.Float("Best price", compute="_compute_best_price", store=True)
     bedrooms = fields.Integer("Bedrooms", default=2)
     living_area = fields.Integer("Living area")
     facades = fields.Integer("Facades")
@@ -50,6 +50,11 @@ class StateProperty(models.Model):
     def _compute_total_area(self):
         for record in self:
             record.total_area = record.living_area + record.garden_area
+
+    @api.depends('state_property_offer_id.price')
+    def _compute_best_price(self):
+        for record in self:
+            record.best_price = max(record.state_property_offer_id.mapped('price')) if record.state_property_offer_id.price else 0
 
     @api.constrains('date_availability')
     def _check_date_availability(self):
@@ -74,27 +79,33 @@ class StateProperty(models.Model):
         for record in self:
             if record.state == 'canceled':
                 raise UserError(_("A canceled property cannot be set as sold !"))
-            record.state = 'sold'
-        return True
+            return record.write({
+                'state': 'sold'
+            })
 
     def action_cancel(self):
         for record in self:
             if record.state == 'sold':
                 raise UserError(_("A sold property cannot be set as canceled !"))
-            record.state = 'canceled'
-        return True
+            return record.write({
+                'state': 'canceled'
+            })
 
 
 class StatePropertyType(models.Model):
     _name = 'state.property.type'
     _description = 'State property type'
-    _order = 'name'
+    _order = 'sequence, name'
 
     _sql_constraints = [
         ('unique_name', 'UNIQUE (name)', 'A property type name must be unique.')
     ]
 
     name = fields.Char("Name", required=True)
+    sequence = fields.Integer("Sequence", default=10)
+    property_ids = fields.One2many("state_property.state_property", "property_type_id", string="Property")
+    offer_count = fields.Integer("Offer count")  # compute = "_compute_offer_count"
+    offer_ids = fields.Many2many("state.property.offer", string="Offers")  # compute = "_compute_offer_count"
 
 
 class StatePropertyTag(models.Model):
@@ -107,3 +118,4 @@ class StatePropertyTag(models.Model):
     ]
 
     name = fields.Char("Name", required=True)
+    color = fields.Integer("Color")
