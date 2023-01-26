@@ -17,6 +17,7 @@ class Type(models.Model):
     def _count_offers(self):
         for record in self:
             record.offer_count += len(record.offer_ids)
-            if record.offer_ids:
-                print("*************************",self.offer_ids)
+            
+            # if record.offer_ids:
+            #     print("*************************",self.offer_ids)
                 

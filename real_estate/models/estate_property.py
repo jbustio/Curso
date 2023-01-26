@@ -63,6 +63,13 @@ class real_estate(models.Model):
         self.state = 'Canceled'
 
 
+    def populate(self):
+        self.create({
+            "name":"Dummy House",
+            "description":"The description",
+            "property_type_id":self.env['estate.type'].create({"name":"Testing Type"}),
+            "tag_id":self.env["estate.tag"].create({"name":"Testing Tag"})
+        })
 
 
     @api.depends("garden_area","living_area")
@@ -70,16 +77,20 @@ class real_estate(models.Model):
         for record in self:
             record.total_area = record.garden_area + record.living_area
 
+
+    #This method compute the best price
     @api.depends("offer.price")
     def _compute_price(self):
         prices_to_iter = []
         for record in self:
-            if record.offer != None:
+            if len(record.offer) > 0:
                 #for offer in record.offer:
-                record.best_price = max(record.mapped('offer.price'))
-                
+                try:
+                    record.best_price = max(record.mapped('offer.price'))
+                except ValueError:
+                    return UserError("Error en el best price")
             else:
-                self.best_price = 0
+                record.best_price = 0
     
 
     @api.onchange('garden')
@@ -101,11 +112,11 @@ class real_estate(models.Model):
             if (record.selling_price < record.expected_price * 0.9)and not(float_is_zero(record.selling_price,10)):
                 raise ValidationError("El precio de venta no puede ser menor del 90'%' del esperado")
     #############################
-    """ Metodos para hacer testing """
+    """ Method for testing  """
     def north_direction(self):
-        self.write({'garden_direction':'North'})
+        self.write({'garden_orientation':'North'})
 
     def south_direction(self):
-        self.write({'garden_direction':'South'})
+        self.write({'garden_orientation':'South'})
 
     ##############################

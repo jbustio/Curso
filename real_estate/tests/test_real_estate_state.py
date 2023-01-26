@@ -15,11 +15,11 @@ class TestRealEstate(TransactionCase):
     def test_button_north(self):
         """Make north button"""
         self.test_real_estate.north_direction()
-        self.assertEqual(self.test_real_estate.garden_direction,'NEast',
+        self.assertEqual(self.test_real_estate.garden_orientation,'East',
         "The field should be changed to north") 
 
     def test_button_south(self):
         """Make south button"""
         self.test_real_estate.north_direction()
-        self.assertEqual(self.test_real_estate.garden_direction,'South',
+        self.assertEqual(self.test_real_estate.garden_orientation,'South',
         "The field should be changed to south")

@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 {
-    'name': "real_estate",
+    'name': "estate.account",
 
     'summary': """
-        Modulo sobre el manejo de bienes raices""",
+        Modulo sobre el manejo de cuentas""",
 
     'description': """
         Long description of module's purpose
@@ -19,30 +18,22 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base_setup'],
+    'depends': ['base_setup','real_estate','account'],
 
     # always loaded
     'data': [
         
         
         
-        'security/real_estate_security.xml',
-        'security/type_security.xml',
-        'security/tag_security.xml',
-        'security/offer_security.xml',
+        
         'security/ir.model.access.csv',
-        'views/real_estate_view.xml',
-        'views/real_estate_menu.xml',
-        'views/estate_type_menu.xml',
-        'views/estate_type_view.xml',
-        'views/estate_tag_view.xml',
-        'views/estate_offer_view.xml',
-        #'views/res_config_settings.xml',
+        'views/estate_account_menu.xml',
+        
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
     'license': 'LGPL-3',
-    'application':True,
+    'application':False,
 }

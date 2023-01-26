@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="estate_account_menu"
+        name="Estate Account"
+        />
+    <record id="action_real_estate" model="ir.actions.act_window">
+        <field name="name">Estate Account</field>
+        <field name="res_model">real_estate.real_estate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_available':True}</field>
+   </record>
+</odoo>
