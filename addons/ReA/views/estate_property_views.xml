@@ -102,7 +102,7 @@
                 <field name="postcode"/>
                 <field name="expected_price"></field>
                 <field name="bedrooms"></field>
-                <field name="living_area"></field>
+                <field name="living_area" filter_domain="[('living_area', '>=', self)]"></field>
                 <field name="fecades"></field>
                 <filter name="state" string="Available" domain="['|',('state','=','N'), ('state','=','OR')]"/>
                 <filter name="active" domain="[('active','=',False)]"/>
