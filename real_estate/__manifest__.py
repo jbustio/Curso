@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 {
     'name': "Real Estate",
 
@@ -32,8 +33,13 @@
         'views/real_estate_property_offer_view.xml',
         'views/real_estate_property_type_view.xml',
         'views/real_estate_property_tags_view.xml',
+        'reports/real_estate_property_template.xml',
+
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode
-
+    "demo": [
+        "demo/demo.xml"
+    ],
+    "application": True,
 }

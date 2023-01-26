@@ -255,3 +255,9 @@ class RealEstatePropertyOffer(models.Model):
             else:
                 raise UserError("Unable to refuse an already accepted offer")
         return True
+
+
+class RealEstateSalesman(models.Model):
+    _inherit = 'res.users'
+
+    real_estate_property_ids = fields.One2many('real.estate.property', string="Real Estate_Properties", inverse_name='salesman_id')
