@@ -17,7 +17,7 @@
                     <group>
                         <group>
                             <field name="name"/>
-                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="tag_ids" widget="many2many_tags" editable="top"/>
                             <field name="property_type_id"/>
                         </group>
                         <group>
@@ -47,16 +47,16 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Offers" name="offers">
-                            <field name="state_property_offer_id">
+                        <page string="Offers" name="offers" >
+                            <field name="state_property_offer_id" attrs="{'readonly':[('state','in',['offer_accepted', 'sold','canceled'])]}">
                                 <tree editable="top">
                                     <field name="price"/>
                                     <field name="status"/>
                                     <field name="partner_id"/>
                                     <field name="validity"/>
                                     <field name="date_deadline"/>
-                                    <button name="action_accept" type="object" title="Accept" icon="fa-check"/>
-                                    <button name="action_refuse" type="object" title="Refuse" icon="fa-close"/>
+                                    <button name="action_accept" type="object" title="Accept" icon="fa-check" attrs="{'invisible':[('status','in',['accepted','refused'])]}"/>
+                                    <button name="action_refuse" type="object" title="Refuse" icon="fa-close" attrs="{'invisible':[('status','in',['accepted','refused'])]}"/>
                                 </tree>
                                 <form>
                                     <group>
@@ -86,10 +86,11 @@
         <field name="name">State property</field>
         <field name="model">state_property.state_property</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state == 'offer_received'" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
+            <tree decoration-success="'state','==', ['offer_received','offer_accepted']" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="state"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="date_availability" optional="hide"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
@@ -109,6 +110,8 @@
                 <field name="date_availability"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
+                <!--búsqueda filtro-->
+                <filter string="Available" name="available" domain="[('state', 'in', ('new', 'offer_received'))]"/>
                 <!--búsqueda agrupada-->
                 <group expand="0" string="Agrupar por ..." colspan="12" col="10">
                     <filter name="property_type_id" string="Property type" context="{'group_by':'property_type_id'}"/>
@@ -141,7 +144,7 @@
         <field name="name">State property tag</field>
         <field name="model">state.property.tag</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Property tag" editable="bottom">
                 <!-- Add your fields here -->
                 <field name="name"/>
             </tree>
@@ -184,8 +187,8 @@
         <field name="model">state.property.type</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- Add your fields here -->
                 <field name="name"/>
+                <field name="sequence" widget="handle"/>
             </tree>
         </field>
     </record>
