@@ -1,0 +1,22 @@
+<odoo>
+  <data>
+    <template id="report_property_offers_user"
+      inherit_id="estate.report_property_offers_user">
+      <xpath expr="//div[@name='status']" position="after">
+        <t t-set="state" t-value="property.state" />
+        <t t-if="state == 'sold'">
+          <strong>The invoice has been created!!!</strong>
+        </t>
+      </xpath>
+    </template>
+    <template id="report_property_offers"
+      inherit_id="estate.report_property_offers">
+      <xpath expr="//div[@name='status']" position="after">
+        <t t-set="state" t-value="property.state" />
+        <t t-if="state == 'sold'">
+          <strong>The invoice has been created!!!</strong>
+        </t>
+      </xpath>
+    </template>
+  </data>
+</odoo>

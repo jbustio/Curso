@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <!-- form for estate.property -->
+
+  <record id="estate_property_type_form" model="ir.ui.view">
+    <field name="name">estate.property.type.form</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+      <form string="Real Estate Type">
+        <header>
+
+
+          
+
+
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="%(estate_property_offers_action)d"
+            class="oe_stat_button"
+            context="{'search_default_expected': True}"
+            icon="fa-money" title="Offers" type="action"
+            attrs="{'invisible': [('offer_count','=',0),]}">
+            <div class="o_stat_info">
+              <span class="o_stat_value">
+                <field name="offer_count"/>
+                <span class="o_stat_text">
+                  Offers
+                </span>
+              </span>
+            </div>
+          </button>
+            <!-- <button name="action_show_groups" type="object" groups="base.group_no_one"
+            class="oe_stat_button" icon="fa-users">
+              <field string="Groups"
+            name="groups_count" widget="statinfo" />
+            </button>
+            <button
+            name="action_show_accesses" type="object" groups="base.group_no_one"
+            class="oe_stat_button" icon="fa-list">
+              <field string="Access Rights"
+            name="accesses_count" widget="statinfo" />
+            </button>
+            <button
+            name="action_show_rules" type="object" groups="base.group_no_one"
+              class="oe_stat_button"
+            icon="fa-list-ul">
+              <field string="Record Rules" name="rules_count"
+            widget="statinfo" />
+            </button> -->
+          </div>
+          <group>
+            <field name="name" />
+            <field name="sequence" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <!-- estate- property tree -->
+  <record id="estate_property_type_tree" model="ir.ui.view">
+    <field name="name">estate.property.tree</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+      <tree string="Real Estate Type">
+        <field name="name" />
+        <!-- <field name="offer_count" /> -->
+        <field name="sequence" widget="handle" readonly='1' />
+      </tree>
+    </field>
+  </record>
+
+
+  <!-- Search view for "estate.property" -->
+  <record id="estate_property_type_search" model="ir.ui.view">
+    <field name="name">estate.property.search</field>
+    <field name="model">estate.property.type</field>
+    <field name="type">search</field>
+    <field name="mode">primary</field>
+    <field name="priority" eval="16" />
+    <field name="active" eval="True" />
+    <field name="arch" type="xml">
+      <search string="Real Estate">
+        <field name="name" />
+        <!-- <field name="description" /> -->
+        <!-- <filter string="Available today" name="date_availability"
+        domain="[('date_availability','=',context_today())]"/>            -->
+      </search>
+    </field>
+  </record>
+
+
+</odoo>
