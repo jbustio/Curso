@@ -21,7 +21,7 @@
             "python": "${command:python.interpreterPath}",
             "program": "D:\\odoo15-15.0\\odoo15-15.0\\odoo-bin",
             "args": [
-                "--config=D:\\custom_addons\\odoo.conf",
+                "--config=D:\\Projects\\Curso\\odoo.conf",
                 // "--db-filter=fm_test",
                 // "--dev=reload",
                 // "--dev=xml"

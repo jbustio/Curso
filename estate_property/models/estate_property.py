@@ -1,4 +1,5 @@
 from odoo import fields, models, api,exceptions
+from odoo.tools.float_utils import * 
 from datetime import date
 
 
@@ -6,6 +7,29 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate Property"
     _order = "id desc"
+    _sql_constraints = [
+        (
+            'check_expected_price', 
+            'CHECK(expected_price > 0)',
+            'Expected price must be strictly positive'
+        ),
+        (
+            'check_selling_price', 
+            'CHECK(selling_price >= 0)',
+            'Selling price must be positive'
+        ),
+        (
+            'unique_tag',
+            'UNIQUE(tag_id)',
+            'Tag has to be unique'
+        ),
+        (
+            'unique_type',
+            'UNIQUE(property_type_id)',
+            'Type has to be unique'
+        )
+        
+    ]
     
     
     name = fields.Char( "Property Name",required=True)
@@ -23,7 +47,7 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection([("North","North"), ("South","South"),("East", "East"),("West", "West")])
     active = fields.Boolean(string = "Active", default = True)
     state = fields.Selection([('New', 'New'),('Offer Received', 'Offer Received'),('Offer Refused', 'Offer Refused'), ('Offer Accepted', 'Offer Accepted'), ('Sold', 'Sold'),('Canceled', 'Canceled')], required=True, copy = False, default = 'New')
-    best_price = fields.Float(compute = "_compute_price", default = 0)
+    best_price = fields.Float(compute = "_compute_price")
     
     
     
@@ -68,3 +92,11 @@ class EstateProperty(models.Model):
             if record.state == 'Canceled':
                 raise exceptions.UserError("A canceled property cannot be sold")
             record.state = 'Sold'
+            
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if (record.selling_price < record.expected_price * 0.9) and not(float_is_zero(record.selling_price,10)):
+                raise ValidationError("The selling price is less than 90% of the expected price.")
+            
+    
