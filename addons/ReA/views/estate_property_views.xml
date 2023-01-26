@@ -27,7 +27,7 @@
             <field name="selling_price"></field>
             <field name="date_availability"/>
             <field name="type_id"></field>
-            <field name="tag_ids"></field>
+            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"></field>
         </tree>
         </field>
     </record>
