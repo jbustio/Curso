@@ -24,6 +24,7 @@
                     <sheet>
                         <group>
                             <field name="name"></field>
+                            <field name="color" widget = "color_picker"></field>
                         </group>
                     </sheet>
                 </form>
@@ -34,8 +35,9 @@
             <field name="name">property_tag.view.tree</field>
             <field name="model">property.tag</field>
             <field name="arch" type="xml">
-                <tree string="">
-                    <field name="name"></field>
+                <tree  editable="bottom" string="">
+                    <field name="name"  options="{'color_field': 'color'}"></field>
+                    <field name="color" widget = "color_picker"></field>
                 </tree>
             </field>
         </record>
@@ -45,7 +47,8 @@
             <field name="model">property.tag</field>
             <field name="arch" type="xml">
                 <search string="">
-                    <field name="name"></field>
+                    <field name="name"  options="{'color_field': 'color'}"></field>
+                    <field name="color" widget = "color_picker"></field>
                 </search>
             </field>
         </record>

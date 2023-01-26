@@ -23,7 +23,7 @@
             <field name="name">property_offer.view.tree</field>
             <field name="model">property.offer</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <tree  editable="bottom" string="">
                             <field name="price"></field>
                             <field name="status"></field>
                                 <button 

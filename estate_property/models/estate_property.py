@@ -5,6 +5,7 @@ from datetime import date
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate Property"
+    _order = "id desc"
     
     
     name = fields.Char( "Property Name",required=True)
@@ -42,9 +43,10 @@ class EstateProperty(models.Model):
     @api.depends('offer')
     def _compute_price(self):
         for r in self:
-            if r.offer:
+            if r.offer :
                 r.best_price = max(r.offer.mapped('price'))
-                
+            else:
+                r.best_price = 0
     @api.onchange('garden')
     def _onchange_garden(self):
         if self.garden:

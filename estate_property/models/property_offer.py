@@ -6,6 +6,7 @@ from datetime import date, timedelta
 class PropertyOffer(models.Model):
     _name = "property.offer"
     _description = "Property Offer"
+    _order = "price desc"
     
     price = fields.Float( "Price")
     status = fields.Selection([("Accepted","Accepted"), ("Refused","Refused")], copy = False)

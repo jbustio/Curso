@@ -5,6 +5,7 @@ from odoo import fields, models
 class PropertyType(models.Model):
     _name = "property.type"
     _description = "Property Type"
+    _order = "sequence, name"
     
     
     name = fields.Char( "Property Type",required=True)

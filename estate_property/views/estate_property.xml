@@ -54,7 +54,7 @@
                                     <group>
                                         <field name="description"></field> 
                                         <field name="property_type_id"></field>
-                                        <field name="property_tag_ids" widget = "many2many_tags"></field>
+                                        <field name="property_tag_ids" widget = "many2many_tags" options="{'color_field': 'color'}" ></field>
                                         <field name="state"></field>
                                     </group>
                                 </page>
@@ -73,7 +73,7 @@
                                 <page name="page3" string="Offers">
                                     <group>
                                         <field name="best_price"></field>
-                                        <field name="offer"></field> 
+                                        <field name="offer" attrs="{'readonly': [('state','in', ['Offer Accepted', 'Sold', 'Canceled'])]}"/>
                                     </group>
                                 </page>
                                 <page name="page4" string="Other Info">
@@ -93,12 +93,18 @@
             <field name="name">property_estate.view.tree</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <tree  
+                decoration-success="[('state', 'in', ['Offer Received','Offer Accepted'])]"
+                decoration-bf="[('state','in','Offer Accepted')]"
+                decoration-muted="[('state','in','Sold')]"
+                string="">
                     <field name="name"></field>
                     <field name="description"></field>
                     <field name="expected_price"></field>
+                    <field name="date_availability" optional="1"/>
+                    <field name="state"></field>
                     <field name="property_type_id"></field>
-                    <field name="property_tag_ids" widget = "many2many_tags"></field>
+                    <field name="property_tag_ids" widget = "many2many_tags"  options="{'color_field': 'color'}" > </field>
                 </tree>
             </field>
         </record>
@@ -112,7 +118,7 @@
                     <field name="expected_price"></field>
                     <field name="description"></field>
                     <field name="property_type_id"></field>
-                    <field name="property_tag_ids" widget = "many2many_tags"></field>
+                    <field name="property_tag_ids" widget = "many2many_tags"  options="{'color_field': 'color'}"></field>
                     
                 </search>
             </field>
