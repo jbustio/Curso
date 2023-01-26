@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!--<template id="invoice_table">
+    <template id="invoice_table">
+        <h1>
+            <strong>Invoice</strong>
+        </h1>
         <table class="table" t-if="property.invoice_id">
             <thead>
                 <tr>
@@ -27,6 +30,9 @@
                         <span t-field="invoice.invoice_date"/>
                     </td>
                     <td>
+                        <span t-field="invoice.invoice_date_due"/>
+                    </td>
+                    <td>
                         <span t-field="invoice.amount_untaxed"/>
                     </td>
                     <td>
@@ -41,14 +47,16 @@
                 </tr>
             </tbody>
         </table>
-    </template>-->
+        <div t-else="">No invoice created yet :(</div>
+    </template>
 
     <template id="estate_account_property_offers_table" name="report_real_estate_property_invoice"
-              inherit_id="real_estate.report_property_offers" t-inherit-mode="extension">
+              inherit_id="real_estate.report_property_offers">
 
-        <xpath expr="//div[@name='invoice-info']" position="inside">
-<!--            <t t-call="estate_account.invoice_table">-->
-<!--            </t>-->
+        <xpath expr="//div[@name='invoice-info']" position="replace">
+<!--            <h1>hola mundo</h1>-->
+            <t t-call="estate_account.invoice_table">
+            </t>
 
         </xpath>
 

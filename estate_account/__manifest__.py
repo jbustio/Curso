@@ -24,8 +24,8 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        # 'reports/real_estate_property_template.xml',
+        'security/ir.model.access.csv',
+        'reports/real_estate_property_template.xml',
     ],
     # only loaded in demonstration mode
 

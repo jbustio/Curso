@@ -2,6 +2,9 @@
 <odoo>
 
     <template id="offers_table">
+        <h1>
+            <strong>Offers</strong>
+        </h1>
         <div t-if="not property.offer_ids">
             <strong>No offers have been made yet :(</strong>
         </div>
