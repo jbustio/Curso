@@ -18,8 +18,9 @@
         <field name="name">Properties</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-        <tree>
+        <tree decoration-success="state in ['OR','OA']" decoration-bf="state=='OA'" decoration-muted="state=='S'">
             <field name="name"/>
+            <field name="state" invisible="1"></field>
             <field name="postcode"></field>
             <field name="bedrooms"></field>
             <field name="living_area"></field>

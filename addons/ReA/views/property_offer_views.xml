@@ -5,10 +5,10 @@
         <field name="name">Offer</field>
         <field name="model">property.offer</field>
         <field name="arch" type="xml">
-        <tree editable="top">
+        <tree editable="top" decoration-success="status=='A'" decoration-danger="status=='R'">
             <field name="price"/>
             <field name="partner_id"></field>
-            <field name="status"></field>
+            <field name="status" invisible="1"></field>
             <button name="accept_offer"  type="object" icon="fa-check" attrs="{'invisible': ['|',('status', '=', 'A'),('status', '=', 'R')]}"/>
             <button name="refuse_offer"  type="object" icon="fa-close" attrs="{'invisible': ['|',('status', '=', 'A'),('status', '=', 'R')]}"/>
             <field name="validity"></field>
