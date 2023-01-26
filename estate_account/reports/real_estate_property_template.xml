@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--<template id="invoice_table">
+        <table class="table" t-if="property.invoice_id">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>Customer</th>
+                    <th>Invoice Date</th>
+                    <th>Due Date</th>
+                    <th>Tax Excluded</th>
+                    <th>Total</th>
+                    <th>Payment Status</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-set="invoice" t-value="property.invoice_id"/>
+                <tr>
+                    <td>
+                        <span t-field="invoice.ref"/>
+                    </td>
+                    <td>
+                        <span t-field="invoice.partner_id"/>
+                    </td>
+                    <td>
+                        <span t-field="invoice.invoice_date"/>
+                    </td>
+                    <td>
+                        <span t-field="invoice.amount_untaxed"/>
+                    </td>
+                    <td>
+                        <span t-field="invoice.amount_total"/>
+                    </td>
+                    <td>
+                        <span t-field="invoice.payment_state"/>
+                    </td>
+                    <td>
+                        <span t-field="invoice.state"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </template>-->
+
+    <template id="estate_account_property_offers_table" name="report_real_estate_property_invoice"
+              inherit_id="real_estate.report_property_offers" t-inherit-mode="extension">
+
+        <xpath expr="//div[@name='invoice-info']" position="inside">
+<!--            <t t-call="estate_account.invoice_table">-->
+<!--            </t>-->
+
+        </xpath>
+
+    </template>
+
+</odoo>
