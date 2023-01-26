@@ -40,7 +40,7 @@ class Offer(models.Model):
         that set the status to Refused"""
         for record in self:
             record.status = "refused"
-            record.property_id.state = "Offer Acepted"
+            
 
     @api.depends("validity","create_date")
     def _compute_date_deadline(self):

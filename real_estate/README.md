@@ -21,3 +21,7 @@ $ databasename=# \d estate_property;
 ## Clase 4
 
 Agregados permisos y grupos
+
+# Clase 5 
+
+Extendiendo modelo con herencia tradicional

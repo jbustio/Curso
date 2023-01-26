@@ -78,6 +78,10 @@ class real_estate(models.Model):
             record.total_area = record.garden_area + record.living_area
 
 
+   
+
+
+
     #This method compute the best price
     @api.depends("offer.price")
     def _compute_price(self):
@@ -92,6 +96,7 @@ class real_estate(models.Model):
             else:
                 record.best_price = 0
     
+   
 
     @api.onchange('garden')
     def _onchange_garden(self):

@@ -6,9 +6,9 @@
         <field name="arch" type="xml">
             <form string="House"> 
                 <header>
-                    <button name="sold" type="object" string="Sold" states="New"/>
-                    <button name="cancel" type="object" string="Cancel" states="New"/>
-                    <field name="state" widget="statusbar" statusbar_visible="Offer Accepted,New,Sold,Offer Received"/>
+                    <button name="sold" type="object" string="Sold" states="Offer Accepted"/>
+                    <button name="cancel" type="object" string="Cancel" states="Offer Accepted"/>
+                    <field name="state" widget="statusbar"  statusbar_visible="Offer Accepted,New,Sold,Offer Received"/>
                 </header>
                 <sheet>
                     <h1><field name="name"/></h1>
@@ -66,7 +66,7 @@
         <field name="name">Houses List</field>
         <field name="model">real_estate.real_estate</field>
         <field name="arch" type="xml">
-            <tree decoration-success="offer > 1" decoration-bf="state=='Offer Accepted'" decoration-muted="state=='Sold'">
+            <tree decoration-success="offer > 1" decoration-danger="state=='Canceled'" decoration-bf="state=='Offer Accepted'" decoration-muted="state=='Sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
