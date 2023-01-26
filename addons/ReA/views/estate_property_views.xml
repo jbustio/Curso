@@ -25,7 +25,7 @@
             <field name="living_area"></field>
             <field name="expected_price"></field>
             <field name="selling_price"></field>
-            <field name="date_availability"/>
+            <field name="date_availability" optional="hide"/>
             <field name="type_id"></field>
             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"></field>
         </tree>

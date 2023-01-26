@@ -9,4 +9,13 @@
     </record>
 
     <menuitem name="PropertyTags" id="property_tag_menu" parent="settings_menu" action="property_tag_action" sequence="1"/><!--Group acces are defined to show menu item-->
+    <record id="property_tag_view_tree" model="ir.ui.view">
+        <field name="name">property_tag.view.tree</field>
+        <field name="model">property.tag</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"></field>
+            </tree>
+        </field>
+    </record>
 </odoo>
