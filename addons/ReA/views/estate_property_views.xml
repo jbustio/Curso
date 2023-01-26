@@ -5,6 +5,7 @@
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_state': True}</field>
     </record>
     <!--Menu itesm view-->
     <menuitem name="Real Estate" id="rea_base_menu"/><!--Menu root, name appears in sidebar and main window-->
@@ -103,7 +104,7 @@
                 <field name="bedrooms"></field>
                 <field name="living_area"></field>
                 <field name="fecades"></field>
-                <filter name="state" domain="['|',('state','=','N'), ('state','=','OR')]"/>
+                <filter name="state" string="Available" domain="['|',('state','=','N'), ('state','=','OR')]"/>
                 <filter name="active" domain="[('active','=',False)]"/>
                 <filter name="groupby_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
                 <filter name="groupby_type" string="Type" context="{'group_by': 'type_id'}"/>
