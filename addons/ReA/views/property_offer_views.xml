@@ -9,8 +9,8 @@
             <field name="price"/>
             <field name="partner_id"></field>
             <field name="status"></field>
-            <button name="accept_offer" string="Accept"  type="object" icon="fa-check"/>
-            <button name="refuse_offer" string="Refuse"  type="object" icon="fa-close"/>
+            <button name="accept_offer"  type="object" icon="fa-check" attrs="{'invisible': ['|',('status', '=', 'A'),('status', '=', 'R')]}"/>
+            <button name="refuse_offer"  type="object" icon="fa-close" attrs="{'invisible': ['|',('status', '=', 'A'),('status', '=', 'R')]}"/>
             <field name="validity"></field>
             <field name="date_deadline"></field>
         </tree>

@@ -67,8 +67,8 @@
                                 <field name="fecades"></field>
                                 <field name="garage"></field>
                                 <field name="garden"></field>
-                                <field name="garden_ares">Garden Area(sqm)</field>
-                                <field name="garden_orientation">Garden Orientation</field>
+                                <field name="garden_ares" attrs="{'invisible': [('garden', '=', False)]}">Garden Area(sqm)</field>
+                                <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}">Garden Orientation</field>
                                 <field name="active"></field>
                                 <field name="total_area"></field>
                             </group>
@@ -82,7 +82,7 @@
                         </page>
 
                         <page string="Offers">
-                                <field name="offer_ids"/>
+                                <field name="offer_ids" attrs="{'readonly':[('state', 'not in', ['N','OR'])]}"/>
                         </page>
 
                     </notebook>
