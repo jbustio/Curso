@@ -21,6 +21,7 @@
                     <field name="date_availability">Date Availability</field>                     
                 </group>
                 <group>
+                    <field name="postcode">Postcode</field>
                     <field name="expected_price">Expected Price</field>                    
                     <field name="selling_price">Selling Price</field>
                     <field name="bedrooms">Bedrooms</field>
@@ -39,17 +40,21 @@
                         </group>
                     </page>                    
                     <page name="info" string="Other Info">
+                        <group name="info">
+                            <field name="sales_person"></field>
+                            <field name="buyer"></field>
+                        </group>
                         
                     </page>
                     <page name="offert" string="Offert">
-                        <field name="offer_ids">
-                        <tree>
+                        <field name="offer_ids" attrs="{'readonly': [('state','in',['o_ac','s','c'])]}">
+                        <tree decoration-danger="status=='refused'" decoration-success="status=='accepted'">
                             <field name="price" string='Price'></field> 
                             <field name="partner_id" string='Partner'></field>
                             <field name="validity" string='Validity(days)'></field>
                             <field name="date_deadline" string='Dead line'></field>
-                            <button icon='fa-check' name="action_accept" attrs="{'invisible':[('status','!=','None')]}" type="object"/>
-                            <button icon='fa-times' name="action_refuse" attrs="{'invisible':[('status','!=','None')]}" type="object"/>
+                            <button icon='fa-check' name="action_accept" attrs="{'invisible': [('status','in', ['accepted', 'refused'])]}" type="object"/>
+                            <button icon='fa-times' name="action_refuse" attrs="{'invisible': [('status','in', ['accepted', 'refused'])]}" type="object"/>
                             <field name="status" string='Status'></field>
                             
                         </tree>
@@ -67,9 +72,10 @@
         <field name="name">estate_property.view.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="state == 'o_r'" decoration-bf="state=='o_ac'" decoration-muted="state=='s'">
                 <field name="name"/>
                 <field name="description" />
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"></field>
                 <field name="expected_price" />
                 <field name="date_availability"/>
                 <field name="selling_price"/>
@@ -81,6 +87,7 @@
                 <field name="garden_area"/>
                 <field name="garden_orientation"/>
                 <field name="property_type_id" widget="many2one_tags"/>
+                <field name="state"></field>
             </tree>
         </field>
     </record>
@@ -94,6 +101,7 @@
                 <field name="garage"></field>
                 <filter name="garage_filter" string="Have Garage" domain="[('garage', '=', 'True')]"/>
                 <filter name="bedrooms" string="Gedrooms Groups" domain="[('bedrooms', '>', '1')]" context="{'group_by': 'bedrooms'}" />
+                <filter name="Available"  string="Available"  domain="[('state','=','new')]"/>
             </search>
         </field>
     </record>
@@ -118,6 +126,41 @@
             </form>
         </field>
     </record>
+
+    <!--<record id="type_view_form" model="ir.ui.view">
+        <field name="name">Type form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form >
+                <header>
+                    <button name="%(estate.property.type_offer_action)d" icon="" type="action" string="Offers"/>
+                </header>
+            <sheet>
+            <notebook>
+                <page name="types" string="Types">
+                    <field name="name"/>
+                    <field name="property_ids"/>    
+                </page>
+            </notebook>
+            
+            
+        </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="type_view_tree" model="ir.ui.view">
+        <field name="name">Type tree</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree>                
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+                <field name="property_ids"/>
+                <field name="offer_count"/>                
+            </tree>
+        </field>
+    </record> -->
     
 
     <record id="real_estate_action" model="ir.actions.act_window">
@@ -130,6 +173,12 @@
         <field name="res_model">estate.property.type</field>
         <field name="view_mode">tree,form,search</field>
     </record>
+    <!--<record id="type_offer_action" model="ir.actions.act_window">
+        <field name="name"> Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('property_type_id','=',active_id)]</field>
+    </record>-->
     <record id="tags_property_action" model="ir.actions.act_window">
         <field name="name">Property Tags</field>
         <field name="res_model">estate.property.tag</field>

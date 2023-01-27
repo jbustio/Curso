@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "estate",
+    'name': "estate_account",
 
-    'summary': "Estate Property",
+    'summary': """
+        Short (1 phrase/line) summary of the module's purpose, used as
+        subtitle on modules listing or apps.openerp.com""",
 
-    'description': "Estate Property",
+    'description': """
+        Long description of module's purpose
+    """,
 
     'author': "Richar",
     'website': "http://www.yourcompany.com",
@@ -16,17 +20,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','estate','account'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
-        'security/estate_property_security.xml',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/real_estate_view.xml',
-        'reports/estate_property_reports.xml',
-        'reports/estate_property_template.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
