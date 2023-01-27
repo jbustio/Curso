@@ -140,3 +140,11 @@ class estate_property(models.Model):
             if (record.selling_price < record.expected_price * 0.9) and not(float_is_zero(record.selling_price,10)):
                 raise ValidationError("The selling price cannot be lower than 90% of the expected price.")
 
+
+class res_user_extended(models.Model):
+    _inherit = 'res.users'
+    
+    estate_property_ids = fields.One2many(
+                            'estate_property.estate.property',
+                            'salesperson',
+                            string="Estate property ids")
