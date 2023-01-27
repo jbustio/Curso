@@ -34,12 +34,12 @@ class EstateProperty(models.Model):
                     #     "quantity": 1,
                     #     "price_unit": record.selling_price,
                     # }),
-                    Command.create({
+                    (0, 0,{
                         "name": "6% of sold price",
                         "quantity": 1,
                         "price_unit": record.selling_price / 100 * 6,
                     }),
-                    Command.create({
+                    (0, 0, {
                         "name": "Administrative fees",
                         "quantity": 1,
                         "price_unit": 100,
