@@ -14,12 +14,12 @@ class EstateProperty(models.Model):
             'partner_id': self.buyer.id,
             'move_type': 'out_invoice',
             'invoice_line_ids':[
-                Command.create({
+                (0,0,{
                     "name":"6'%' selling price",
                     "quantity":1,
                     "price_unit":self.selling_price * 0.06,
                 }),
-                Command.create({
+                (0,0,{
                     "name":"100 from administrative fees",
                     "quantity":1,
                     "price_unit": 100,
