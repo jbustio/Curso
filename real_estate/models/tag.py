@@ -7,5 +7,5 @@ class Tag(models.Model):
 
 
     name = fields.Char(required=True)
-    estate_id = fields.Many2many('real_estate.real_estate',string="Houses")
+    estate_id = fields.Many2many('estate.property',string="Houses")
     color = fields.Integer()

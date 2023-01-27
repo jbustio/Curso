@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_real_estate_user,RealEstateUser,model_real_estate_real_estate,real_estate_group_user,1,1,1,0
-access_real_estate_manager,RealEstateManager,model_real_estate_real_estate,real_estate_group_manager,1,1,1,1
+access_estate_property_user,RealEstateUser,model_estate_property,estate_property_group_user,1,1,1,0
+access_estate_property_manager,RealEstateManager,model_estate_property,estate_property_group_manager,1,1,1,1
 
 access_estate_type_user,TypeUser,model_estate_type,estate_type_group_user,1,1,1,0
 access_estate_type_manager,TypeManager,model_estate_type,estate_type_group_manager,1,1,1,1

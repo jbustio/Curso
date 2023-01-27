@@ -2,6 +2,8 @@
 from odoo import models, fields, api
 from datetime import timedelta
 from odoo.exceptions import UserError
+
+
 class Offer(models.Model):
     _name="estate.offer"
     _description="Ofertas hechas"
@@ -18,8 +20,14 @@ class Offer(models.Model):
     validity = fields.Integer(default=7,string="Validity(days)")
     date_deadline = fields.Date(readonly=True,compute="_compute_date_deadline",inverse="_inverse_date_deadline")
     partner_id = fields.Many2one('res.partner',string="Partner",required=True)
-    property_id = fields.Many2one('real_estate.real_estate',string="Property")
+    property_id = fields.Many2one('estate.property',string="Property",)
     property_type_id = fields.Many2one(related='property_id.property_type_id',string="Property Type")
+
+
+    # def create(self):
+    #     for record in self:
+    #         record.property_id.state = "Offer Received"
+
 
     def accept(self):
         """This method is for create a button in the form view

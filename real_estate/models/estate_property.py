@@ -4,8 +4,8 @@ from odoo.exceptions import ValidationError
 from datetime import timedelta
 from odoo.tools.float_utils import * 
 
-class real_estate(models.Model):
-    _name = 'real_estate.real_estate'
+class estateProperty(models.Model):
+    _name = 'estate.property'
     _description = 'Modelo principal en la app real estate para el manejo de los bienes raices'
     _order = "id desc"
 
