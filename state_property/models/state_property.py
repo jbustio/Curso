@@ -44,6 +44,7 @@ class StateProperty(models.Model):
     state_property_offer_id = fields.One2many("state.property.offer", "property_id", string="State property offer")
     buyer = fields.Many2one('res.partner', string='Buyer')
     salesperson = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
+    user_id = fields.Many2one("state.property.user", string="User")
 
     # Method _computed
     @api.depends('living_area', 'garden_area')
