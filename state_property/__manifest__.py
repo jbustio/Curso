@@ -30,6 +30,8 @@
         'views/menu_views.xml',
         'views/state_property.xml',
         'views/state_property_offer.xml',
+        'views/state_property_user.xml',
+        'report/state_property_offer_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
