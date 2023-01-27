@@ -97,10 +97,15 @@ class PropertyType(models.Model):
 
     name = fields.Char(required=True)
     property_ids = fields.One2many("estate.property", 'type_id')
+    offer_ids = fields.One2many("property.offer", 'property_type_id')
+    offer_count = fields.Integer(compute="_count_offers", readonly=True)
     sequence = fields.Integer()
 
     _sql_constraints = [('check_name', 'UNIQUE(name)',f'Name already exists.')]
 
+    @api.depends('offer_ids')
+    def _count_offers(self):
+        self.offer_count = len(self.offer_ids)
 
 class PropertyTag(models.Model):
     _name="property.tag"
@@ -122,6 +127,7 @@ class PropertyOffer(models.Model):
     partner_id=fields.Many2one('res.partner',required=True)
     property_id = fields.Many2one('estate.property',required=True)
     validity = fields.Integer(default=7)
+    property_type_id = fields.Many2one(related='property_id.type_id', store=True)
     date_deadline= fields.Date(compute="_get_deadline", inverse="_get_validity")
 
     _sql_constraints = [('check_price', 'CHECK(price>0)','Price must be positive.')]
