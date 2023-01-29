@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- To be used in JS for snippet options -->
+    <template id="assets_frontend_snippets" inherit_id="website.snippet_options" name="Usar el js">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/registro_candidatos/static/src/js/list_snipper.js"/>
+        </xpath>
+    </template>
+
+    <template id="list_can_tech" inherit_id="website.snippets" name="Lista de los candidatos por tecnologías">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <!-- Add your fields here -->
+            <t t-snippet="registro_candidatos.snippet" t-thumbnail="/registro_candidatos/static/src/img/checklist_icon.png"/>
+        </xpath>
+    </template>
+
+    <template id="snippet" name="Snippet">
+        <section class="index_snippet">
+            <div class="snippet">
+                <h1>Attractive page leo</h1>
+
+                <!--<ol>-->
+                    <!--<li>Coffee</li>-->
+                    <!--<li>Tea</li>-->
+                    <!--<li>Milk</li>-->
+                <!--</ol>-->
+
+                <!--<dl>-->
+                    <!--<dt>Coffee</dt>-->
+                    <!--<dd>* black hot drink</dd>-->
+                    <!--<dt>Milk</dt>-->
+                    <!--<dd>* white cold drink</dd>-->
+                <!--</dl>-->
+
+                <div class="row justify-content-center" id="list-row"/>
+
+            </div>
+        </section>
+    </template>
+
+</odoo>
