@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_applicants_applicants,applicants.applicants,model_applicants_applicants,base.group_user,1,1,1,1
+access_applicants_technology_and_experience,applicants.technology_and_experience,model_applicants_technology_and_experience,base.group_user,1,1,1,1
