@@ -1,30 +1,100 @@
 <odoo>
     <data>
-<!--
-          <record id="object0" model="custom_recruitment.custom_recruitment">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
-          </record>
 
-          <record id="object1" model="custom_recruitment.custom_recruitment">
-            <field name="name">Object 1</field>
-            <field name="value">10</field>
-          </record>
+        <record id="hr_skill_type_dev" model="hr.skill.type">
+            <field name="name">Dev Technologies</field>
+        </record>
 
-          <record id="object2" model="custom_recruitment.custom_recruitment">
-            <field name="name">Object 2</field>
-            <field name="value">20</field>
-          </record>
+        <record id="hr_skill_level_beginner" model="hr.skill.level">
+            <field name="name">1 year exp</field>
+            <field name="level_progress">15</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_elementary" model="hr.skill.level">
+            <field name="name">3 years exp</field>
+            <field name="level_progress">25</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_intermediate" model="hr.skill.level">
+            <field name="name">5 years exp</field>
+            <field name="level_progress">50</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_advanced" model="hr.skill.level">
+            <field name="name">10 years exp</field>
+            <field name="level_progress">80</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_expert" model="hr.skill.level">
+            <field name="name">10+ years exp</field>
+            <field name="level_progress">100</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
 
-          <record id="object3" model="custom_recruitment.custom_recruitment">
-            <field name="name">Object 3</field>
-            <field name="value">30</field>
-          </record>
+        <!-- Dev -->
+        <record id="hr_skill_js" model="hr.skill">
+            <field name="name">Angular</field>
+            <field name="sequence">1</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_vue" model="hr.skill">
+            <field name="name">Vue</field>
+            <field name="sequence">2</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_react_native" model="hr.skill">
+            <field name="name">React Native</field>
+            <field name="sequence">3</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_css" model="hr.skill">
+            <field name="name">CSS</field>
+            <field name="sequence">4</field>
 
-          <record id="object4" model="custom_recruitment.custom_recruitment">
-            <field name="name">Object 4</field>
-            <field name="value">40</field>
-          </record>
--->
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_sprintboot" model="hr.skill">
+            <field name="name">Sprintboot</field>
+            <field name="sequence">5</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_odoo" model="hr.skill">
+            <field name="name">Odoo</field>
+            <field name="sequence">6</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_react" model="hr.skill">
+            <field name="name">React</field>
+            <field name="sequence">7</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_flutter" model="hr.skill">
+            <field name="name">Flutter</field>
+            <field name="sequence">8</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_python" model="hr.skill">
+            <field name="name">Python</field>
+            <field name="sequence">9</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_html" model="hr.skill">
+            <field name="name">HTML</field>
+            <field name="sequence">10</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_aws" model="hr.skill">
+            <field name="name">AWS</field>
+            <field name="sequence">11</field>
+
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+
     </data>
 </odoo>

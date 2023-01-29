@@ -32,6 +32,9 @@
         'views/views.xml'
 
     ],
+    'demo': [
+        'demo/demo.xml'
+    ],
     'assets': {
         'web.assets_frontend': [
             '/ch_recruitment/static/src/js/snippets.js'
