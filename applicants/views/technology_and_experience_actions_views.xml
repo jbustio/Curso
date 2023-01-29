@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record 
+        id="technology_and_experience_action" 
+        model="ir.actions.act_window"
+    >
+        <field name="name">Tech and experience</field>
+        <field name="res_model">applicants.technology_and_experience</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
