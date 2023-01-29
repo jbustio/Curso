@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_technology" model="ir.actions.report">
+        <field name="name">Candidatos de la tecnología</field>
+        <field name="model">tech.technology</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">registro_candidatos.report_technology</field>
+        <field name="report_file">registro_candidatos.report_technology</field>
+        <field name="print_report_name">'Candidatos de la tecnología'</field>
+        <field name="binding_model_id" ref="model_tech_technology"/>
+    </record>
+
+    <!-- Main report templates -->
+    <template id="report_technology">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>
+                            <span t-field="o.name"/>
+                        </h2>
+                        <hr/>
+                        <div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th><strong>Nombre(s)</strong></th>
+                                    <th><strong>Experiencia(Años)</strong></th>
+                                </tr>
+                                <t t-foreach="o.registro_id.sorted(key=lambda r: r.experience, reverse=True)" t-as="registro">
+                                    <tr>
+                                        <td class="col-xs-4">
+                                            <span t-field="registro.candidate_id"/>
+                                        </td>
+                                        <td class="col-xs-4">
+                                            <span t-field="registro.experience"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
