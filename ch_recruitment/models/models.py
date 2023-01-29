@@ -60,8 +60,7 @@ class CHApplicant(models.Model):
     @api.depends('skill_ids')
     def _get_full_skills_levels(self):
         for record in self:
-            skills = self.env['hr.skill'].browse(record.skill_ids.ids)
-            record.full_skills_levels = ','.join([sk.name for sk in skills])
+            record.full_skills_levels = ','.join([f'{sk.name_get()[0][1]}' for sk in record.applicant_skill_ids])
 
     @api.depends('applicant_skill_ids.skill_level_id')
     def _compute_skill_level_ids(self):
