@@ -32,7 +32,7 @@
                         <div class="container">
                             <div class="row" style="background-color:#7d61cc">
                                 <div class="col-2">Price</div>
-                                <div class="col-2">Partner</div>
+                                <div class="col-3">Partner</div>
                                 <div class="col-2">Validity (days)</div>
                                 <div class="col-2">Deadline</div>
                                 <div class="col-2">Status</div>
@@ -46,7 +46,7 @@
                                     <div class="col-2">
                                         <span t-field="offer.price" />
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <span t-field="offer.partner_id" />
                                     </div>
                                     <div class="col-2">
