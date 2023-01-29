@@ -1,6 +1,8 @@
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
+from psycopg2 import IntegrityError
 from odoo.tests import tagged
+import openerp.tools
 
 # The CI will run these tests after all the modules are installed,
 # not right after installing the one defining it.
@@ -53,23 +55,13 @@ class EstateTestCase(TransactionCase):
         }])
 
 
+    @openerp.tools.mute_logger('openerp.sql_db')
+    def test_repeated_tech_by_applicant(self):
+        """Test that the tech cannot be re-entered by an applicant."""
+        with self.assertRaises(IntegrityError):
+            self.env['applicants.technology_and_exp'].create([{
+                'name': 'VueJs',
+                'applicant_id': self.__class__.applicants[0].id,
+                'experience_years': 3
+            }])
 
-    def test_creation_area(self):
-        """Test that the total_area is computed like it should."""
-        self.properties.living_area = 20
-        self.assertRecordValues(self.properties, [
-           {'name': ..., 'total_area': ...},
-           {'name': ..., 'total_area': ...},
-        ])
-
-
-    def test_action_sell(self):
-        """Test that everything behaves like it should when selling a property."""
-        self.properties.action_sold()
-        self.assertRecordValues(self.properties, [
-           {'name': ..., 'state': ...},
-           {'name': ..., 'state': ...},
-        ])
-
-        with self.assertRaises(UserError):
-            self.properties.forbidden_action_on_sold_property()
