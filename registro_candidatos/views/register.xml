@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- tree view -->
+    <record id="register_view_tree" model="ir.ui.view">
+        <field name="name">Registro de candidatos</field>
+        <field name="model">register.candidate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="candidate_id"/>
+                <field name="tech_id"/>
+                <field name="experience"/>
+            </tree>
+        </field>
+    </record>
+    <!-- form view -->
+    <record id="register_form" model="ir.ui.view">
+        <field name="name">Registro de candidatos form</field>
+        <field name="model">register.candidate</field>
+        <field name="arch" type="xml">
+            <form string="Registro de candidatos">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="candidate_id"/>
+                            <field name="tech_id"/>
+                            <field name="experience"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

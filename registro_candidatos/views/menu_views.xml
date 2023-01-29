@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- Tecnologia action window -->
+    <record id="technology_action" model="ir.actions.act_window">
+        <field name="name">Tecnología</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tech.technology</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Tecnología
+            </p>
+            <p>
+                Lista de tecnologías más utilizadas en la empresa
+            </p>
+        </field>
+    </record>
+
+    <!-- Registrar candidato action -->
+    <record id="register_candidate_action" model="ir.actions.act_window">
+        <field name="name">Registrar candidato</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">register.candidate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Registrar candidato
+            </p>
+            <p>
+                Convocatoria para registrar candidatos
+            </p>
+        </field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="Registrar candidatos" id="registro_candidato_menu" groups="base.group_user" />
+
+    <!-- This Menu Item must have a parent and an action -->
+    <!-- Menu Registrar candidato -->
+    <menuitem id="register_candidate_menu" name="Registrar candidato" parent="registro_candidato_menu" action="register_candidate_action"/>
+    <!-- Menu Tecnologia -->
+    <menuitem id="technology_menu" name="Tecnología" parent="registro_candidato_menu" action="technology_action"/>
+
+</odoo>

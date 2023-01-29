@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- candidate res.partner inherit form view -->
+    <record id="candidate_res_partner_view_form" model="ir.ui.view">
+        <field name="name">candidate.res.partner.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//field[@name='vat']" position="before">
+                <!-- Add your fields here -->
+                <field name="address" string="Address"/>
+                <!--register_id-->
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <!-- Add your fields here -->
+                <field name="dni" string="DNI"/>
+                <field name="age" string="Age"/>
+                <field name="gender" string="Gender"/>
+                <!--register_id-->
+            </xpath>
+        </field>
+    </record>
+</odoo>
