@@ -3,7 +3,7 @@ odoo.define('applicant.dynamic.snippet', function (require) {
     var publicWidget = require('web.public.widget');
 
     publicWidget.registry.books = publicWidget.Widget.extend({
-        selector: '.book_snippet',
+        selector: '.applicant_snippet',
         disabledInEditableMode: false,
         start: function () {
             var self = this;

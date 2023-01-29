@@ -1,11 +1,11 @@
 <odoo>
     <data>
-        <template id="snippet_applicant_dynamic" name="Latest Books">
-            <section class="book_list">
+        <template id="snippet_applicant_dynamic" name="Latest Applicants">
+            <section class="applicant_list">
                 <div class="container">
                     <h2>Latest Applicants</h2>
                     <table class="table applicant_snippet table-striped"
-                           data-number-of-books="5">
+                           data-number-of-applicants="5">
                         <tr>
                             <th>Name</th>
                             <th>Skills</th>
@@ -33,6 +33,15 @@
                         <we-button data-select-class="table-bordered">
                             Bordered
                         </we-button>
+                    </we-select>
+                    <we-select string="Table Row">
+                        <we-button data-select-class="table-hover">
+                            Hovered
+                        </we-button>
+                        <we-button data-select-class="">
+                            Normal
+                        </we-button>
+
                     </we-select>
                     <we-button-group string="No of Applicants"
                                      data-attribute-name="numberOfApplicants">
