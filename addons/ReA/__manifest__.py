@@ -18,6 +18,8 @@ Promote your house sale proposition to the world in order to build a brand, attr
     'views/property_type_views.xml', # We use as base menu item created in estate_property_view
     'views/property_tag_views.xml',
     'views/property_offer_views.xml',
+    'report/estate_property_templates.xml',
+    'report/estate_property_reports.xml',
 ],
 "license": "AGPL-3",
 "application": True,
