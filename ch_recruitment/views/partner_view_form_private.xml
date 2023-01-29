@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="ch_recruitment_inherited_res_partner_view_form_private" model="ir.ui.view">
+            <field name="name">inherited.res.partner.view.form.private</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_view_form_private"/>
+            <field name="arch" type="xml">
+                <!-- find field description and add the field
+                     new_field after it -->
+                <xpath expr="//group//group//label" position="before">
+                    <field name="ci"/>
+                    <field name="age"/>
+                    <field name="sex"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

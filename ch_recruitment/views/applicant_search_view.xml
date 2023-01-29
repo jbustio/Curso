@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <record id="ch_recruitment.applicant_view_search" model="ir.ui.view">
+            <field name="name">Applicants</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment_skills.hr_applicant_view_search_bis"/>
+            <field name="arch" type="xml">
+
+                <filter name="groupby_skills" position="after">
+                    <filter string="Skill Levels" name="groupby_skill_level_ids"
+                            context="{'group_by': 'skill_level_ids'}"/>
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</odoo>

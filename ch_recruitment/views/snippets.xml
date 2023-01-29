@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <template id="snippet_applicant_dynamic" name="Latest Books">
+            <section class="book_list">
+                <div class="container">
+                    <h2>Latest Applicants</h2>
+                    <table class="table applicant_snippet table-striped"
+                           data-number-of-books="5">
+                        <tr>
+                            <th>Name</th>
+                            <th>Skills</th>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </template>
+
+        <template id="applicant_snippets_options" inherit_id="website.snippets">
+            <!-- register snippet -->
+            <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+                <t t-snippet="ch_recruitment.snippet_applicant_dynamic"
+                   t-thumbnail="/ch_recruitment/static/src/img/s_list.png"/>
+            </xpath>
+            <xpath expr="//div[@id='snippet_options']" position="inside">
+                <div data-selector=".applicant_snippet">
+                    <we-select string="Table Style">
+                        <we-button data-select-class="table-striped">
+                            Striped
+                        </we-button>
+                        <we-button data-select-class="table-dark">
+                            Dark
+                        </we-button>
+                        <we-button data-select-class="table-bordered">
+                            Bordered
+                        </we-button>
+                    </we-select>
+                    <we-button-group string="No of Applicants"
+                                     data-attribute-name="numberOfApplicants">
+                        <we-button data-select-data-attribute="5">
+                            5
+                        </we-button>
+                        <we-button data-select-data-attribute="10">
+                            10
+                        </we-button>
+                        <we-button data-select-data-attribute="15">
+                            15
+                        </we-button>
+                    </we-button-group>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

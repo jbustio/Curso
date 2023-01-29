@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="inherited_applicant_model_view_form" model="ir.ui.view">
+            <field name="name">inherited.applicant.model.form.inherit.test</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+                <!-- find field description and add the field
+                     new_field after it -->
+                <xpath expr="//field[@name='email_from']" position="before">
+                    <field name="partner_ci"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_mobile']" position="after">
+                    <field name="partner_age"/>
+                    <field name="partner_sex"/>
+                </xpath>
+
+                <xpath expr="//field[@name='linkedin_profile']" position="after">
+                    <label for="partner_street" string="Address"/>
+                    <div>
+                        <div class="o_address_format" name="div_address">
+                            <field name="partner_street" placeholder="Street..." class="o_address_street"/>
+                            <field name="partner_street2" placeholder="Street 2..." class="o_address_street"/>
+                            <field name="partner_city" placeholder="City" class="o_address_city"/>
+                            <field name="partner_state_id" class="o_address_state" placeholder="State"
+                                   context="{'country_id': partner_country_id, 'default_country_id': partner_country_id, 'zip': partner_zip}"/>
+                            <field name="partner_zip" placeholder="ZIP" class="o_address_zip"/>
+                            <field name="partner_country_id" placeholder="Country" class="o_address_country"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

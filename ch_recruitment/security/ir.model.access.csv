@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ch_recruitment_ch_recruitment,ch_recruitment.ch_recruitment,model_ch_recruitment_ch_recruitment,base.group_user,1,1,1,1

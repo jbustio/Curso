@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="ch_recruitment.crm_case_tree_view_job" model="ir.ui.view">
+            <field name="name">Applicants</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='availability']" position="after">
+                    <field name="applicant_skill_ids" widget="many2many_tags" optional="hide"/>
+<!--                    <field name="full_skills_levels" optional="hide"/>-->
+                </xpath>
+            </field>
+        </record>
+<!--
+        <record id="ch_recruitment.crm_case_tree_view_job_report" model="ir.actions.report">
+            <field name="name">Applicants Report</field>
+            <field name="model">hr.applicant</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">Recruitment Applicants Report</field>
+            <field name="report_file">ch_recruitment.report_applicants</field>
+            <field name="print_report_name">Recruitment Applicants Report</field>
+    &lt;!&ndash;        <field name="paperformat_id" ref="event.paperformat_euro_lowmargin"/>&ndash;&gt;
+            <field name="binding_model_id" ref="model_hr_applicant"/>
+        </record>-->
+    </data>
+</odoo>
