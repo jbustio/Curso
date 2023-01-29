@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <!-- explicit list view definition -->
+  <record model="ir.ui.view" id="oc_candidate_technology_list">
+    <field name="name">Candidate Technologies</field>
+    <field name="model">oc.recruiting.candidate.technology</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="technology_id"/>
+        <field name="years" widget="Integer"/>
+      </tree>
+    </field>
+  </record>
+  <!-- actions opening views on models -->
+  <record id="oc_candidate_technology_action" model="ir.actions.act_window">
+    <field name="name">Candidate Technologies</field>
+    <field name="res_model">oc.recruiting.candidate.technology</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('candidate_id', '=', active_id)]</field>
+    <field name="help" type="html">
+        <p>
+        Defining Candidates
+        </p>
+    </field>
+</record>
+
+  <!-- Top menu item -->
+ 
+
+</odoo>

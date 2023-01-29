@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+    <record id="object0" model="oc.recruiting.technology">
+      <field name="name">Angular</field>
+    </record>
+    <record id="object1" model="oc.recruiting.technology">
+      <field name="name">Vue</field>
+    </record>
+    <record id="object2" model="oc.recruiting.technology">
+      <field name="name">React native</field>
+    </record>
+    <record id="object3" model="oc.recruiting.technology">
+      <field name="name">Css</field>
+    </record>
+    <record id="object4" model="oc.recruiting.technology">
+      <field name="name">Odoo</field>
+    </record>
+    <record id="object5" model="oc.recruiting.technology">
+      <field name="name">React</field>
+    </record>
+    <record id="object6" model="oc.recruiting.technology">
+      <field name="name">Flutter</field>
+    </record>
+    <record id="object7" model="oc.recruiting.technology">
+      <field name="name">Python</field>
+    </record>
+    <record id="object8" model="oc.recruiting.technology">
+      <field name="name">Html</field>
+    </record>
+    <record id="object9" model="oc.recruiting.technology">
+      <field name="name">Aws</field>
+    </record>
+  </data>
+</odoo>

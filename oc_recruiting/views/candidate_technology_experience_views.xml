@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <record model="ir.ui.view" id="oc_candidate_technology_experience_list">
+    <field name="name">Candidates Technolgoy Experience</field>
+    <field name="model">oc.recruiting.candidate.technology</field>
+    <field name="arch" type="xml">
+      <tree >
+        <field name="candidate_id" />
+        <field name="technology_id" />
+        <field name="years" />
+      </tree>
+    </field>
+  </record>
+  <record id="oc_recruiting_candidate_technology_form" model="ir.ui.view">
+    <field name="name">oc_recruiting_candidate.technology.form</field>
+    <field name="model">oc.recruiting.candidate.technology</field>
+    <field name="arch" type="xml">
+      <form string="">
+        <header>
+        </header>
+        <sheet>
+          <field name="candidate_id" />
+          <field name="technology_id" />
+          <field name="years" widget="integer" />
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="oc_recruiting_candidate_technology_search" model="ir.ui.view">
+    <field name="name">oc_recruiting_candidate.search</field>
+    <field name="model">oc.recruiting.candidate.technology</field>
+    <field name="arch" type="xml">
+      <search>
+        <field string="Technology" name="technology_id"
+          filter_domain="[('technology_id.name','ilike',self),]" />
+        <field string="Candidate" name="candidate_id"
+          filter_domain="[('candidate_id.partner_id.name','ilike',self),]" />
+        <group expand="1" string="Group By">
+          <filter string="Candidate" name="candidate_id"
+            context="{'group_by':'candidate_id', 'residual_visible':True}" />
+          <filter string="Technology" name="technology_id"
+            context="{'group_by':'technology_id', 'residual_visible':True}" />
+        </group>
+      </search>
+    </field>
+  </record>
+  <!-- actions opening views on models -->
+  <record id="oc_recruiting_candidate_technology_action" model="ir.actions.act_window">
+    <field name="name">Candidates</field>
+    <field name="res_model">oc.recruiting.candidate.technology</field>
+    <field name="view_mode">tree,form</field>
+    
+    <field name="context">{'search_default_available': True, }</field>
+  </record>
+
+  <!-- Top menu item -->
+
+
+</odoo>

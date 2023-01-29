@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem
+        id="menu_oc_recruiting"
+        name="OC recruiting"
+    />
+
+    <menuitem
+        id="oc_recruiting_candidates"
+        name="Candidates"
+        parent="menu_oc_recruiting"
+        action="oc_recruiting_candidate_action"
+        sequence="1"
+    />
+    <menuitem
+        id="oc_recruiting_candidate_technology_menu"
+        name="Candidate Technology Experience"
+        action="oc_recruiting_candidate_technology_action"
+        parent="menu_oc_recruiting"
+        sequence="2"/>
+    <menuitem
+        id="menu_oc_recruiting_settings"
+        name="Settings"
+        parent="menu_oc_recruiting"
+    />
+    <!-- <menuitem
+        id="menu_oc_recruiting_skill_years"
+        name="Years of Experience"
+        parent="menu_oc_recruiting"
+        action="oc_recruiting_skill_years"
+        sequence="2"
+    /> -->
+    <menuitem
+        id="menu_oc_recruiting_technology"
+        name="Technologies"
+        parent="menu_oc_recruiting_settings"
+        action="oc_recruiting_technology_action"
+    />
+
+
+    <!-- <menuitem
+        id="menu_oc_recruiting_candidate"
+        name="OC Candidates"
+    parent="menu_oc_recruiting"
+        action="oc_recruiting_candidate_action"
+    /> -->
+</odoo>

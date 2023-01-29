@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+oc_recruiting.access_oc_recruiting_candidate,access_oc_recruiting_candidate,oc_recruiting.model_oc_recruiting_candidate,base.group_user,1,1,1,1
+oc_recruiting.access_oc_recruiting_technology,access_oc_recruiting_technology,oc_recruiting.model_oc_recruiting_technology,base.group_user,1,1,1,1
+oc_recruiting.access_oc_recruiting_candidate_technology,access_oc_recruiting_candidate_technology,oc_recruiting.model_oc_recruiting_candidate_technology,base.group_user,1,1,1,1

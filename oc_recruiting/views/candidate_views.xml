@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="oc_candidate_list">
+        <field name="name">Candidate</field>
+        <field name="model">oc.recruiting.candidate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <!-- <field name="tech_ids" widget="many2many_tags" /> -->
+                <!-- <field name="partner_ids"  widget="many2many_tags_avatar" placeholder="Select attendees..." context="{'force_email':True}" class="oe_inline"/> -->
+                <field name="tech_ids"  widget="many2many_tags_avatar" placeholder="Select technologies..." class="oe_inline"/>
+                <field name="most_experience_technology" widget="stat_info" />
+            </tree>
+        </field>
+    </record>
+    <record id="oc_recruiting_candidate_form" model="ir.ui.view">
+        <field name="name">oc_recruiting_candidate.form</field>
+        <field name="model">oc.recruiting.candidate</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                        </group>
+                        <group>
+                            <field name="most_experience_technology" />
+                        </group>
+                    </group>
+                    <field name="technology_ids" string="Technology Experience" />
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="oc_recruiting_candidate_search" model="ir.ui.view">
+        <field name="name">oc_recruiting_candidate.search</field>
+        <field name="model">oc.recruiting.candidate</field>
+        <field name="arch" type="xml">
+            <search>
+                <field string="Technology" name="technology_ids"
+                    filter_domain="[('technology_ids.technology_id.name','ilike',self),]" />
+                <field string="Candidate" name="partner_id"
+                    filter_domain="[('partner_id.name','ilike',self),]" />
+                <field string="Candidate" name="partner_id"
+                    filter_domain="[('partner_id.name','ilike',self),]" />
+                <group expand="1" string="Group By">
+                    <filter string="Candidate" name="partner_id"
+                        context="{'group_by':'partner_id', 'residual_visible':True}" />
+
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record id="oc_recruiting_candidate_action" model="ir.actions.act_window">
+        <field name="name">Candidates</field>
+        <field name="res_model">oc.recruiting.candidate</field>
+        <field name="view_mode">tree,form</field>
+        
+        <field name="context">{'search_default_available': True,}</field>
+    </record>
+
+    <!-- Top menu item -->
+
+
+</odoo>
