@@ -6,10 +6,30 @@
             <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
             <field name="arch" type="xml">
 
-                <xpath expr="//field[@name='availability']" position="after">
-                    <field name="applicant_skill_ids" widget="many2many_tags" optional="hide"/>
-<!--                    <field name="full_skills_levels" optional="hide"/>-->
+                <xpath expr="//field[@name='partner_name']" position="after">
+                    <field name="partner_ci"/>
+                    <field name="partner_age" widget="char"/>
+                    <field name="partner_sex"/>
                 </xpath>
+                <xpath expr="//field[@name='availability']" position="after">
+                    <field name="applicant_skill_ids" widget="many2many_tags" optional="show"/>
+                </xpath>
+                <xpath expr="//field[@name='categ_ids']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='priority']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='application_status']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='create_date']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+
             </field>
         </record>
 <!--
