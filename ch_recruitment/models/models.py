@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, models, fields, _
-
-
-# class Technology(models.Model):
-#     _name = 'ch_recruitment.technology'
-#     _description = 'Technologies available for recruitment'
-#
-#     _sql_constraints = [
-#         ('name_uniq', 'UNIQUE (name)', 'You can\'t have two technologies with the same name!')
-#     ]
-#     _rec_name = 'name'
-#     _order = 'name'
-#
-#     name = fields.Char()
-#     description = fields.Text()
-#     color = fields.Integer(default=1)
-
-#
 from odoo.exceptions import UserError
 
 
@@ -27,6 +10,17 @@ class CHPartner(models.Model):
     ci = fields.Char("CI", size=11)
     age = fields.Integer("Age")
     sex = fields.Selection(string="Sex", selection=[('m', "Male"), ('f', "Female")])
+
+
+class CHApplicantSkill(models.Model):
+
+    _inherit = 'hr.applicant.skill'
+
+    def name_get(self):
+        l = []
+        for record in self:
+            l.append((record.id, f'{record.skill_id.name}/{record.skill_level_id.name}'))
+        return l
 
 
 class CHApplicant(models.Model):
@@ -60,6 +54,7 @@ class CHApplicant(models.Model):
     partner_country_code = fields.Char(related='partner_country_id.code', string="Country Code", compute="_compute_partner_address",
                                        inverse='_inverse_partner_country_code', store=True)
 
+    # comma separated skills to style in js snippet
     full_skills_levels = fields.Text(compute="_get_full_skills_levels")
 
     @api.depends('skill_ids')
@@ -144,8 +139,6 @@ class CHApplicant(models.Model):
     def create_employee_from_applicant(self):
         """ Create an employee from applicant """
         self.ensure_one()
-
-        # raise UserError(_('AKI!!!'))
         self._check_interviewer_access()
 
         contact_name = False
