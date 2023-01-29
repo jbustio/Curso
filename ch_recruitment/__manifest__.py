@@ -26,6 +26,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/snippets.xml',
+        'views/employee_form_view.xml',
         'views/applicant_search_view.xml',
         'views/applicant_tree_view_job.xml',
         'views/partner_view_form_private.xml',

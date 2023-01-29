@@ -4,6 +4,14 @@ from odoo import api, models, fields, _
 from odoo.exceptions import UserError
 
 
+class CHEmployee(models.Model):
+    _inherit = 'hr.employee'
+
+    ci = fields.Char(size=11, related='address_home_id.ci', string="CI", groups="hr.group_hr_user", readonly=True)
+    age = fields.Integer(related='address_home_id.age', string="Age", groups="hr.group_hr_user", readonly=True)
+    sex = fields.Selection(string="Sex", selection=[('m', "Male"), ('f', "Female")], related='address_home_id.sex', readonly=True)
+
+
 class CHPartner(models.Model):
     _inherit = 'res.partner'
 
