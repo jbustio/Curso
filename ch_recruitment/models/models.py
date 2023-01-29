@@ -9,7 +9,7 @@ class CHEmployee(models.Model):
 
     ci = fields.Char(size=11, related='address_home_id.ci', string="CI", groups="hr.group_hr_user", readonly=True)
     age = fields.Integer(related='address_home_id.age', string="Age", groups="hr.group_hr_user", readonly=True)
-    sex = fields.Selection(string="Sex", selection=[('m', "Male"), ('f', "Female")], related='address_home_id.sex', readonly=True)
+    sex = fields.Selection(string="Sex", related='address_home_id.sex', readonly=True)
 
 
 class CHPartner(models.Model):
@@ -34,9 +34,11 @@ class CHApplicantSkill(models.Model):
 class CHApplicant(models.Model):
 
     _inherit = 'hr.applicant'
-    _order = "skill_level_ids desc"
+    _order = "level_progress desc"
 
     skill_level_ids = fields.Many2many('hr.skill.level', compute='_compute_skill_level_ids', store=True)
+    level_progress = fields.Integer(
+        related='applicant_skill_ids.skill_level_id.level_progress', store=True)
 
     partner_name = fields.Char("Applicant's Full Name", compute='_compute_partner_phone_email',
                                 inverse='_inverse_partner_name', store=True)
