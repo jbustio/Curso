@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="registro_candidatos.list">
+      <field name="name">registro_candidatos list</field>
+      <field name="model">registro_candidatos.registro_candidatos</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="registro_candidatos.action_window">
+      <field name="name">registro_candidatos window</field>
+      <field name="res_model">registro_candidatos.registro_candidatos</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="registro_candidatos.action_server">
+      <field name="name">registro_candidatos server</field>
+      <field name="model_id" ref="model_registro_candidatos_registro_candidatos"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="registro_candidatos" id="registro_candidatos.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="registro_candidatos.menu_1" parent="registro_candidatos.menu_root"/>
+    <menuitem name="Menu 2" id="registro_candidatos.menu_2" parent="registro_candidatos.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="registro_candidatos.menu_1_list" parent="registro_candidatos.menu_1"
+              action="registro_candidatos.action_window"/>
+    <menuitem name="Server to list" id="registro_candidatos" parent="registro_candidatos.menu_2"
+              action="registro_candidatos.action_server"/>
+-->
+  </data>
+</odoo>
