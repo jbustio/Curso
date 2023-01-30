@@ -25,6 +25,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'reports/applicant_report_template.xml',
         'views/snippets.xml',
         'views/employee_form_view.xml',
         'views/applicant_search_view.xml',

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="applicant_skill_table">
+
+        <table class="table" t-if="applicant.applicant_skill_ids">
+            <thead>
+                <tr>
+                    <th>Skill</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+<!--                <t t-set="invoice" t-value="property.invoice_id"/>-->
+                <t t-foreach="applicant.applicant_skill_ids" t-as="applicant_skill">
+                    <tr>
+                        <td>
+                            <span t-field="applicant_skill.skill_id.name"/>
+                        </td>
+                        <td>
+                            <span t-field="applicant_skill.skill_level_id.name"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+        <div t-else=""><h3>No skills created yet :(</h3></div>
+    </template>
+
+    <template id="report_applicants">
+        <t t-foreach="docs" t-as="applicant">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+
+                        <h1>
+                            <strong>Applicant:</strong>
+                            <t t-if="applicant.partner_name">
+                                <span t-field="applicant.partner_name"/>
+                            </t>
+                            <t t-else="">
+                                <span t-field="applicant.display_name"/>
+
+                            </t>
+                        </h1>
+
+                        <t t-call="ch_recruitment.applicant_skill_table"/>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

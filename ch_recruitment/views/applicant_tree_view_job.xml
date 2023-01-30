@@ -32,16 +32,14 @@
 
             </field>
         </record>
-<!--
         <record id="ch_recruitment.crm_case_tree_view_job_report" model="ir.actions.report">
             <field name="name">Applicants Report</field>
             <field name="model">hr.applicant</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">Recruitment Applicants Report</field>
+            <field name="report_name">ch_recruitment.report_applicants</field>
             <field name="report_file">ch_recruitment.report_applicants</field>
-            <field name="print_report_name">Recruitment Applicants Report</field>
-    &lt;!&ndash;        <field name="paperformat_id" ref="event.paperformat_euro_lowmargin"/>&ndash;&gt;
+            <field name="print_report_name">'Recruitment Applicants Report'</field>
             <field name="binding_model_id" ref="model_hr_applicant"/>
-        </record>-->
+        </record>
     </data>
 </odoo>
