@@ -41,9 +41,9 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="most_experience_btn"
+                        <button name="%(oc_recruiting_mx_tech_action)d"
                             class="oe_stat_button"
-                            icon="fa-star" title="Most experience technology" type="button"
+                            icon="fa-star" title="Most experience technology" type="action"
                             attrs="{'invisible': [('tech_count','==',0),]}">
                             <div class="o_stat_info">
                                 <span class="o_stat_value">
@@ -54,9 +54,9 @@
                                 </span>
                             </div>
                         </button>
-                        <button name="number_technologies_btn"
+                        <button name="%(oc_recruiting_mx_tech_action)d"
                             class="oe_stat_button"
-                            icon="fa-gears" title="Number of Technologies" type="button"
+                            icon="fa-gears" title="Number of Technologies" type="action"
                             attrs="{'invisible': [(0,'=',1),]}">
                             <div class="o_stat_info">
                                 <span class="o_stat_value">
@@ -124,6 +124,7 @@
     </record>
 
     <!-- Top menu item -->
+    
 
 
 </odoo>

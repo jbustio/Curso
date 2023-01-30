@@ -77,6 +77,8 @@ class OcCandicate(models.Model):
             })
             record.employee_id = employee
        
+    def most_experience_btn(self):
+        pass
 
     def action_refuse(self):
         for record in self:

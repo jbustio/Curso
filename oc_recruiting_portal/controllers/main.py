@@ -8,6 +8,6 @@ class Main(http.Controller):
         search = http.request.params.get("search", "")
         domain = []
         if search:
-            domain = [("partner_id.name","ilike", search )]
+            domain = ["|",("partner_id.name","ilike", search ),("technology_ids.technology_id.name","ilike", search )]
         candidates = Candidate.sudo().search(domain, order="most_experience_technology desc") 
         return http.request.render( "oc_recruiting_portal.candidates", {"candidates": candidates}, )
