@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, models, fields, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class CHEmployee(models.Model):
@@ -14,6 +14,10 @@ class CHEmployee(models.Model):
 
 class CHPartner(models.Model):
     _inherit = 'res.partner'
+    _sql_constraints = [
+        ('ci_uniq', 'UNIQUE (ci)', 'You can\'t have two employees with the same ci!'),
+        ('age', 'CHECK(age >= 18)', "The age must be a positive numeric value"),
+    ]
 
     ci = fields.Char("CI", size=11)
     age = fields.Integer("Age")
@@ -38,7 +42,7 @@ class CHApplicant(models.Model):
 
     skill_level_ids = fields.Many2many('hr.skill.level', compute='_compute_skill_level_ids', store=True)
     level_progress = fields.Integer(
-        related='applicant_skill_ids.skill_level_id.level_progress', store=True)
+        related='applicant_skill_ids.skill_level_id.level_progress')
 
     partner_name = fields.Char("Applicant's Full Name", compute='_compute_partner_phone_email',
                                 inverse='_inverse_partner_name', store=True)
@@ -66,6 +70,22 @@ class CHApplicant(models.Model):
 
     # comma separated skills to style in js snippet
     full_skills_levels = fields.Text(compute="_get_full_skills_levels")
+
+    @api.constrains('partner_age')
+    def _check_partner_age(self):
+        for record in self:
+            # check that age is valid
+            if record.partner_age and record.partner_age < 18:
+                raise ValidationError(_("The partner must be at least 18 years old."))
+
+    @api.constrains('partner_ci')
+    def _check_partner_ci(self):
+        for record in self:
+            if record.partner_ci and len(record.partner_ci) < 11 or len(record.partner_ci) > 11:
+                raise ValidationError(_("The partner ci must have eleven digits"))
+
+            if not record.partner_ci.isnumeric():
+                raise ValidationError(_("The partner ci must have eleven digits"))
 
     @api.depends('skill_ids')
     def _get_full_skills_levels(self):
