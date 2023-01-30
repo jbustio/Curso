@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="snippet_candidate_dynamic" name="Candidate List">
+        <section class="candidate_list">
+            <div class="container">
+                <h2>Candidate List</h2>
+                <table class="table candidate_snippet table-striped" data-number-of-candidate="5">
+                    <tr>
+                        <th>Name</th>
+                        <th>Lastnames</th>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+    </template>
+    <template id="candidate_snippet_options" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="recruitment_candidate.snippet_candidate_dynamic" t-thumbnail="recruitment_candidate/static/src/img/list_thumbnail.png"/>
+        </xpath>
+        <xpath expr="//div[@id='snippet_options']" position="inside">
+            <div data-selector=".candidate_snippet">
+                <we-select string="Table Style">
+                    <we-button data-select-class="table-striped">
+                    Striped
+                    </we-button>
+                    <we-button data-select-class="table-dark">
+                    Dark
+                    </we-button>
+                    <we-button data-select-class="table-bordered">
+                    Bordered
+                    </we-button>
+                </we-select>
+                <we-button-group string="No of candidate" data-atribute-name="numberOfCandidate">
+                    <we-button data-select-data-attribute="5">
+                        5                    
+                    </we-button>
+                    <we-button data-select-data-attribute="10">
+                        10
+                    </we-button>
+                    <we-button data-select-data-attribute="15">
+                        15
+                    </we-button>
+                </we-button-group>
+            </div>
+        </xpath>
+    </template>
+    
+</odoo>
