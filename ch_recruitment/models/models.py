@@ -42,7 +42,7 @@ class CHApplicant(models.Model):
 
     skill_level_ids = fields.Many2many('hr.skill.level', compute='_compute_skill_level_ids', store=True)
     level_progress = fields.Integer(
-        related='applicant_skill_ids.skill_level_id.level_progress')
+        related='applicant_skill_ids.skill_level_id.level_progress', store=True)
 
     partner_name = fields.Char("Applicant's Full Name", compute='_compute_partner_phone_email',
                                 inverse='_inverse_partner_name', store=True)
