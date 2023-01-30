@@ -4,7 +4,8 @@
         <field name="name">Candidate List</field>
         <field name="model">recruitment.candidate</field>
         <field name="arch" type="xml">
-            <tree >
+            
+            <tree>
                 <field name="name" />
                 <field name="lastname"/>
                 <field name="ci"/>
@@ -101,4 +102,7 @@
         </search>
         </field>
     </record>
+   
+    
+   
 </odoo>
