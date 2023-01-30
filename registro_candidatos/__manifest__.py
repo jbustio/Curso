@@ -39,8 +39,9 @@
         'demo/demo.xml',
     ],
     'assets': {
-        'web.assets_frontend': [
+        'website.assets_frontend': [
             'registro_candidatos/static/src/js/list_snipper.js',
         ],
     },
+    # web.assets_common, web.assets_backend and website.assets_frontend
 }
