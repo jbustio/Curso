@@ -12,7 +12,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr_recruitment', 'hr_skills'],
+    'depends': ['base', 'hr'],
     'data': [
         'security/ir.model.access.csv',
         'reports/oc_recruiting_templates.xml',
@@ -20,11 +20,12 @@
         'views/hr_skills.xml',
         'views/technology_views.xml',
         'views/candidate_views.xml',
-        'views/candidate_technologies_views.xml',
+        # 'views/candidate_technologies_views.xml',
         'views/candidate_technology_experience_views.xml',
+        'views/base_view_partner_form.xml',
+        'views/hr_view_employee_form.xml',
         'views/views.xml',
         'views/menu.xml',
-
     ],
     'demo': ['demo/demo.xml', ],
 }

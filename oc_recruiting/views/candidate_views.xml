@@ -5,12 +5,19 @@
         <field name="name">Candidate</field>
         <field name="model">oc.recruiting.candidate</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree
+                decoration-success="(state=='employee')"
+                decoration-info="(state=='accepted')"
+                decoration-danger="(state=='refuse')">
                 <field name="partner_id" />
                 <!-- <field name="tech_ids" widget="many2many_tags" /> -->
-                <!-- <field name="partner_ids"  widget="many2many_tags_avatar" placeholder="Select attendees..." context="{'force_email':True}" class="oe_inline"/> -->
-                <field name="tech_ids"  widget="many2many_tags_avatar" placeholder="Select technologies..." class="oe_inline"/>
-                <field name="most_experience_technology" widget="stat_info" />
+                <!-- <field name="partner_ids"  widget="many2many_tags_avatar" placeholder="Select
+                attendees..." context="{'force_email':True}" class="oe_inline"/> -->
+                <field name="tech_ids" widget="many2many_tags_avatar"
+                    placeholder="Select technologies..." class="oe_inline"
+                    options="{'create': True, 'image_field': 'image'}" />
+                <field name="most_experience_technology"/>
+                <field name="state" widget="badge" decoration-primary="state=='accepted'" />
             </tree>
         </field>
     </record>
@@ -20,17 +27,66 @@
         <field name="arch" type="xml">
             <form string="">
                 <header>
+                    <button name="action_make_employee" string="Make Employee" states="new"
+                        class="btn btn-outline-primary disabled"
+                    />
+                    <button name="action_make_employee" string="Make Employee" states="accepted"
+                        class="oe_highlight"
+                        type="object" decoration-primary="1"
+                    />
+
+                    <button name="action_refuse" string="Refuse" decoration-danger="1"
+                        type="object" states="new,accepted" />
+                    <field name="state" widget="statusbar" statusbar_visible="new,accepted,employee" />
                 </header>
                 <sheet>
-                    <group>
-                        <group>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="most_experience_btn"
+                            class="oe_stat_button"
+                            icon="fa-star" title="Most experience technology" type="button"
+                            attrs="{'invisible': [('tech_count','==',0),]}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="most_experience_technology" />
+                                    <!-- <span class="o_stat_text">
+                                        Years
+                                    </span> -->
+                                </span>
+                            </div>
+                        </button>
+                        <button name="number_technologies_btn"
+                            class="oe_stat_button"
+                            icon="fa-gears" title="Number of Technologies" type="button"
+                            attrs="{'invisible': [(0,'=',1),]}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="tech_count" />
+                                    <span class="o_stat_text">
+                                        Technologies
+                                    </span>
+                                </span>
+                            </div>
+                        </button>
+            
+                    </div>
+                    <group name="top_group">
+                        <group name="group_left">
                             <field name="partner_id" />
+                            <field name="accept" widget="boolean_toggle" />
+                            <!-- <field name="name" />
+                            <field
+                            name="last_name" /> -->
+
+                            <!-- <field name="sex" /> -->
+                            <!-- <field name="CI" /> -->
                         </group>
-                        <group>
-                            <field name="most_experience_technology" />
+                        <group name="group_right">
+                            <!-- <field name="most_experience_technology" /> -->
+
                         </group>
                     </group>
-                    <field name="technology_ids" string="Technology Experience" />
+                    <field name="technology_ids" string="Technology Experience"
+                        attrs="{'readonly': ['|', ('state','==','refuse'),('state','==','accepted')]}" />
 
                 </sheet>
             </form>
@@ -63,8 +119,8 @@
         <field name="name">Candidates</field>
         <field name="res_model">oc.recruiting.candidate</field>
         <field name="view_mode">tree,form</field>
-        
-        <field name="context">{'search_default_available': True,}</field>
+
+        <field name="context">{'search_default_available': True,'hide_candidate':True}</field>
     </record>
 
     <!-- Top menu item -->

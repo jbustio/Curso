@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="oc_recruiting_portal.candidates" name="Book List">
+        <t t-call="web.frontend_layout">
+            <t t-set="title">Candidates</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2> Candidates</h2>
+                            <!-- <t t-call="s_searchbar_input"></t> -->
+                            <form method="get" data-snippet="s_searchbar_input"
+                                class="o_searchbar_form s_searchbar_input" data-name="Search">
+                                <div role="search" class="input-group ">
+                                    <input type="search" name="search"
+                                        class="search-query form-control oe_search_box None"
+                                        placeholder="Search candidates..." />
+                                    <button type="submit" aria-label="Search" title="Search"
+                                        class="btn oe_search_button btn-primary">
+                                        <i class="oi oi-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <table class="table" style="margin-bottom: 10%; margin-top: 20px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Technologies</th>
+                                    <th scope="col">Most Experience Technology</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="candidates" t-as="candidate">
+                                    <tr scope="row">
+                                        <td>
+                                            <span t-field="candidate.name" />
+                                        </td>
+                                        <td>
+                                            <span t-field="candidate.tech_ids"
+                                                widget="many2many_tags"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span t-field="candidate.most_experience_technology" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

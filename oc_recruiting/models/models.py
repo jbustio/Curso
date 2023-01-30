@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class OcCandicate(models.Model):
@@ -8,20 +9,40 @@ class OcCandicate(models.Model):
     _description = 'OcCandicate'
 
     name = fields.Char(
-        compute='_compute_name')
+        compute='_compute_name', inverse='_inverse_name')
     partner_id = fields.Many2one('res.partner', string="Candidate", copy=False,
                                  required=True
                                  )
     technology_ids = fields.One2many(
-        'oc.recruiting.candidate.technology', 'candidate_id',)
+        'oc.recruiting.candidate.technology', 'candidate_id', required=True)
     tech_ids = fields.Many2many(
         'oc.recruiting.technology', compute='_compute_tech_ids', store=True, string="Technologies")
     most_experience_technology = fields.Char(
         compute="_compute_most_experience_technology", store=True)
 
-    most_experience = fields.Char(
-        compute="_compute_most_experience")
+    accept = fields.Boolean(default=False)
     
+    state = fields.Selection(required=True, default="new", copy=False, tracking=True,
+                             selection=[('new', 'New Candidate'), ('accepted', 'Accepted Candidate'), (
+                                 'employee', 'Employee'), ('refuse', 'Refused Candidate'),])
+    employee_id = fields.Many2one(
+        'hr.employee', string='Employee', index=True, tracking=True)
+
+    tech_count = fields.Integer(compute='_compute_tech_count', store=True)
+    
+    @api.depends('technology_ids')
+    def _compute_tech_count(self):
+        for record in self:
+            record.tech_count = len(record.technology_ids.ids) 
+
+    def _inverse_name(self):
+        for record in self:
+            record.partner_id.name = record.name
+
+    def _inverse_last_name(self):
+        for record in self:
+            record.partner_id.last_name = record.last_name
+
     @api.depends('technology_ids')
     def _compute_most_experience(self):
         for r in self:
@@ -46,6 +67,33 @@ class OcCandicate(models.Model):
     def _compute_name(self):
         for record in self:
             record.name = record.partner_id.name
+
+    def action_make_employee(self):
+        for record in self:
+            record.state = "employee"
+            employee = self.env['hr.employee'].create({
+                "user_partner_id": record.partner_id.id,
+                "name": record.partner_id.name,
+            })
+            record.employee_id = employee
+       
+
+    def action_refuse(self):
+        for record in self:
+            record.state = "refuse"
+
+    @api.onchange("accept")
+    def _onchange_accept(self):
+        for record in self:
+            if record.state in ["new", "accepted"]:
+                record.state = "accepted" if record.accept else record.state
+
+    @api.model
+    def create(self, vals):
+        if not vals["technology_ids"]:
+            raise UserError(_("At leat one technology should be added"))
+        return super().create(vals)
+
 
 
 class OcTechnology(models.Model):
@@ -89,7 +137,7 @@ class CandidateTechnology(models.Model):
         required=True,
         ondelete='cascade')
 
-    years = fields.Integer(string="Years", help="Years of experience.")
+    years = fields.Integer(string="Years of XP", help="Years of experience.")
 
     sql_constraints = [
         ('_unique_tech', 'unique (candidate_id, technology_id)',

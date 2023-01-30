@@ -1,5 +1,4 @@
-# Osvaldo Cobacho Aguilera
-## Ejercicio para diagnóstico
+# Ejercicio para diagnóstico
   
 Se desea elaborar un sistema que permita a una compañía de desarrollo de software, incluir nuevos programadores en su equipo a partir de una convocatoria. De los candidatos presentados se deben registrar los siguientes datos: Nombre y Apellidos, CI, dirección actual, edad y sexo. Además, el sistema debe permitir especificar las tecnologías que domina cada candidato y los años de experiencia en cada una. Las tecnologías más utilizadas en la empresa son: 
 

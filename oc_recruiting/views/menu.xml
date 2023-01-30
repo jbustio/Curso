@@ -13,11 +13,19 @@
         sequence="1"
     />
     <menuitem
+        id="oc_recruiting_reports"
+        name="Reports"
+        parent="menu_oc_recruiting"
+        action="oc_recruiting_candidate_action"
+        sequence="1"
+    />
+
+    <menuitem
         id="oc_recruiting_candidate_technology_menu"
         name="Candidate Technology Experience"
         action="oc_recruiting_candidate_technology_action"
-        parent="menu_oc_recruiting"
-        sequence="2"/>
+        parent="oc_recruiting_reports"
+        sequence="2" />
     <menuitem
         id="menu_oc_recruiting_settings"
         name="Settings"
@@ -26,7 +34,7 @@
     <!-- <menuitem
         id="menu_oc_recruiting_skill_years"
         name="Years of Experience"
-        parent="menu_oc_recruiting"
+    parent="menu_oc_recruiting"
         action="oc_recruiting_skill_years"
         sequence="2"
     /> -->

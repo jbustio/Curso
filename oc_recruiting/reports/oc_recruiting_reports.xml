@@ -11,4 +11,15 @@
         <field name="binding_model_id" ref="model_oc_recruiting_candidate" />
         <field name="binding_type">report</field>
     </record>
+    <record id="report_oc_recruiting_technolgy_experience" model="ir.actions.report">
+        <field name="name">Technology Experience</field>
+        <field name="model">oc.recruiting.candidate.technology</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oc_recruiting.technolgy_experience</field>
+        <field name="report_file">oc_recruiting.technolgy_experience</field>
+        <field name="print_report_name">'Technology Experience'</field>
+        <!-- <field name="paperformat_id" ref="event.paperformat_euro_lowmargin" /> -->
+        <field name="binding_model_id" ref="model_oc_recruiting_candidate_technology" />
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
