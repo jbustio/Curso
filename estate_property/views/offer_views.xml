@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tree_offer" model="ir.ui.view">
+        <field name="name">Offers</field>
+        <field name="model">estate_property.offer</field>
+        <field name="arch" type="xml" >
+            <tree editable="bottom">
+                <field name="price"/>
+                <button 
+                    name="action_accept" 
+                    type="object" 
+                    icon="fa-check"
+                    attrs="{'invisible': [('status','in', ['accepted', 'refused'])]}"
+                    />
+                <button 
+                    name="action_refuse" 
+                    type="object" 
+                    icon="fa-times"
+                    attrs="{'invisible': [('status','in', ['accepted', 'refused'])]}"
+                    />
+                <field name="status"/>
+                <field name="partner_id"/>
+                <field name="property_id"/>
+                <field 
+                    name="property_state" 
+                    invisible="1" 
+                />
+                
+            </tree>
+        </field>
+
+    </record>
+    <record id="form_offer" model="ir.ui.view">
+        <field name="name">Offer form</field>
+        <field name="model">estate_property.offer</field>
+        <field name="arch" type = "xml">
+            <form>
+                <sheet>
+                    <group 
+                        name="offer form" 
+                        string="Fill offer info"
+                    >
+                        <field name="price"/>
+                        <field name="status"/>
+                        <field name="partner_id"/>
+                        <field name="property_id"/>
+                        <field name="validity" />
+                        <field name="date_deadline" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record 
+        id="estate_offer_action" 
+        model="ir.actions.act_window"
+    >
+        <field name="name">Estate Offer</field>
+        <field name="res_model">estate_property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[('property_type_id', '=',active_id)]</field> -->
+    </record>
+    <menuitem
+        id="estate_offers_menu"
+        name="Offers"
+        parent="real_estate_menu"
+        action="estate_offer_action"
+        sequence="10"
+    />
+</odoo>

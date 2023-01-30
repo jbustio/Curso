@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_form_house" model="ir.ui.view">
+        <field name="name">House form</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+            <form string="House">
+                <header>
+                    <button 
+                        name="action_cancel" 
+                        type="object" 
+                        string="Cancel"
+                        states="New,Offer Received,Offer Refused,Offer Accepted"
+                        />
+                    <button 
+                        name="action_sold" 
+                        type="object" 
+                        string="Sold"
+                        states="New,Offer Received,Offer Refused,Offer Accepted"
+                        />
+                    <field name="state" widget="statusbar"/> 
+                </header>
+                <sheet>
+                    <group name="root_group">
+                        <group name = "left_group">
+                            <field name="name"/>
+                            <field name="date_availability"/>
+                            <field 
+                                name="tag_id" 
+                                widget="many2many_tags" 
+                                options="{'color_field': 'color'}"/>
+                            <field name="postcode" />
+                        </group>
+                        <group>
+                            <field name="expected_price" class="oe_inline" />
+                            <field name="selling_price" readonly="1" />
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group name="Description Page">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field 
+                                            name="property_type_id" 
+                                            options="{'no_create': True, 'no_open': True}"
+                                        />
+                                        <field name="active" />
+                                       
+                                    </group>
+                                    <group>
+                                        <field name="garage"/>
+                                        <field name="garden" />
+                                        <field 
+                                            name="garden_orientation" 
+                                            attrs="{'invisible': [('garden', '=', False)]}"/>
+                                        <field 
+                                        name="living_area"
+                                        />
+                                        <field 
+                                            name="garden_area" 
+                                            attrs="{'invisible': [('garden', '=', False)]}"
+                                        />
+                                        <field name="total_area" />
+                                        <field name="bedrooms" />
+                                        <field name="facades"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Buyer and seller">
+                                <group name="Buyer and seller Page">
+                                    <field name="salesperson" />
+                                    <field name="buyer" />                                    
+                                </group>
+                            </page>
+                            <page string="Offer">
+                                <group name="Offer Page">
+                                    <field name="salesperson" />
+                                    <field name="buyer" />
+                                    <field name="offer" attrs="{'readonly': [('state','in', ['Offer Accepted', 'Sold', 'Canceled'])]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">Houses List</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+            <tree 
+                decoration-success="[('state', 'in', ['Offer Received','Offer Accepted'])]"
+                decoration-bf="[('state','in','Offer Accepted')]"
+                decoration-muted="[('state','in','Sold')]"
+                >
+                <field name="name"/>
+                <field name="description"/>
+                <field name="property_type_id"/>
+                <field name="date_availability" optional="1"/>
+                <field name="expected_price" />
+                <field name="selling_price"/>
+                <field name="best_price" />
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_search_house" model="ir.ui.view">
+        <field name="name">House filters</field>
+        <field name="model">estate_property.estate.property</field>
+        <field name="arch" type="xml">
+        <search>
+            <field name="selling_price"/>
+                <field name="property_type_id"></field>
+                <filter name="selling_price"
+                        string="Selling price"
+                        domain="[('selling_price','=','provided_value')]"/>
+                <filter name="property_type_id"
+                        string="Type"
+                        domain="[('property_type_id','=','provided_value')]"/>
+                <filter name="Available"
+                        string="Available"
+                        domain="[('state','=','New')]"/>
+                <field 
+                    name="living_area" 
+                    string="Living Area"
+                    filter_domain="[('living_area', '>=', self)]"
+                    />
+            </search>
+        </field>
+    </record>
+    <record 
+        id="real_estate_action" 
+        model="ir.actions.act_window"
+    >
+        <field name="name">Real State</field>
+        <field name="res_model">estate_property.estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="estate_property_menu"
+        name="Houses"
+        parent="real_estate_menu"
+        action="real_estate_action"
+        sequence="10"
+        />
+
+    
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <menuitem
+            id="applicants_menu"
+            name="Applicants and experiences"
+            sequence="10"/>
+        <menuitem
+            id="applicants_views"
+            name="Applicants"
+            parent="applicants_menu"
+            action="applicants_action"
+            sequence="10"
+        />
+        <menuitem
+            id="technology_and_experience_menu"
+            name="Technology and experience"
+            parent="applicants_menu"
+            action="technology_and_experience_action"
+            sequence="10"
+        />
+</odoo>
