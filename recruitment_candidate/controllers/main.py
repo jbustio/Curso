@@ -1,7 +1,7 @@
 from odoo import http
 
 class Candidates(http.Controller):
-    @http.route("/candidates")
+    @http.route("/candidates",auth="public",website=True)
     def list(self, **kwargs):
         Candidate = http.request.env["recruitment.candidate"]
         cands = Candidate.search([])

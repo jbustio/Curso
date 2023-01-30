@@ -1,6 +1,6 @@
 from odoo import models,fields,api
 from odoo.exceptions import UserError
-
+import re
 class Candidate(models.Model):
     _name="recruitment.candidate"
     _description = """
@@ -15,7 +15,7 @@ class Candidate(models.Model):
 
     name = fields.Char(string="Name",required=True)
     lastname = fields.Char(string="Lastname")
-    ci = fields.Integer()
+    ci = fields.Char()
     address = fields.Char()
     age = fields.Integer()
     sex = fields.Selection([('Female','Female'),('Male','Male')],required=True)
@@ -35,3 +35,19 @@ class Candidate(models.Model):
     def reject(self):
         self.state = 'Rejected'
         return True
+
+    def url(self):
+        return {
+            'type':'ir.actions.act_url',
+            'target':'new',
+            'url':'http://localhost:8069/candidates'
+        }
+
+    @api.constrains("ci")
+    def _check_ci(self):
+        pattern = re.compile('[a-zA-Z]')
+        for record in self:
+            if len(record.ci) != 11:
+                raise UserError("The ci number must have 11 digits")
+            elif pattern.match(record.ci):
+                raise UserError("The ci must contains only numbers")

@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="candidates_list_template" name="Candidates List">
-        <h1>Testing</h1>
+    <template id="candidates_list_template">
+        <t t-call="website.layout">
+            <t t-set="title">Candidate web</t>
+
+
+            <link href="/recruitment_candidate/static/src/css/candidate.css" rel="stylesheet" type="text/css"/>
+            <script src="/recruitment/static/src/js/candidate.js"/>
+
+
+            <div class="oe_structure">
+
+                <!-- <form method="GET">
+                        <input type=
+                    </form> -->
+                <div class="container">
+                    <h1 class="front-h1">Candidate List</h1>
+                    <section>
+
+                        <table class="front-table">
+                            <thead class="front-thead">
+                                <tr>
+                                    <th scope="col" class="theader">Name</th>
+                                    <th scope="col" class="theader">Lastname</th>
+                                    <th scope="col" class="theader">CI</th>
+                                    <th scope="col" class="theader">Address</th>
+                                    <th scope="col" class="theader">Age</th>
+                                    <th scope="col" class="theader">Tech</th>
+                                    <th scope="col" class="theader">Years of Experience</th>
+                                </tr>
+                            </thead>
+                            <t t-foreach="cands" t-as="cand">
+                                <tr>
+                                    <td>
+                                        <span t-field="cand.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="cand.lastname"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="cand.ci"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="cand.address"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="cand.age"/>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="cand.dev_skills" t-as="skills">
+                                            <span t-field="skills.name"></span>
+                                            <br></br>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="cand.dev_skills" t-as="skills">
+                                            <span t-field="skills.years_experience"></span>
+                                            <br></br>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </section>
+
+
+
+                </div>
+            </div>
+
+        </t>
     </template>
 
 </odoo>
