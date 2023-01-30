@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Real Estate Menu -->
+    <menuitem id="recruitment_menu" 
+              name="Recruitment" />
+    <record id="action_candidates" model="ir.actions.act_window">
+        <field name="name">Candidates</field>
+        <field name="res_model">recruitment.candidate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_available':True}</field>
+    </record>
+
+
+    <!--Menu Item para abrir la lista Houses-->
+
+    <menuitem id="recruitment_candidates" 
+              name="Candidates" 
+              parent="recruitment_menu" 
+              action="action_candidates">
+    </menuitem>
+
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="candidates_list_template" name="Candidates List">
+        <h1>Testing</h1>
+    </template>
+
+</odoo>

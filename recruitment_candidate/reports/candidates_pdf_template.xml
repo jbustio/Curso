@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_candidates_skills">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1>Header</h1>
+                    <t t-foreach="docs" t-as="person">
+                        <t t-call="recruitment_candidate.report_subtemplate"/>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="report_subtemplate">
+        <div t-name="status_div">
+            <h1>
+                <strong>Candidate:</strong>
+                <span t-field="person.name"></span>
+            </h1>
+            <h1>
+                <strong>CI:</strong>
+                <span t-field="person.ci"></span>
+            </h1>
+            <h1>
+                <strong>Address:</strong>
+                <span t-field="person.address"></span>
+            </h1>
+
+            <strong>Status: </strong>
+            <span t-field="person.state"/>
+            <div class="container">
+            <table>
+                <thead>
+                    <tr class="border-bottom">
+                        <th class="m-3 p-2 text-center">Tech</th>
+                        <th class="m-3 p-2 text-center">Years of experience </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-if="len(person.mapped('dev_skills')) > 0">
+                        <tr class="border-bottom text-center" t-foreach="person.dev_skills" t-as="skills">
+                            <td>
+                                <span class="m-3 p-2 text-center" t-field="skills.name"></span>
+                            </td>
+                            <td>
+                                <span class="m-3 p-2 text-center" t-field="skills.years_experience"></span>
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-else="">This candidate does not know any technology</t>
+                </tbody>
+            </table>
+            <br></br>
+        </div>
+        </div>
+        
+    </template>
+
+</odoo>

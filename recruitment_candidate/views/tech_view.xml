@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tech_view_tree" model="ir.ui.view">
+        <field name="name">Tech List</field>
+        <field name="model">recruitment.tech</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="years_experience"/>
+                <field name="candidate_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

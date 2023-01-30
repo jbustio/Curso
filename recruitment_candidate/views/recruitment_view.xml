@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="candidate_view_tree" model="ir.ui.view">
+        <field name="name">Candidate List</field>
+        <field name="model">recruitment.candidate</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name" />
+                <field name="lastname"/>
+                <field name="ci"/>
+                <field name="age"/>
+                <field name="address"/>
+                <field name="dev_skills"/>
+            </tree>
+        </field>
+    </record>
+    <record id="candidate_view_form" model="ir.ui.view">
+        <field name="name">candidate_view_form</field>
+        <field name="model">recruitment.candidate</field>
+        <field name="arch" type="xml">
+            <form string="Candidate">
+                 <header>
+                    <button name="hire" type="object" string="Hire" states="Pending"/>
+                    <button name="reject" type="object" string="Reject" states="Pending"/>
+                    <field name="state" widget="statusbar"  statusbar_visible="Hired,Rejected,Pending"/>
+                </header>
+                <sheet>
+                    <group name="group_left">
+                        <field name="name" class="oe_left"/>
+                        <field name="lastname" class="oe_left"/>
+                        <field name="ci" class="oe_left"/>
+                        <field name="age" class="oe_left"/>
+                        <field name="address" class="oe_left"/>
+                        <field name="sex" class="oe_left"/>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Tech">
+                                <field name="recruiter" class="oe_left"/>
+                                <field name="dev_skills"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="candidate_search_view" model="ir.ui.view">
+        <field name="name">Candidate search</field>
+        <field name="model">recruitment.candidate</field>
+        <field name="arch" type="xml">
+        <search>    
+            <field name="dev_skills"
+                    string="Candidate Skills"
+                   filter_domain="[('dev_skills.name','ilike',self)]"/>
+            <filter name="Angular Devs" 
+                    string="Angular Devs" 
+                    domain="[('dev_skills.name', '=', 'Angular')]" 
+                    />
+            <filter name="Vue Devs" 
+                    string="Vue Devs" 
+                    domain="[('dev_skills.name', '=', 'Vue')]" 
+                     />
+            <filter name="React Native Devs" 
+                    string="React Native Devs" 
+                    domain="[('dev_skills.name', '=', 'React Native')]" 
+                     />
+            <filter name="CSS Devs" 
+                    string="CSS Devs" 
+                    domain="[('dev_skills.name', '=', 'CSS')]" 
+                     />
+            <filter name="Spring boot Devs" 
+                    string="Spring Boot Devs" 
+                    domain="[('dev_skills.name', '=', 'Spring boot')]" 
+                    />
+            
+            <filter name="Odoo Devs" 
+                    string="Odoo Devs" 
+                    domain="[('dev_skills.name', '=', 'Odoo')]" 
+                     />
+             <filter name="React Devs" 
+                    string="React Devs" 
+                    domain="[('dev_skills.name', '=', 'React')]" 
+                     />
+             <filter name="Flutter Devs" 
+                    string="Flutter Devs" 
+                    domain="[('dev_skills.name', '=', 'Flutter')]" 
+                   />
+            <filter name="Python Devs" 
+                    string="Python Devs" 
+                    domain="[('dev_skills.name', '=', 'Python')]" 
+                     />
+            <filter name="HTML Devs" 
+                    string="HTML Devs" 
+                    domain="[('dev_skills.name', '=', 'HTML')]" 
+                  />
+            <filter name="AWS Devs" 
+                    string="AWS Devs" 
+                    domain="[('dev_skills.name', '=', 'AWS')]" 
+                    />
+        </search>
+        </field>
+    </record>
+</odoo>

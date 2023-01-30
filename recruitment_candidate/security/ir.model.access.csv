@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_candidate_recruitment,User,model_recruitment_candidate,recruitment_candidates_group_user,1,1,1,0
+access_candidate_recruitment,Manager,model_recruitment_candidate,recruitment_candidates_group_manager,1,1,1,1
+
+access_tech_recruitment,Tech User,model_recruitment_tech,recruitment_tech_group_user,1,1,1,0
+access_tech_recruitment,Tech Manager,model_recruitment_tech,recruitment_tech_group_manager,1,1,1,1

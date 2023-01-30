@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_candidate_skills" model="ir.actions.report">
+        <field name="name">Candidates</field>
+        <field name="model">recruitment.candidate</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">recruitment_candidate.report_candidates_skills</field>
+        <field name="report_file">recruitment_candidate.report_candidates_skills</field>
+        <field name="print_report_name">'Candidates'</field>
+        <field name="binding_model_id" ref="model_recruitment_candidate"/>
+
+    </record>
+
+</odoo>

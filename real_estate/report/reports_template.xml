@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Main report templates -->
-    <template id="report_property_offer">
+    <template id="report_property_offer" t-name="report_property_offer">
         <t t-foreach="docs" t-as="property">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
@@ -16,7 +16,7 @@
 
                             <span t-field="property.name"></span>
                         </h2>
-                        <div>
+                        <div id="expected_price">
 
                             <strong>Expected Price: </strong>
                             <span t-field="property.expected_price"/>
