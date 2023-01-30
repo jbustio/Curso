@@ -26,6 +26,7 @@
         <field name="model">oc.recruiting.candidate</field>
         <field name="arch" type="xml">
             <form string="">
+                
                 <header>
                     <button name="action_make_employee" string="Make Employee" states="new"
                         class="btn btn-outline-primary disabled"
@@ -40,7 +41,9 @@
                     <field name="state" widget="statusbar" statusbar_visible="new,accepted,employee" />
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" title="Refuse" bg_color="bg-danger" states="refuse"/>
                     <div class="oe_button_box" name="button_box">
+                        
                         <button name="%(oc_recruiting_mx_tech_action)d"
                             class="oe_stat_button"
                             icon="fa-star" title="Most experience technology" type="action"
@@ -63,6 +66,19 @@
                                     <field name="tech_count" />
                                     <span class="o_stat_text">
                                         Technologies
+                                    </span>
+                                </span>
+                            </div>
+                        </button>
+                        <button name="%(hr_candidate_employee_action)d"
+                            class="oe_stat_button"
+                            icon="fa-id-card" title="Employee" type="action"
+                            states="employee">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    1
+                                    <span class="o_stat_text">
+                                        Employee
                                     </span>
                                 </span>
                             </div>
