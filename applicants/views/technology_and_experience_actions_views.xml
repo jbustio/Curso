@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="technology_and_experience_action_view_tree" model="ir.ui.view">
+        <field name="name">Technology and experiences</field>
+        <field name="model">applicants.technology_and_experience</field>
+        <field name="arch" type="xml">
+            <tree
+                >
+                <field name="name"/>
+                <field name="year"/>
+                <field name="applicant_id"/>
+            </tree>
+        </field>
+    </record>
+
+    
+
     <record 
         id="technology_and_experience_action" 
         model="ir.actions.act_window"
