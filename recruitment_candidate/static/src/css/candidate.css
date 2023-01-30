@@ -1,0 +1,21 @@
+.front-h1{
+    text-align: center;
+    color: blue;
+ 
+}
+
+.theader{
+    text-align: center;
+}
+.front-thead{
+    background-color: rgb(82, 137, 255);
+    color:beige;
+
+}
+.front-table{
+    margin:auto;
+}
+.front-table td{
+    border: 1px solid;
+    padding: 10px;
+}
