@@ -87,12 +87,12 @@ class OcCandicate(models.Model):
     @api.onchange("accept")
     def _onchange_accept(self):
         for record in self:
-            if record.state in ["new", "accepted"]:
-                record.state = "accepted" if record.accept else record.state
+            if record.state in ["new", "accepted"] and record.tech_ids.ids:
+                record.state = "accepted" if record.accept else "new"
 
     @api.model
     def create(self, vals):
-        if not vals["technology_ids"]:
+        if not vals.get("technology_ids", None):
             raise UserError(_("At leat one technology should be added"))
         return super().create(vals)
 

@@ -16,7 +16,7 @@
                 <field name="tech_ids" widget="many2many_tags_avatar"
                     placeholder="Select technologies..." class="oe_inline"
                     options="{'create': True, 'image_field': 'image'}" />
-                <field name="most_experience_technology"/>
+                <field name="most_experience_technology" />
                 <field name="state" widget="badge" decoration-primary="state=='accepted'" />
             </tree>
         </field>
@@ -26,7 +26,7 @@
         <field name="model">oc.recruiting.candidate</field>
         <field name="arch" type="xml">
             <form string="">
-                
+
                 <header>
                     <button name="action_make_employee" string="Make Employee" states="new"
                         class="btn btn-outline-primary disabled"
@@ -41,9 +41,9 @@
                     <field name="state" widget="statusbar" statusbar_visible="new,accepted,employee" />
                 </header>
                 <sheet>
-                    <widget name="web_ribbon" title="Refuse" bg_color="bg-danger" states="refuse"/>
+                    <widget name="web_ribbon" title="Refuse" bg_color="bg-danger" states="refuse" />
                     <div class="oe_button_box" name="button_box">
-                        
+
                         <button name="%(oc_recruiting_mx_tech_action)d"
                             class="oe_stat_button"
                             icon="fa-star" title="Most experience technology" type="action"
@@ -75,20 +75,22 @@
                             icon="fa-id-card" title="Employee" type="action"
                             states="employee">
                             <div class="o_stat_info">
-                                <span class="o_stat_value">
-                                    1
-                                    <span class="o_stat_text">
+                                <span class="o_stat_value"> 1 <span class="o_stat_text">
                                         Employee
                                     </span>
                                 </span>
                             </div>
                         </button>
-            
+
                     </div>
                     <group name="top_group">
                         <group name="group_left">
                             <field name="partner_id" />
-                            <field name="accept" widget="boolean_toggle" />
+                            <field name="accept" widget="boolean_toggle"
+                                attrs="{'invisible': ['|',('tech_count','=',0), ('state', 'not in',('new',)),] }"
+                            />
+            
+                            
                             <!-- <field name="name" />
                             <field
                             name="last_name" /> -->
@@ -140,7 +142,6 @@
     </record>
 
     <!-- Top menu item -->
-    
 
 
 </odoo>
