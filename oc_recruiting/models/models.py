@@ -8,6 +8,11 @@ class OcCandicate(models.Model):
     _name = 'oc.recruiting.candidate'
     _description = 'OcCandicate'
 
+    _sql_constraints = [
+        ('_unique_technology_name', 'unique (partner_id)',
+         "Candidates must be unique"),
+    ]
+
     name = fields.Char(
         compute='_compute_name', inverse='_inverse_name')
     partner_id = fields.Many2one('res.partner', string="Candidate", copy=False,
