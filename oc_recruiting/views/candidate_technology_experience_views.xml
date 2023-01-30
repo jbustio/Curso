@@ -52,7 +52,7 @@
     <field name="res_model">oc.recruiting.candidate.technology</field>
     <field name="view_mode">tree,form</field>
 
-    <field name="context">{'search_default': True,}</field>
+    <field name="context">{'search_default': True, "search_default_group_candidate_id": True}</field>
   </record>
 
   <!-- Top menu item -->

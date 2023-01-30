@@ -35,7 +35,6 @@
                         class="oe_highlight"
                         type="object" decoration-primary="1"
                     />
-
                     <button name="action_refuse" string="Refuse" decoration-danger="1"
                         type="object" states="new,accepted" />
                     <field name="state" widget="statusbar" statusbar_visible="new,accepted,employee" />

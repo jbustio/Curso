@@ -103,7 +103,7 @@ class OcTechnology(models.Model):
     _description = "Technology"
     _order = "sequence, name"
 
-    sql_constraints = [
+    _sql_constraints = [
         ('_unique_technology_name', 'unique (name)',
          "Technologies must be unique"),
     ]
@@ -141,7 +141,7 @@ class CandidateTechnology(models.Model):
 
     years = fields.Integer(string="Years of XP", help="Years of experience.")
 
-    sql_constraints = [
+    _sql_constraints = [
         ('_unique_tech', 'unique (candidate_id, technology_id)',
          "Can't have two experiences with the same technology"),
         ('years', 'CHECK(years BETWEEN 1 AND 50)',
