@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_technology_candidate">
+        <t t-foreach="docs" t-as="technology">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>
+                            <span t-field="technology.name"/>
+                        </h2>                         
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <strong>
+                                <th>Nombre</th>
+                                <th>CI</th>
+                                </strong>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="candidate" t-value="technology.mapped('candidate_ids')"/>                            
+                                    <tr t-foreach="candidate" t-as="candidate">
+                                    <td><span t-field="candidate.name"/></td>
+                                    <td><span t-field="candidate.ci"/></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
