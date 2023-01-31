@@ -7,7 +7,7 @@
 
 
             <link href="/recruitment_candidate/static/src/css/candidate.css" rel="stylesheet" type="text/css"/>
-            <script src="/recruitment/static/src/js/candidate.js"/>
+            <script src="/recruitment_candidate/static/src/js/candidate.js"/>
 
 
             <div class="oe_structure">

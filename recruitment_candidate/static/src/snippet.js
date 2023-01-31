@@ -1,4 +1,4 @@
-odoo.define('candidate.dynamic.snippet',function(require){
+odoo.define('dynamic.snippet',function(require){
     'use strict'
      var publicWidget = require('web.public.widget');
      

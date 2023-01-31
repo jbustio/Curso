@@ -2,6 +2,7 @@
 <odoo>
 
     <template id="snippet_candidate_dynamic" name="Candidate List">
+    <script src="recruitment_candidate/static/src/snippet.js"/>
         <section class="candidate_list">
             <div class="container">
                 <h2>Candidate List</h2>
@@ -9,6 +10,12 @@
                     <tr>
                         <th>Name</th>
                         <th>Lastnames</th>
+                        <th>CI</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Tech</th>
+                        <th>Years of experience</th>
+
                     </tr>
                 </table>
             </div>
