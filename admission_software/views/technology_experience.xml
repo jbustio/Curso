@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="technology_experience_view_form" model="ir.ui.view">
+            <field name="name">technology_experience.view.form</field>
+            <field name="model">technology.experience</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="technology_name"></field>
+                            <field name="experience"></field>
+                        </group>
+                        <group>
+                            <field name="notes"></field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="technology_experience_view_tree" model="ir.ui.view">
+            <field name="name">technology_experience.view.tree</field>
+            <field name="model">technology.experience</field>
+            <field name="arch" type="xml">
+                <tree  editable="bottom" string="">
+                            <field name="technology_name"></field>
+                            <field name="experience"></field>
+                            <field name="notes"></field>
+                </tree>
+            </field>
+        </record>
+</odoo>
