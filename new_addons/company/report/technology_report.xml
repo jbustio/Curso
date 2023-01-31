@@ -7,8 +7,18 @@
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">company.report_technology_candidate</field>
             <field name="report_file">company.report_technology_candidate</field>
-            <field name="print_report_name">'Tecnologia candidatos'</field>
+            <field name="print_report_name">'Tecnologia x candidatos'</field>
             <field name="binding_model_id" ref="model_company_technology"/>
         </record>
+        <record id="action_report_candidate" model="ir.actions.report">
+            <field name="name">Candidato</field>
+            <field name="model">company.candidate</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">company.report_candidate</field>
+            <field name="report_file">company.report_candidate</field>
+            <field name="print_report_name">'Candidatos'</field>
+            <field name="binding_model_id" ref="model_company_candidate"/>
+        </record>
+
     </data>
 </odoo>

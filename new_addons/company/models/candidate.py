@@ -1,5 +1,5 @@
 from odoo import fields, models, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 class CompanyCandidate(models.Model):
     _name = 'company.candidate'
@@ -14,8 +14,10 @@ class CompanyCandidate(models.Model):
         ('M', 'Masculino') ,
         ('F', 'Femenino')
     ], string='Sexo')
-    #technology_ids = fields.Many2many('company.technology', 'candidate_technology','candidate_id','technology_id' , string='Tecnologias')
-    candidate_technology_ids = fields.One2many('candidate.technology','candidate_id' ,string='candidate_technology',auto_join=True)
+    partner_id = fields.Many2one('res.partner', string='partner')
+    technology_ids = fields.One2many('company.technology','candidate_ids' , string='Tecnologias')
+    #candidate_technology_ids = fields.One2many('candidatetechnology','candidate_id' ,string='relacion')
+    
     _sql_constraints = [
         ("age_check", 'CHECK (age > 18)', 'Debe ser mayor de edad'),
         ('ci_check', 'UNIQUE(ci)','El Carnet ID es unico')
@@ -30,8 +32,7 @@ class CompanyCandidate(models.Model):
 class CompanyTechnology(models.Model):
     _name = 'company.technology'
     _description = 'Tecnologia'
-
-
+    _order = 'years_experience desc , name'
     name = fields.Selection([
         ('Angular', 'Angular'),
         ('Vue', 'Vue'),
@@ -45,18 +46,9 @@ class CompanyTechnology(models.Model):
         ('HTML', 'HTML'),
         ('AWS', 'AWS')
     ], string='Tecnologia')
-    _sql_constraints = [
-        ("name_check", "UNIQUE(name)", "Las tecnologias son unicas en la empresa"),
-    ]
-    candidate_ids = fields.Many2many('company.candidate','candidate_technology','technology_id','candidate_id', string='Candidatos')
-    
-
-class CandidateTechnologyRel(models.Model):
-    _name = 'candidate.technology'
-    _description = 'CandidateTechnologyRel'
-    _rec_name = 'candidate_id'
-    _order = 'technology_id years_experience'
-   
-    candidate_id = fields.Many2one('company.candidate',string='candidate', ondelete='cascade', required=True, index=True)
-    technology_id = fields.Many2one('company.technology' , string='technology',ondelete='cascade',required=True, index=True)
     years_experience = fields.Integer('Experiencia')
+    
+    _sql_constraints = [
+        ("name_candidate_check", "UNIQUE(name,candidate_ids)", "Una candidato no puede repetir una tecnologia"),
+    ]
+    candidate_ids = fields.Many2one('company.candidate', string='Candidatos')

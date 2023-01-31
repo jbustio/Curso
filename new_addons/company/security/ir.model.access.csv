@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_company_candidate,company.candidate,model_company_candidate,group_user_company,1,1,1,1
+access_company_technology,company.technology,model_company_technology,group_user_company,1,1,1,1
