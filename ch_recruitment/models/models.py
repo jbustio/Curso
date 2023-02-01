@@ -40,6 +40,8 @@ class CHApplicant(models.Model):
     _inherit = 'hr.applicant'
     _order = "level_progress desc"
 
+    applicant_skill_ids = fields.One2many('hr.applicant.skill', 'applicant_id', string="Skills", auto_join=True)
+
     skill_level_ids = fields.Many2many('hr.skill.level', compute='_compute_skill_level_ids', store=True)
     level_progress = fields.Integer(
         related='applicant_skill_ids.skill_level_id.level_progress', store=True)
@@ -81,10 +83,10 @@ class CHApplicant(models.Model):
     @api.constrains('partner_ci')
     def _check_partner_ci(self):
         for record in self:
-            if record.partner_ci and len(record.partner_ci) < 11 or len(record.partner_ci) > 11:
+            if record.partner_ci and (len(record.partner_ci) < 11 or len(record.partner_ci) > 11):
                 raise ValidationError(_("The partner ci must have eleven digits"))
 
-            if not record.partner_ci.isnumeric():
+            if record.partner_ci and not record.partner_ci.isnumeric():
                 raise ValidationError(_("The partner ci must have eleven digits"))
 
     @api.depends('skill_ids')
